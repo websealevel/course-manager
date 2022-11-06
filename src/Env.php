@@ -13,8 +13,7 @@ class Env
 
     private function __construct(
         readonly public array $envVariables
-    )
-    {
+    ) {
     }
 
     /**
@@ -74,28 +73,48 @@ class Env
      * Formate un message pour l'afficher dans le terminal
      * @return void
      */
-    public function print(string $message): void
+    public function print(string $message, ...$params): void
     {
+        if (!empty($params)) {
+            $message = sprintf($message, ...$params);
+        }
         echo $message . PHP_EOL;
     }
 
+
     /**
-     * Créer le dossier $path s'il n'existe pas déjà. Retourne vrai si la création du dossier
+     * Retourne le path absolu de la racine des cours
+     * @param $relativePath Chemin relatif à la racine
+     * @global ABS_PATH_KEY
+     * @throws Exception - Si la variable ABS_PATH_KEY n'existe pas dans les variables d'environnement
+     * @return string
+     */
+    public function abspath(string $relativePath = ''): string
+    {
+        if (!isset($this->envVariables[self::ABS_PATH_KEY])) {
+            throw new Exception("La variable d'environnement " . self::ABS_PATH_KEY . "n'est pas définie.");
+        }
+        return $this->envVariables[self::ABS_PATH_KEY] . '/' . $relativePath;
+    }
+
+    /**
+     * Créer le dossier $path à la racine du projet s'il n'existe pas déjà. Retourne vrai si la création du dossier
      * a réussi, faux sinon
-     * @param string $path. Le path du dossier à écrire (relatif à PATH_COURSES)
-     * @global PATH_COURSES
-     * @return bool
+     * @param string $path. Le path du dossier à écrire (relatif à abspath)
      * @throws Exception -- Si impossible de créer le dossier à cause des droits d'écriture.
+     * @return bool
      */
     public function mkdirp(string $path): bool
     {
 
-        if (is_dir(self::ABSPATH . $path)) {
-            static::print(sprintf("Le répertoire %s existe déjà. Skip.", $path));
+        $full_path = $this->abspath() . $path;
+
+        if (is_dir($full_path)) {
+            $this->print(sprintf("Le répertoire %s existe déjà. Skip.", $path));
             return false;
         }
 
-        $created = mkdir(static::ABSPATH . $path);
+        $created = mkdir($full_path, recursive: true);
 
         if (!$created)
             throw new Exception(
@@ -104,39 +123,55 @@ class Env
 
         return $created;
     }
-    /* Retourne la liste des Flags détéctés dans l'input user
-    * @param int $argc Le nombre d'arguments du script PHP
-    * @param array $argv Les arguments du script PHP
-    * @return Flag[] Un tableau de flags détectés définis par le système
-    */
-    public function parse_flags(int $argc, array $argv): array
+
+
+    /**
+     * Retourne le contenu du README d'un cours à sa création
+     * @return string
+     */
+    public function readmeContent(string $title): string
     {
-        /**
-         * Remove script name
-         */
-        array_shift($argv);
 
-        $flags_found = array();
+        $titleCapitalFirst = ucfirst($title);
 
-        foreach ($argv as $arg) {
+        $content = <<<MARKDOWN
 
-            //Si des flags
-            if (str_contains($arg, '--') || str_contains($arg, '-')) {
+        # ${titleCapitalFirst}
 
-                $found = array_filter(FLAGS, function ($flag) use ($arg) {
+        ## Notes
 
-                    $names = array($flag->name, $flag->short);
+        ## Ressources
 
-                    return in_array(str_replace(array('--', '-'), '', $arg), $names);
-                });
+        MARKDOWN;
 
-                if (!empty($found)) {
-                    $flags_found[] = $found[0];
-                }
-            }
-        }
+        return $content;
+    }
 
-        return $flags_found;
+    /**
+     * Retourne le contenu du index.html d'un cours à sa création
+     * @return string
+     */
+    public function indexHtmlContent(string $title): string
+    {
+
+        $titleCapitalFirst = ucfirst($title);
+
+        $content = <<<HTML
+
+        <!DOCTYPE html>
+        <html lang="fr"> 
+        <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        </head>
+        <body>
+            <h1>${titleCapitalFirst}</h1>
+        </body>
+        </html>
+
+        HTML;
+
+        return $content;
     }
 
     /**
@@ -144,22 +179,31 @@ class Env
      * @param Course Le cours dont on initialise le répertoire
      * @return void
      */
-    static public function prepareDirectory(Course $course)
+    public function prepareDirectory(Course $course)
     {
         $dirs_to_create = array(
-            'Bibliographie'
+            'Bibliographie',
+            'module-01-presentation'
         );
         $files_to_create = array(
-            'README.md'
+            'README.md' => $this->readmeContent($course->name),
+            'index.html' => $this->indexHtmlContent($course->name)
         );
 
         foreach ($dirs_to_create as $dir) {
-            static::mkdirp(
+            $this->mkdirp(
                 sprintf("%s/%s", $course->path(), $dir)
             );
         }
 
-        foreach ($files_to_create as $file) {
+        foreach ($files_to_create as $file => $content) {
+            $file = fopen(
+                sprintf("%s/%s", $this->abspath($course->path()), $file),
+                'w'
+            );
+
+            fwrite($file, $content);
+            fclose($file);
         }
     }
 }

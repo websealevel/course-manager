@@ -56,7 +56,7 @@ ABSPATH/
 
 ## Scripts
 
-- `course-new {vendor} {niveau} {nom du cours}` . Cree un dossier `ABSPATH/{niveau}{nom du cours}` avec le contenu suivant
+- `course-create {vendor} {niveau} {nom du cours}` . Cree un dossier `ABSPATH/{niveau}{nom du cours}` avec le contenu suivant
     - `Bibliographie`: stocke la bibliographie du cours (livres, fichiers PDF, etc.)
     - `README.md`: description breve du cours (durée, contenu, ressources, niveau des apprenants, remarques). Contient le plan, les objectifs et le planning.
     - `index.html`: permet de naviguer dans le cours au format HTML
