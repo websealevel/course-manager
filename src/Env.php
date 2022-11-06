@@ -5,6 +5,7 @@ namespace Wsl\CourseManager;
 use Exception;
 
 use Wsl\CourseManager\Course;
+use Wsl\CourseManager\Module;
 
 class Env
 {
@@ -204,6 +205,19 @@ class Env
 
             fwrite($file, $content);
             fclose($file);
+        }
+
+        //Creation du module de presentation
+        $module = new Module(
+            $course,
+            0,
+            'presentation'
+        );
+
+        foreach($module->directories as $dir){
+            $this->mkdirp(
+                sprintf("%s/%s", $module->path(), $dir)
+            );
         }
     }
 }
