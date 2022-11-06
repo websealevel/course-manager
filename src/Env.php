@@ -31,8 +31,8 @@ class Env
                 throw new Exception("php doit être executé en mode CLI.");
             }
 
-            $env_variables = static::readEnvVariables();
-            $env = new Env($env_variables);
+            $variables = static::readEnvVariables();
+            $env = new Env($variables);
             return $env;
         } catch (Exception $e) {
             echo $e->getMessage() . PHP_EOL;
@@ -83,7 +83,6 @@ class Env
         echo $message . PHP_EOL;
     }
 
-
     /**
      * Retourne le path absolu de la racine du projet (avec trailing slash)
      * @throws Exception - Si la variable ABS_PATH_KEY n'existe pas dans les variables d'environnement
@@ -103,7 +102,7 @@ class Env
     }
 
     /**
-     * Créer le dossier $path à la racine du projet s'il n'existe pas déjà. Retourne vrai si la création du dossier
+     * Créer le dossier $path s'il n'existe pas déjà. Retourne vrai si la création du dossier
      * a réussi, faux sinon
      * @param string $path. Le path du dossier à écrire (relatif à abspath)
      * @throws Exception -- Si impossible de créer le dossier à cause des droits d'écriture.
