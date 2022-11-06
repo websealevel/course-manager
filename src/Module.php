@@ -4,8 +4,12 @@ namespace Wsl\CourseManager;
 
 use Wsl\CourseManager\Course;
 
+/**
+ * Un module est une partie d'un cours. Un module appartient à un Course.
+ */
 class Module
 {
+
     public function __construct(
         readonly public Course $course,
         readonly public int $id,
@@ -24,15 +28,24 @@ class Module
      */
     public function fullName(): string
     {
-        return sprintf("module-%d-%s", $this->id, $this->name);
+        return sprintf("module-%02d-%s", $this->id, $this->name);
     }
 
     /**
-     * Retourne la path complet du module relatif à la racine du projet
+     * Retourne la path du module relatif à la racine du projet
      * @return string
      */
     public function path()
     {
         return $this->course->path() . '/' . $this->fullName();
+    }
+
+    /**
+     * Retourne le fichier markdown du cours
+     * @return string
+     */
+    public function courseMarkdownFile(): string
+    {
+        return sprintf("%02d-%s-%s.md", $this->id, $this->name, $this->course->fullName());
     }
 }

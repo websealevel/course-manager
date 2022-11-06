@@ -34,19 +34,17 @@ Une présentation est généré par `module`. Cette présentation fait référen
 Architecture:
 
 ~~~bash
-ABSPATH/
+cours/
   #fichiers sources, privés
-    Private/
+    privé/
       vendor/
-        coursA-/
-        coursB-/
+        coursA/
+        coursB/
     #fichiers générés à partir des sources publiques, partageable avec les étudiants, presentations sans notes
-    Public/
+    publique/
         cours-A/
             module01-presentation/.html, .pdf (presentation sans les notes de présentation, notes de cours)
-            module02-intro-a-la-poo/.html, .pdf
         index.html
-    index.html
     README.md
 ~~~
 
@@ -60,32 +58,39 @@ ABSPATH/
     - `Bibliographie`: stocke la bibliographie du cours (livres, fichiers PDF, etc.)
     - `README.md`: description breve du cours (durée, contenu, ressources, niveau des apprenants, remarques). Contient le plan, les objectifs et le planning.
     - `index.html`: permet de naviguer dans le cours au format HTML
+    - `module-00-presentation`: module de présentation du cours, avec ses sous-dossiers et son fichier de cours markdown.
 
 <!-- - script `course-ls {nom du cours}`: liste le contenu du cours (modules présents)
 
 - script `course-module {nom du cours} {numero} {nom du module}`, genere un module du cours nom du cours (analyse des dossiers présents en slug) genere un module avec le nom et un numero (different de 0 qui est déjà pris par presentation). Cree le contenu suivant
     - `{nom du cours}/{nom du module}/cours/{numero}-{nom module}-{nom du cours}.md` : le fichier contenant le cours
-    - `{nom du cours}/{nom du module}/Exercices`
-    -` {nom du cours}/{nom du module}/TPS`
-    - `{nom du cours}/{nom du module}/Exams`
+    - `{nom du cours}/{nom du module}/exercices`
+    -` {nom du cours}/{nom du module}/tp`
     - `/Public/{nom-du-cours}/{nom-du-module}/ : contiendra tout le contenu généré à partir des fichiers markdown pour le module (cours, exercice, tp, exams) au format PDF et HTML (sans les commentaires cad mes notes de cours). Ce sera un dossier que je pourrai partager sans soucis avec les étudiants (aucune info privée).
 
 - script `course-export {nom du cours} {opt nom du module}`: genere les fichiers html et pdf du cours et fait une copie dans le dossier `Public` et Privé (presentation avec notes). Met à jour l'index.html local au cours et l'index.html global. -->
 
 ## Génération des présentations avec [marp](https://marp.app)
+
 Toutes les possibilités d'installation de l'application sont listées [sur le dépôt](https://github.com/marp-team/marp-cli).
+
 ### macOS
+
 Installer marp via le gestionnaire de paquets [Homebrew](https://brew.sh/index_fr)
 ~~~bash
 brew install marp-cli
 ~~~
 ### Windows
+
 Installer marp via le gestionnaire de paquets [Scoop](https://scoop.sh/)
 ~~~bash
 scoop install marp
 ~~~
+
 ### Debian/Ubuntu
+
 #### Installation via les binaires
+
 Télécharger l'archive contenant les binaires [depuis son dépôt GitHub](https://github.com/marp-team/marp-cli/releases).
 Extraire l'archive
 ~~~bash

@@ -5,6 +5,7 @@ namespace Wsl\CourseManager;
 use Exception;
 
 use Wsl\CourseManager\Course;
+use Wsl\CourseManager\FileManager;
 use Wsl\CourseManager\Module;
 
 class Env
@@ -31,8 +32,8 @@ class Env
             }
 
             $env_variables = static::readEnvVariables();
-
-            return new Env($env_variables);
+            $env = new Env($env_variables);
+            return $env;
         } catch (Exception $e) {
             echo $e->getMessage() . PHP_EOL;
             exit;
@@ -84,18 +85,21 @@ class Env
 
 
     /**
-     * Retourne le path absolu de la racine des cours
-     * @param $relativePath Chemin relatif à la racine
-     * @global ABS_PATH_KEY
+     * Retourne le path absolu de la racine du projet (avec trailing slash)
      * @throws Exception - Si la variable ABS_PATH_KEY n'existe pas dans les variables d'environnement
      * @return string
      */
-    public function abspath(string $relativePath = ''): string
+    public function abspath(): string
     {
         if (!isset($this->envVariables[self::ABS_PATH_KEY])) {
             throw new Exception("La variable d'environnement " . self::ABS_PATH_KEY . "n'est pas définie.");
         }
-        return $this->envVariables[self::ABS_PATH_KEY] . '/' . $relativePath;
+        return $this->envVariables[self::ABS_PATH_KEY] . '/';
+    }
+
+    public function fullPath(string $relativePath, string $trailing = '')
+    {
+        return $this->abspath() . $relativePath . $trailing;
     }
 
     /**
@@ -108,7 +112,7 @@ class Env
     public function mkdirp(string $path): bool
     {
 
-        $full_path = $this->abspath() . $path;
+        $full_path = $this->fullPath($path);
 
         if (is_dir($full_path)) {
             $this->print(sprintf("Le répertoire %s existe déjà. Skip.", $path));
@@ -176,33 +180,31 @@ class Env
     }
 
     /**
-     * Initialise le répertoire d'un cours nouvellement créee (création de dossier et de fichiers par défaut)
+     * Initialise le répertoire d'un cours nouvellement créee (création de dossiers et de fichiers par défaut)
      * @param Course Le cours dont on initialise le répertoire
      * @return void
      */
     public function prepareDirectory(Course $course)
     {
-        $dirs_to_create = array(
+        $dirsToCreate = array(
             'Bibliographie',
-            'module-01-presentation'
         );
-        $files_to_create = array(
+        $filesToCreate = array(
             'README.md' => $this->readmeContent($course->name),
             'index.html' => $this->indexHtmlContent($course->name)
         );
 
-        foreach ($dirs_to_create as $dir) {
+        foreach ($dirsToCreate as $dir) {
             $this->mkdirp(
                 sprintf("%s/%s", $course->path(), $dir)
             );
         }
 
-        foreach ($files_to_create as $file => $content) {
+        foreach ($filesToCreate as $file => $content) {
             $file = fopen(
-                sprintf("%s/%s", $this->abspath($course->path()), $file),
+                sprintf("%s/%s", $this->fullPath($course->path()), $file),
                 'w'
             );
-
             fwrite($file, $content);
             fclose($file);
         }
@@ -214,10 +216,46 @@ class Env
             'presentation'
         );
 
-        foreach($module->directories as $dir){
+        //Creation des sous directory du module
+        foreach ($module->directories as $dir) {
             $this->mkdirp(
                 sprintf("%s/%s", $module->path(), $dir)
             );
         }
+
+        //Creation du fichier de cours
+        $file = fopen(
+            sprintf(
+                "%s/%s/cours/%s",
+                $this->fullPath($module->course->path()),
+                $module->fullName(),
+                $module->courseMarkdownFile()
+            ),
+            'w'
+        );
+
+        $slideContent = <<<MARPMARKDOWN
+        ---
+        marp: false
+        paginate: true
+        headingDivider: 2
+        header:
+        footer: 
+        ---
+        <style>
+        section {
+        font-size: 1.4rem;
+        }
+        </style>
+        
+        # {$module->name}
+        
+        Durée:
+        niveau: {$module->course->level}
+
+        MARPMARKDOWN;
+
+        fwrite($file, $slideContent);
+        fclose($file);
     }
 }

@@ -3,7 +3,7 @@
 
 /**
  * Script de création d'un nouveau cours. 
- * Ex: create-course mydigitalschool b3 mvc
+ * Ex: course-create mydigitalschool b3 mvc
  *
  * @package wsl 
  */
@@ -27,7 +27,6 @@ $course = new Course(
 );
 
 //Création du dossier du cours
-$env->mkdirp($course->vendor);
 $env->mkdirp($course->path());
 
 //Initialisation du contenu du dossier du cours
