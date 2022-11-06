@@ -1,7 +1,9 @@
 <?php
 
 namespace Wsl\CourseManager;
-
+/**
+* Une classe qui décrit un cours. Un cours est placé dans un vendor (établissement, organisme, etc.) et est définir par un niveau et un nom.
+*/
 class Course
 {
     public function __construct(
@@ -12,7 +14,7 @@ class Course
     }
 
     /**
-     * Retourne le nom complet du cours $level-$name dans $vendor
+     * Retourne le nom complet du cours ($level-$name)
      * @return string
      */
     public function fullName(): string
@@ -21,11 +23,11 @@ class Course
     }
 
     /**
-     * Retourne le chemin relatif du cours par rappor à la racine
+     * Retourne le chemin du cours
      * @return string
      */
     public function path(): string
     {
-        return $this->vendor . '/' . $this->fullName($this->level, $this->name);
+        return sprintf("%s/%s", $this->vendor, $this->fullName());
     }
 }
