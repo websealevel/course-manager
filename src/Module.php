@@ -3,11 +3,12 @@
 namespace Wsl\CourseManager;
 
 use Wsl\CourseManager\Course;
+use Wsl\CourseManager\IFile;
 
 /**
  * Un module est une partie d'un cours. Un module appartient à un Course.
  */
-class Module
+class Module implements IFile
 {
 
     public function __construct(
@@ -35,7 +36,7 @@ class Module
      * Retourne la path du module relatif à la racine du projet
      * @return string
      */
-    public function path()
+    public function path(): string
     {
         return $this->course->path() . '/' . $this->fullName();
     }

@@ -1,10 +1,13 @@
 <?php
 
 namespace Wsl\CourseManager;
+
+use Wsl\CourseManager\IFile;
+
 /**
 * Une classe qui décrit un cours. Un cours est placé dans un vendor (établissement, organisme, etc.) et est définir par un niveau et un nom.
 */
-class Course
+class Course implements IFile
 {
     public function __construct(
         readonly public string $vendor,
