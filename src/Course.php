@@ -1,5 +1,7 @@
 <?php
 
+namespace Wsl\CourseManager;
+
 class Course
 {
     public function __construct(
