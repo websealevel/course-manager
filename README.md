@@ -2,11 +2,20 @@
 
 Une application CLI en PHP pour gérer les fichiers de cours.
 
-## Installation locale
+## Installation locale avec Composer
 
-A venir...
+Télécharger le code source.
+
+~~~bash
+composer update
+~~~
 
 ## Installation globale
+
+## Dépendances
+
+- marp
+- pandoc
 
 
 
