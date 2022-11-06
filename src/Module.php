@@ -44,7 +44,7 @@ class Module
      * Retourne le fichier markdown du cours
      * @return string
      */
-    public function courseMarkdownFile(): string
+    public function slidesDeckMarkdownFile(): string
     {
         return sprintf("%02d-%s-%s.md", $this->id, $this->name, $this->course->fullName());
     }

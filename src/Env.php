@@ -237,7 +237,7 @@ class Env
                 "%s/%s/cours/%s",
                 $this->fullPath($module->course->path()),
                 $module->fullName(),
-                $module->courseMarkdownFile()
+                $module->slidesDeckMarkdownFile()
             ),
             'w'
         );
