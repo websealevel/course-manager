@@ -1,0 +1,17 @@
+{
+    "name": "websealevel/course-manager",
+    "description": "Une application CLI en PHP pour gérer les fichiers de cours.",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Websealevel\\CourseManager\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "websealevel",
+            "email": "contact@websealevel.com"
+        }
+    ],
+    "require": {}
+}
