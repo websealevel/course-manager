@@ -17,48 +17,25 @@ composer update
 - marp
 - pandoc
 
+## Specs
 
+Un dossier `cours` (racine du projet).
 
-## Specs (en cours d'écriture)
+Un dossier `cours/Public`  contient les cours publiés et distribués (fichiers générés au format PDF, HTML, etc. uniquement sans les notes, aucun fichier source Markdown). Il reflète la structure de `cours` (organisé de la même manière, même arborescence). 
 
-- `ABSPATH`: le dossier racine des cours appelé `cours`.
-- `ABSPATH/Public`: le cours publié et distribué (fichiers générés au format PDF, HTML, etc.)
-- `ABSPATH/Private`: le cours privé, non distribué (notes de cours, sources)
+A la racine, un fichier `README.md` et `index.html` qui contient la liste de tous les cours et permet de naviguer dans tous les cours au format html.
 
-A la racine un fichier `README.md` et `index.html` qui contient la liste de tous les cours et permet de naviguer dans tous les cours au format html.
+Chaque `cours` est défini dans un `vendor` (un organisme, une école), eux mêmes divisés en `modules`. Un module contient une partie du cours, des exercices et des tps.
 
-La bibliothèque est découpée en `cours`, eux mêmes divisés en `modules`. Un module contient une partie du cours, des exercices et des TP.
-
-Une présentation est généré par `module`. Cette présentation fait référence aux exercices et tps présents dans le module. Un fichier `index.html` local permet de passer d'une présentation à l'autre facilement.
-
-Architecture:
-
-~~~bash
-cours/
-  #fichiers sources, privés
-    privé/
-      vendor/
-        coursA/
-        coursB/
-    #fichiers générés à partir des sources publiques, partageable avec les étudiants, presentations sans notes
-    publique/
-        cours-A/
-            module01-presentation/.html, .pdf (presentation sans les notes de présentation, notes de cours)
-        index.html
-    README.md
-~~~
-
-- les noms de cours et de module sont au format slug (lowercase, sans espace, alphanumeriques)
-- les numeros de module sont au format %2d
-- chaque cours a obligatoirement un `module-00-presentation`
+Une présentation est généré par `module`. Chaque présentation est écrite en Markdown, et générée ensuite en HTML et PDF avec marpit. Cette présentation fait référence aux exercices et tps présents dans le module. Un fichier `index.html` local permet de passer d'une présentation à l'autre facilement. Les exercices, sujets de TP ou d'examen et les autres documents Markdown sont générés en PDF avec pandoc.
 
 ## Scripts
 
-- `course-create {vendor} {niveau} {nom du cours}` . Cree un dossier `ABSPATH/{niveau}{nom du cours}` avec le contenu suivant
+- `course-create {vendor} {niveau} {nom du cours}` . Cree un dossier `cours/{vendor}/{niveau}-{nom du cours}` avec le contenu suivant
     - `Bibliographie`: stocke la bibliographie du cours (livres, fichiers PDF, etc.)
+    - `module-00-presentation`: module de présentation du cours, avec ses sous-dossiers et son fichier deck de slides markdown.
     - `README.md`: description breve du cours (durée, contenu, ressources, niveau des apprenants, remarques). Contient le plan, les objectifs et le planning.
     - `index.html`: permet de naviguer dans le cours au format HTML
-    - `module-00-presentation`: module de présentation du cours, avec ses sous-dossiers et son fichier de cours markdown.
 
 <!-- - script `course-ls {nom du cours}`: liste le contenu du cours (modules présents)
 
