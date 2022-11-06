@@ -153,5 +153,6 @@ pandoc {file.md} -t html5 -o {file.pdf} --css style.css --pdf-engine-opt=--enabl
 - [Marp écosystème](https://marp.app/)
 - [Pandoc](https://pandoc.org/index.html), un convertisseur de document universel et éprouvé
 - [Minicli 3](https://github.com/minicli/minicli), un projet opensource d'application CLI inspirant
+- [poc-marp](https://github.com/websealevel/poc-marp), un dépôt qui récapitule les possibilités essentielles de l'écosystème marp
 
 
