@@ -8,21 +8,73 @@ use Wsl\CourseManager\Course;
 
 class Env
 {
-    const ABSPATH = '/home/paul/depots/websealevel/log/enseignement/cours';
 
-    static public function init()
+    const ABS_PATH_KEY = 'path_courses';
+
+    private function __construct(
+        readonly public array $envVariables
+    )
     {
-        if (php_sapi_name() !== 'cli') {
-            throw new Exception("php doit être executé en mode CLI.");
+    }
+
+    /**
+     * Factory qui retourne un environnement avec validation préalable
+     * @return Env
+     */
+    static public function create(): Env
+    {
+
+        try {
+
+            if (php_sapi_name() !== 'cli') {
+                throw new Exception("php doit être executé en mode CLI.");
+            }
+
+            $env_variables = static::readEnvVariables();
+
+            return new Env($env_variables);
+        } catch (Exception $e) {
+            echo $e->getMessage() . PHP_EOL;
             exit;
         }
+    }
+
+    /**
+     * Retourne un tableau contenant les variables d'environnemnt
+     * @throws Exception - Si le fichier conf.ini n'est pas trouvé
+     * @throws Exception - Si le fichier conf.ini ne contient pas les variables obligatoires
+     * @return array
+     */
+    static public function readEnvVariables(): array
+    {
+        $conf_file = __DIR__ . '/../conf.ini';
+
+        if (!file_exists($conf_file)) {
+            throw new Exception("Fichier de configuration conf.ini manquant à la racine du projet.");
+        }
+
+        $env_variables = parse_ini_file($conf_file);
+
+        if (false === $env_variables) {
+            throw new Exception("Impossible de lire le fichier de configuration. Fichier mal formatté.");
+        }
+
+        $mandatory_options = array('path_courses');
+
+        $diff = array_diff($mandatory_options, array_keys($env_variables));
+
+        if (!empty($diff)) {
+            throw new Exception(sprintf("Variables d'environnement non initialisées: %s", implode(",", $diff)));
+        }
+
+        return $env_variables;
     }
 
     /**
      * Formate un message pour l'afficher dans le terminal
      * @return void
      */
-    static public function print(string $message): void
+    public function print(string $message): void
     {
         echo $message . PHP_EOL;
     }
@@ -35,10 +87,10 @@ class Env
      * @return bool
      * @throws Exception -- Si impossible de créer le dossier à cause des droits d'écriture.
      */
-    static public function mkdirp(string $path): bool
+    public function mkdirp(string $path): bool
     {
 
-        if (is_dir(static::ABSPATH . $path)) {
+        if (is_dir(self::ABSPATH . $path)) {
             static::print(sprintf("Le répertoire %s existe déjà. Skip.", $path));
             return false;
         }
@@ -57,7 +109,7 @@ class Env
     * @param array $argv Les arguments du script PHP
     * @return Flag[] Un tableau de flags détectés définis par le système
     */
-    static public function parse_flags(int $argc, array $argv): array
+    public function parse_flags(int $argc, array $argv): array
     {
         /**
          * Remove script name

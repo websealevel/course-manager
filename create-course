@@ -13,22 +13,25 @@ require 'vendor/autoload.php';
 use Wsl\CourseManager\Env as Env;
 use Wsl\CourseManager\Course as Course;
 
-Env::init();
+$env = Env::create();
 
-if ($argc < 3) {
-    Env::print(sprintf("Nombre d'arguments insuffisants. ./create-course [option] vendor level coursename"));
-    exit;
-}
+var_dump($env->envVariables);
 
-$course = new Course(
-    $argv[1],
-    $argv[2],
-    $argv[3]
-);
 
-//Création du dossier du cours
-Env::mkdirp($course->vendor);
-Env::mkdirp($course->fullName());
+// if ($argc < 3) {
+//     Env::print(sprintf("Nombre d'arguments insuffisants. ./create-course [option] vendor level coursename"));
+//     exit;
+// }
 
-//Initialisation du contenu du dossier du cours
-Env::prepareDirectory($course);
+// $course = new Course(
+//     $argv[1],
+//     $argv[2],
+//     $argv[3]
+// );
+
+// //Création du dossier du cours
+// Env::mkdirp($course->vendor);
+// Env::mkdirp($course->fullName());
+
+// //Initialisation du contenu du dossier du cours
+// Env::prepareDirectory($course);
