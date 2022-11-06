@@ -5,8 +5,17 @@ namespace Wsl\CourseManager;
 use Exception;
 
 use Wsl\CourseManager\Course;
-use Wsl\CourseManager\FileManager;
 use Wsl\CourseManager\Module;
+use Wsl\CourseManager\DefaultContent;
+
+
+/**
+ * Remarque: Une classe a écarteler. Cette classe n'a que la responsabilité de lire le path de la racine
+ * du projet et de retourner les chemins absolus ou relatifs. Elle devrait s'appeler path.
+ * Tout ce qui est relatif à la création de fichier sera au FileManager et Course et Module
+ * y auront acces par composition. Le contenu sera dans une classe Content.
+ * Un Course et un Module sont sémantiquement identique (récursif). A refactor.
+ */
 
 class Env
 {
@@ -233,28 +242,7 @@ class Env
             'w'
         );
 
-        $slideContent = <<<MARPMARKDOWN
-        ---
-        marp: false
-        paginate: true
-        headingDivider: 2
-        header:
-        footer: 
-        ---
-        <style>
-        section {
-        font-size: 1.4rem;
-        }
-        </style>
-        
-        # {$module->name}
-        
-        Durée:
-        niveau: {$module->course->level}
-
-        MARPMARKDOWN;
-
-        fwrite($file, $slideContent);
+        fwrite($file, DefaultContent::marpFirstSlide($module->name, $module->course->level));
         fclose($file);
     }
 }
