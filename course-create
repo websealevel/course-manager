@@ -10,8 +10,8 @@
 
 require 'vendor/autoload.php';
 
-use Wsl\CourseManager\Env as Env;
-use Wsl\CourseManager\Course as Course;
+use Wsl\CourseManager\Env;
+use Wsl\CourseManager\Course;
 
 $env = Env::create();
 
