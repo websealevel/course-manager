@@ -38,6 +38,14 @@ Télécharger le code source.
 composer update
 ~~~
 
+Créer un fichier `conf.ini` à la racine de votre dossier
+
+~~~ini
+path_courses=/votre/chemin/vers/la/ou/vous/stocker/les/cours
+~~~
+
+Créer votre premier cours avec [cm-create](#ajouter-un-cours-cm-create).
+
 ## Installation globale
 
 A venir...
