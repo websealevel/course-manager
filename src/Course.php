@@ -2,16 +2,19 @@
 
 namespace Wsl\CourseManager;
 
-use Wsl\CourseManager\Module;
 use Wsl\CourseManager\IFile;
+use Wsl\CourseManager\Module;
+use Wsl\CourseManager\FileManager;
+use Wsl\CourseManager\DefaultContent;
 
 /**
  * Une classe qui décrit un cours. Un cours est placé dans un vendor (établissement, organisme, etc.)
  * et est définir par un niveau et un nom.
  */
-class Course implements IFile
+class Course
 {
     public function __construct(
+        readonly public Env $env,
         readonly public string $vendor,
         readonly public string $level,
         readonly public string $name,
@@ -39,65 +42,60 @@ class Course implements IFile
         return sprintf("%s/%s", $this->vendor, $this->fullName());
     }
 
-     /**
+    /**
      * Initialise le répertoire d'un cours nouvellement créee (création de dossiers et de fichiers par défaut)
      * @return void
      */
-    public function createDirectory()
+    public function createCourseDirectory()
     {
-
         //Création du dossier du cours
-        FileManager::mkdirp($this->path());
+        FileManager::createDirectory($this->env->fullPath($this->path()));
 
         $dirsToCreate = array(
             'Bibliographie',
         );
         $filesToCreate = array(
-            'README.md' => $this->readmeContent($course->name),
-            'index.html' => $this->indexHtmlContent($course->name)
+            'README.md' => DefaultContent::readmeContent($this->name),
+            'index.html' => DefaultContent::indexHtmlContent($this->name)
         );
 
+        //Création des sous dossiers par défaut
         foreach ($dirsToCreate as $dir) {
-            $this->mkdirp(
-                sprintf("%s/%s", $course->path(), $dir)
-            );
+            $relativePath = sprintf("%s/%s", $this->path(), $dir);
+            $absPath = $this->env->fullPath($relativePath);
+            FileManager::createDirectory($absPath);
         }
 
+        //Création des fichiers par défaut
         foreach ($filesToCreate as $file => $content) {
-            $file = fopen(
-                sprintf("%s/%s", $this->fullPath($course->path()), $file),
-                'w'
-            );
-            fwrite($file, $content);
-            fclose($file);
+            $relativePath =  sprintf("%s/%s", $this->path(), $file);
+            $absPath = $this->env->fullPath($relativePath);
+            FileManager::createFile($absPath);
         }
 
-        //Creation du module de presentation
-        $module = new Module(
-            $course,
-            0,
-            'presentation'
-        );
+        //Creation des modules par défaut
 
         //Creation des sous directory du module
-        foreach ($module->directories as $dir) {
-            $this->mkdirp(
-                sprintf("%s/%s", $module->path(), $dir)
-            );
+        foreach ($this->modules as $module) {
+            foreach ($module->directories as $dir) {
+                $relativePath = sprintf("%s/%s/%s", $this->path(), $module->fullName(), $dir);
+                $absPath = $this->env->fullPath($relativePath);
+                FileManager::createDirectory($absPath);
+            }
         }
 
-        //Creation du fichier de cours
-        $file = fopen(
-            sprintf(
-                "%s/%s/cours/%s",
-                $this->fullPath($module->course->path()),
-                $module->fullName(),
-                $module->slidesDeckMarkdownFile()
-            ),
-            'w'
-        );
+        // //Creation du fichier de cours
+        // $file = fopen(
+        //     sprintf(
+        //         "%s/%s/cours/%s",
+        //         $this->fullPath($module->course->path()),
+        //         $module->fullName(),
+        //         $module->slidesDeckMarkdownFile()
+        //     ),
+        //     'w'
+        // );
 
-        fwrite($file, DefaultContent::marpFirstSlide($module->name, $module->course->level));
-        fclose($file);
+        // fwrite($file, DefaultContent::marpFirstSlide($module->name, $module->course->level));
+        // fclose($file);
     }
 }

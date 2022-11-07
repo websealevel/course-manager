@@ -2,12 +2,10 @@
 
 namespace Wsl\CourseManager;
 
-use Wsl\CourseManager\IFile;
-
 /**
  * Un module est une partie d'un cours.
  */
-class Module implements IFile
+class Module
 {
     public function __construct(
         readonly public int $id,
@@ -27,15 +25,6 @@ class Module implements IFile
     public function fullName(): string
     {
         return sprintf("module-%02d-%s", $this->id, $this->name);
-    }
-
-    /**
-     * Retourne la path du module relatif à la racine du projet
-     * @return string
-     */
-    public function path(): string
-    {
-        return $this->course->path() . '/' . $this->fullName();
     }
 
     /**

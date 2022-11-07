@@ -14,18 +14,17 @@ use Wsl\CourseManager\Env;
 use Wsl\CourseManager\Course;
 use Wsl\CourseManager\Console;
 
-$env = Env::create();
-
 if ($argc < 3) {
     Console::print("Nombre d'arguments insuffisants. create-course [option] vendor level coursename");
     exit;
 }
 
 $course = new Course(
+    Env::create(),
     $argv[1],
     $argv[2],
     $argv[3]
 );
 
 //Initialisation du contenu du dossier du cours
-$course->createDirectory();
+$course->createCourseDirectory();

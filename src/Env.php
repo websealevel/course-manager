@@ -54,21 +54,21 @@ class Env
             throw new Exception("Fichier de configuration conf.ini manquant à la racine du projet.");
         }
 
-        $env_variables = parse_ini_file($conf_file);
+        $variables = parse_ini_file($conf_file);
 
-        if (false === $env_variables) {
+        if (false === $variables) {
             throw new Exception("Impossible de lire le fichier de configuration. Fichier mal formatté.");
         }
 
         $mandatory_options = array('path_courses');
 
-        $diff = array_diff($mandatory_options, array_keys($env_variables));
+        $diff = array_diff($mandatory_options, array_keys($variables));
 
         if (!empty($diff)) {
             throw new Exception(sprintf("Variables d'environnement non initialisées: %s", implode(",", $diff)));
         }
 
-        return $env_variables;
+        return $variables;
     }
 
     /**
@@ -78,10 +78,10 @@ class Env
      */
     public function abspath(): string
     {
-        if (!isset($this->envVariables[self::ABS_PATH_KEY])) {
-            throw new Exception("La variable d'environnement " . self::ABS_PATH_KEY . "n'est pas définie.");
+        if (!isset($this->variables[self::ABS_PATH_KEY])) {
+            throw new Exception("La variable d'environnement " . self::ABS_PATH_KEY . " n'est pas définie.");
         }
-        return $this->envVariables[self::ABS_PATH_KEY] . '/';
+        return $this->variables[self::ABS_PATH_KEY] . '/';
     }
 
     /**
