@@ -72,7 +72,14 @@ cm-add-module php tableaux
 
 ajoute le module `module-01-tableaux` au cours `etablissement1/l2-php`. Comme il n'y a pas d'ambiguité sur le cours il n'est pas utile de préciser le `niveau` ni le `vendor`. L'identifiant du module est 1 car le seul module présent est le module de présentation ayant pour identifiant 0. 
 
+### Publier un module (a venir...)
+
+### Publier un cours (a venir...)
+
+### Inspecter les cours (a venir...)
+
 <!-- - script `course-ls {nom du cours}`: liste le contenu du cours (modules présents)
+
 
 - script `course-export {nom du cours} {opt nom du module}`: genere les fichiers html et pdf du cours et fait une copie dans le dossier `Public` et Privé (presentation avec notes). Met à jour l'index.html local au cours et l'index.html global. -->
 
