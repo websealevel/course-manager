@@ -80,8 +80,8 @@ Enfin, un dossier `cours/Public`  contient les cours publiés et distribués (fi
 
 ### Ajouter un cours `cm-create`
 
-~~~
-`cm-create {vendor} {niveau} {nom du cours}` 
+~~~bash
+cm-create {vendor} {niveau} {nom du cours}
 ~~~
 
 Crée un dossier `cours/{vendor}/{niveau}-{nom du cours}` avec le contenu par défaut suivant
@@ -102,7 +102,7 @@ crée le cours `l2-php` dans le dossier `cours/etablissement1`. Le dossier `l2-p
 ### Ajouter un module à un cours existant `cm-add-module`
 
 ~~~
-`cm-add-module [vendor] [niveau] {coursename} {modulename}`
+cm-add-module [vendor] [niveau] {coursename} {modulename}
 ~~~
 
 Ajoute un module `modulename` au cours `coursename`. Son numéro est défini comme le dernier module + 1. Par exemple
