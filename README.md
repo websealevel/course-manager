@@ -12,6 +12,8 @@ composer update
 
 ## Installation globale
 
+A venir...
+
 ## Dépendances
 
 - marp
@@ -19,31 +21,48 @@ composer update
 
 ## Specs
 
-Un dossier `cours` (racine du projet).
-
-Un dossier `cours/Public`  contient les cours publiés et distribués (fichiers générés au format PDF, HTML, etc. uniquement sans les notes, aucun fichier source Markdown). Il reflète la structure de `cours` (organisé de la même manière, même arborescence). 
+Un dossier `cours` est crée à la création du premier cours et sert de racine au projet. 
 
 A la racine, un fichier `README.md` et `index.html` qui contient la liste de tous les cours et permet de naviguer dans tous les cours au format html.
 
 Chaque `cours` est défini dans un `vendor` (un organisme, une école), eux mêmes divisés en `modules`. Un module contient une partie du cours, des exercices et des tps.
 
-Une présentation est généré par `module`. Chaque présentation est écrite en Markdown, et générée ensuite en HTML et PDF avec marpit. Cette présentation fait référence aux exercices et tps présents dans le module. Un fichier `index.html` local permet de passer d'une présentation à l'autre facilement. Les exercices, sujets de TP ou d'examen et les autres documents Markdown sont générés en PDF avec pandoc.
+Une présentation est généré par `module` dans le dossier `module/cours`. Chaque présentation est écrite en Markdown, et générée ensuite en HTML et PDF avec marpit. 
+
+Un fichier `index.html` local permet de passer d'une présentation à l'autre facilement. Les exercices, sujets de TP ou d'examen et les autres documents Markdown sont générés en PDF avec pandoc.
+
+Enfin, un dossier `cours/Public`  contient les cours publiés et distribués (fichiers générés au format PDF, HTML, etc. uniquement sans les notes, *aucun fichier source Markdown*). Il reflète la structure de `cours` (même arborescence). Tout le contenu de ce dossier est distribuable (publication).
 
 ## Scripts
 
-- `course-create {vendor} {niveau} {nom du cours}` . Cree un dossier `cours/{vendor}/{niveau}-{nom du cours}` avec le contenu suivant
+> Les arguments définis entre accolades sont obligatoires, les arguments définis entre crochets sont optionnels.
+
+- `cm-create {vendor} {niveau} {nom du cours}` . Cree un dossier `cours/{vendor}/{niveau}-{nom du cours}` avec le contenu par défaut suivant
     - `Bibliographie`: stocke la bibliographie du cours (livres, fichiers PDF, etc.)
     - `module-00-presentation`: module de présentation du cours, avec ses sous-dossiers et son fichier deck de slides markdown.
     - `README.md`: description breve du cours (durée, contenu, ressources, niveau des apprenants, remarques). Contient le plan, les objectifs et le planning.
     - `index.html`: permet de naviguer dans le cours au format HTML
 
-<!-- - script `course-ls {nom du cours}`: liste le contenu du cours (modules présents)
 
-- script `course-module {nom du cours} {numero} {nom du module}`, genere un module du cours nom du cours (analyse des dossiers présents en slug) genere un module avec le nom et un numero (different de 0 qui est déjà pris par presentation). Cree le contenu suivant
-    - `{nom du cours}/{nom du module}/cours/{numero}-{nom module}-{nom du cours}.md` : le fichier contenant le cours
-    - `{nom du cours}/{nom du module}/exercices`
-    -` {nom du cours}/{nom du module}/tp`
-    - `/Public/{nom-du-cours}/{nom-du-module}/ : contiendra tout le contenu généré à partir des fichiers markdown pour le module (cours, exercice, tp, exams) au format PDF et HTML (sans les commentaires cad mes notes de cours). Ce sera un dossier que je pourrai partager sans soucis avec les étudiants (aucune info privée).
+Exemple
+
+~~~bash
+cm-create etablissement1 l2 php
+~~~
+
+crée le cours `l2-php` dans le dossier `cours/etablissement1`. Le dossier `l2-php` contient un dossier de biblio et un module de présentation par défaut `module-00-presentation`.
+
+- `cm-add-module [vendor] [niveau] {coursename} {modulename}`. Ajoute un module `modulename` au cours `coursename`. Son numéro est défini comme le dernier module + 1. 
+
+Exemple
+
+~~~bash
+cm-add-module php tableaux
+~~~
+
+ajoute le module `module-01-tableaux` au cours `etablissement1/l2-php`. Comme il n'y a pas d'ambiguité sur le cours il n'est pas utile de préciser le `niveau` ni le `vendor`. L'identifiant du module est 1 car le seul module présent est le module de présentation ayant pour identifiant 0. 
+
+<!-- - script `course-ls {nom du cours}`: liste le contenu du cours (modules présents)
 
 - script `course-export {nom du cours} {opt nom du module}`: genere les fichiers html et pdf du cours et fait une copie dans le dossier `Public` et Privé (presentation avec notes). Met à jour l'index.html local au cours et l'index.html global. -->
 
