@@ -56,7 +56,7 @@ Par exemple
 cm-create etablissement1 l2 php
 ~~~
 
-crée le cours `l2-php` dans le dossier `cours/etablissement1`. Le dossier `l2-php` contient un dossier de biblio et un module de présentation par défaut `module-00-presentation`.
+crée le cours `l2-php` dans le dossier `cours/etablissement1`. Le dossier `l2-php` contient un dossier de biblio et un module de présentation par défaut `module-00-presentation` contenant une présentation en markdown initialisée.
 
 ### Ajouter un module à un cours existant `cm-add-module`
 
