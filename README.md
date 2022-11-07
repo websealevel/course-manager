@@ -32,7 +32,7 @@ Une application CLI en PHP pour gérer les fichiers de cours.
 
 ## Installation locale avec Composer
 
-Télécharger le code source.
+Télécharger le [code source](https://github.com/websealevel/course-manager).
 
 ~~~bash
 composer update
@@ -41,7 +41,7 @@ composer update
 Créer un fichier `conf.ini` à la racine de votre dossier
 
 ~~~ini
-path_courses=/votre/chemin/vers/la/ou/vous/stocker/les/cours
+path_courses=/chemin/vers/la/ou/vous/voulez/stocker/les/cours
 ~~~
 
 Créer votre premier cours avec [cm-create](#ajouter-un-cours-cm-create).
