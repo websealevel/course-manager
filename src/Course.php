@@ -13,15 +13,16 @@ use Wsl\CourseManager\DefaultContent;
  */
 class Course
 {
+    readonly public array $modules;
+
     public function __construct(
-        readonly public Env $env,
+        public Env $env,
         readonly public string $vendor,
         readonly public string $level,
         readonly public string $name,
-        readonly public array $modules = array(
-            new Module(0, 'presentation')
-        )
     ) {
+
+        $this->modules = array( new Module($this->env, 0, 'presentation'));
     }
 
     /**
@@ -51,51 +52,31 @@ class Course
         //Création du dossier du cours
         FileManager::createDirectory($this->env->fullPath($this->path()));
 
-        $dirsToCreate = array(
+        $defaultDirs = array(
             'Bibliographie',
         );
-        $filesToCreate = array(
+        $defaultFiles = array(
             'README.md' => DefaultContent::readmeContent($this->name),
             'index.html' => DefaultContent::indexHtmlContent($this->name)
         );
 
         //Création des sous dossiers par défaut
-        foreach ($dirsToCreate as $dir) {
+        foreach ($defaultDirs as $dir) {
             $relativePath = sprintf("%s/%s", $this->path(), $dir);
             $absPath = $this->env->fullPath($relativePath);
             FileManager::createDirectory($absPath);
         }
 
         //Création des fichiers par défaut
-        foreach ($filesToCreate as $file => $content) {
+        foreach ($defaultFiles as $file => $content) {
             $relativePath =  sprintf("%s/%s", $this->path(), $file);
             $absPath = $this->env->fullPath($relativePath);
-            FileManager::createFile($absPath);
+            FileManager::createFile($absPath, $content);
         }
 
-        //Creation des modules par défaut
-
-        //Creation des sous directory du module
+        //Préparation des repertoires des modules
         foreach ($this->modules as $module) {
-            foreach ($module->directories as $dir) {
-                $relativePath = sprintf("%s/%s/%s", $this->path(), $module->fullName(), $dir);
-                $absPath = $this->env->fullPath($relativePath);
-                FileManager::createDirectory($absPath);
-            }
+            $module->prepareModuleDirectory($this->path(), $this->level);
         }
-
-        // //Creation du fichier de cours
-        // $file = fopen(
-        //     sprintf(
-        //         "%s/%s/cours/%s",
-        //         $this->fullPath($module->course->path()),
-        //         $module->fullName(),
-        //         $module->slidesDeckMarkdownFile()
-        //     ),
-        //     'w'
-        // );
-
-        // fwrite($file, DefaultContent::marpFirstSlide($module->name, $module->course->level));
-        // fclose($file);
     }
 }
