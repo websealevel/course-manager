@@ -32,6 +32,10 @@ Une application CLI en PHP pour gérer les fichiers de cours, à destination des
 
 ## Installation locale avec Composer
 
+Installer php.
+
+Installer Composer.
+
 Télécharger le [code source](https://github.com/websealevel/course-manager).
 
 ~~~bash
@@ -52,6 +56,7 @@ Créer votre premier cours avec [cm-create](#ajouter-un-cours-cm-create).
 
 ## Dépendances
 
+- php (8.1)
 - marp
 - pandoc
 
