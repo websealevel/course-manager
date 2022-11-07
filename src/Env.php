@@ -4,26 +4,18 @@ namespace Wsl\CourseManager;
 
 use Exception;
 
-use Wsl\CourseManager\Course;
-use Wsl\CourseManager\Module;
-use Wsl\CourseManager\DefaultContent;
-
-
 /**
  * Remarque: Une classe a écarteler. Cette classe n'a que la responsabilité de lire le path de la racine
  * du projet et de retourner les chemins absolus ou relatifs. Elle devrait s'appeler path.
- * Tout ce qui est relatif à la création de fichier sera au FileManager et Course et Module
- * y auront acces par composition. Le contenu sera dans une classe Content.
- * Un Course et un Module sont sémantiquement identique (récursif). A refactor.
+ * Elle lit également le fichier de config et test si le sapi de php est bien CLI.
  */
 
 class Env
 {
-
-    const ABS_PATH_KEY = 'path_courses';
+    private const ABS_PATH_KEY = 'path_courses';
 
     private function __construct(
-        readonly public array $envVariables
+        readonly public array $variables
     ) {
     }
 
@@ -31,18 +23,17 @@ class Env
      * Factory qui retourne un environnement avec validation préalable
      * @return Env
      */
-    static public function create(): Env
+    public static function create(): Env
     {
 
         try {
-
             if (php_sapi_name() !== 'cli') {
                 throw new Exception("php doit être executé en mode CLI.");
             }
 
-            $variables = static::readEnvVariables();
-            $env = new Env($variables);
-            return $env;
+            $variables = static::readConfigFile();
+
+            return new Env($variables);
         } catch (Exception $e) {
             echo $e->getMessage() . PHP_EOL;
             exit;
@@ -55,7 +46,7 @@ class Env
      * @throws Exception - Si le fichier conf.ini ne contient pas les variables obligatoires
      * @return array
      */
-    static public function readEnvVariables(): array
+    public static function readConfigFile(): array
     {
         $conf_file = __DIR__ . '/../conf.ini';
 
@@ -81,18 +72,6 @@ class Env
     }
 
     /**
-     * Formate un message pour l'afficher dans le terminal
-     * @return void
-     */
-    public function print(string $message, ...$params): void
-    {
-        if (!empty($params)) {
-            $message = sprintf($message, ...$params);
-        }
-        echo $message . PHP_EOL;
-    }
-
-    /**
      * Retourne le path absolu de la racine du projet (avec trailing slash)
      * @throws Exception - Si la variable ABS_PATH_KEY n'existe pas dans les variables d'environnement
      * @return string
@@ -105,144 +84,14 @@ class Env
         return $this->envVariables[self::ABS_PATH_KEY] . '/';
     }
 
-    public function fullPath(string $relativePath, string $trailing = '')
+    /**
+     * Retourne le path absolu de $relativePath
+     * @param string $relativePath Le chemin relatif à la racine du projet
+     * @param string $trailing Caractère à ajouter à la fin (trailing slash)
+     * @return string
+     */
+    public function fullPath(string $relativePath, string $trailing = ''): string
     {
         return $this->abspath() . $relativePath . $trailing;
-    }
-
-    /**
-     * Créer le dossier $path s'il n'existe pas déjà. Retourne vrai si la création du dossier
-     * a réussi, faux sinon
-     * @param string $path. Le path du dossier à écrire (relatif à abspath)
-     * @throws Exception -- Si impossible de créer le dossier à cause des droits d'écriture.
-     * @return bool
-     */
-    public function mkdirp(string $path): bool
-    {
-
-        $full_path = $this->fullPath($path);
-
-        if (is_dir($full_path)) {
-            $this->print(sprintf("Le répertoire %s existe déjà. Skip.", $path));
-            return false;
-        }
-
-        $created = mkdir($full_path, recursive: true);
-
-        if (!$created)
-            throw new Exception(
-                sprintf("Impossible de créer le dossier %s. Véfifier les droits en écriture sur le path. ", $path)
-            );
-
-        return $created;
-    }
-
-
-    /**
-     * Retourne le contenu du README d'un cours à sa création
-     * @return string
-     */
-    public function readmeContent(string $title): string
-    {
-
-        $titleCapitalFirst = ucfirst($title);
-
-        $content = <<<MARKDOWN
-
-        # ${titleCapitalFirst}
-
-        ## Notes
-
-        ## Ressources
-
-        MARKDOWN;
-
-        return $content;
-    }
-
-    /**
-     * Retourne le contenu du index.html d'un cours à sa création
-     * @return string
-     */
-    public function indexHtmlContent(string $title): string
-    {
-
-        $titleCapitalFirst = ucfirst($title);
-
-        $content = <<<HTML
-
-        <!DOCTYPE html>
-        <html lang="fr"> 
-        <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        </head>
-        <body>
-            <h1>${titleCapitalFirst}</h1>
-        </body>
-        </html>
-
-        HTML;
-
-        return $content;
-    }
-
-    /**
-     * Initialise le répertoire d'un cours nouvellement créee (création de dossiers et de fichiers par défaut)
-     * @param Course Le cours dont on initialise le répertoire
-     * @return void
-     */
-    public function prepareDirectory(Course $course)
-    {
-        $dirsToCreate = array(
-            'Bibliographie',
-        );
-        $filesToCreate = array(
-            'README.md' => $this->readmeContent($course->name),
-            'index.html' => $this->indexHtmlContent($course->name)
-        );
-
-        foreach ($dirsToCreate as $dir) {
-            $this->mkdirp(
-                sprintf("%s/%s", $course->path(), $dir)
-            );
-        }
-
-        foreach ($filesToCreate as $file => $content) {
-            $file = fopen(
-                sprintf("%s/%s", $this->fullPath($course->path()), $file),
-                'w'
-            );
-            fwrite($file, $content);
-            fclose($file);
-        }
-
-        //Creation du module de presentation
-        $module = new Module(
-            $course,
-            0,
-            'presentation'
-        );
-
-        //Creation des sous directory du module
-        foreach ($module->directories as $dir) {
-            $this->mkdirp(
-                sprintf("%s/%s", $module->path(), $dir)
-            );
-        }
-
-        //Creation du fichier de cours
-        $file = fopen(
-            sprintf(
-                "%s/%s/cours/%s",
-                $this->fullPath($module->course->path()),
-                $module->fullName(),
-                $module->slidesDeckMarkdownFile()
-            ),
-            'w'
-        );
-
-        fwrite($file, DefaultContent::marpFirstSlide($module->name, $module->course->level));
-        fclose($file);
     }
 }

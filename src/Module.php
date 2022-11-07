@@ -2,17 +2,14 @@
 
 namespace Wsl\CourseManager;
 
-use Wsl\CourseManager\Course;
 use Wsl\CourseManager\IFile;
 
 /**
- * Un module est une partie d'un cours. Un module appartient à un Course.
+ * Un module est une partie d'un cours.
  */
 class Module implements IFile
 {
-
     public function __construct(
-        readonly public Course $course,
         readonly public int $id,
         readonly public string $name,
         readonly public array $directories = array(
@@ -47,6 +44,6 @@ class Module implements IFile
      */
     public function slidesDeckMarkdownFile(): string
     {
-        return sprintf("%02d-%s-%s.md", $this->id, $this->name, $this->course->fullName());
+        return sprintf("%02d-%s.md", $this->id, $this->name);
     }
 }
