@@ -2,6 +2,34 @@
 
 Une application CLI en PHP pour gérer les fichiers de cours.
 
+
+- [course-manager](#course-manager)
+  - [Installation locale avec Composer](#installation-locale-avec-composer)
+  - [Installation globale](#installation-globale)
+  - [Dépendances](#dépendances)
+  - [Specs](#specs)
+  - [Scripts](#scripts)
+    - [Ajouter un cours `cm-create`](#ajouter-un-cours-cm-create)
+    - [Ajouter un module à un cours existant `cm-add-module`](#ajouter-un-module-à-un-cours-existant-cm-add-module)
+    - [Publier un module (a venir...)](#publier-un-module-a-venir)
+    - [Publier un cours (a venir...)](#publier-un-cours-a-venir)
+    - [Inspecter les cours (a venir...)](#inspecter-les-cours-a-venir)
+  - [Génération des présentations avec marp](#génération-des-présentations-avec-marp)
+    - [macOS](#macos)
+    - [Windows](#windows)
+    - [Debian/Ubuntu](#debianubuntu)
+      - [Installation via les binaires](#installation-via-les-binaires)
+      - [Installation via `node` et `npm`](#installation-via-node-et-npm)
+    - [Au format `HTML`](#au-format-html)
+    - [Au format `PDF`](#au-format-pdf)
+    - [Au format `PPTX` (powerpoint) **lecture seule**](#au-format-pptx-powerpoint-lecture-seule)
+    - [Au format `PPTX` (powerpoint) **éditable**](#au-format-pptx-powerpoint-éditable)
+  - [Génération des documents au format HTML ou PDF](#génération-des-documents-au-format-html-ou-pdf)
+    - [Générer un fichier HTML+CSS a partir d'un fichier markdown (avec `marp`)](#générer-un-fichier-htmlcss-a-partir-dun-fichier-markdown-avec-marp)
+    - [Générer la présentation au format PDF a partir d'un fichier markdown (avec `marp`)](#générer-la-présentation-au-format-pdf-a-partir-dun-fichier-markdown-avec-marp)
+    - [Générer un PDF à partir du markdown en passant par HTML/CSS (avec `pandoc`)](#générer-un-pdf-à-partir-du-markdown-en-passant-par-htmlcss-avec-pandoc)
+  - [Ressources](#ressources)
+
 ## Installation locale avec Composer
 
 Télécharger le code source.
