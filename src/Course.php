@@ -60,7 +60,7 @@ class Course
         }
 
         $defaultDirs = array(
-            'Bibliographie',
+            'bibliographie',
         );
         $defaultFiles = array(
             'README.md' => DefaultContent::readmeContent($this->name),

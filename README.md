@@ -44,10 +44,11 @@ Enfin, un dossier `cours/Public`  contient les cours publiés et distribués (fi
 ~~~
 
 Cree un dossier `cours/{vendor}/{niveau}-{nom du cours}` avec le contenu par défaut suivant
-    - `Bibliographie`: stocke la bibliographie du cours (livres, fichiers PDF, etc.)
-    - `module-00-presentation`: module de présentation du cours, avec ses sous-dossiers et son fichier deck de slides markdown.
-    - `README.md`: description breve du cours (durée, contenu, ressources, niveau des apprenants, remarques). Contient le plan, les objectifs et le planning.
-    - `index.html`: permet de naviguer dans le cours au format HTML
+
+ - `bibliographie`: stocke la bibliographie du cours (livres, fichiers PDF, etc.)
+ - `module-00-presentation`: module de présentation du cours, avec ses sous-dossiers et son fichier deck de slides markdown
+ - `README.md`: description breve du cours (durée, contenu, ressources, niveau des apprenants, remarques). Contient le plan, les objectifs et le planning.
+ - `index.html`: permet de naviguer dans le cours au format HTML
 
 Par exemple
 
