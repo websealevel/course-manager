@@ -37,14 +37,19 @@ Enfin, un dossier `cours/Public`  contient les cours publiés et distribués (fi
 
 > Les arguments définis entre accolades sont obligatoires, les arguments définis entre crochets sont optionnels.
 
-- `cm-create {vendor} {niveau} {nom du cours}` . Cree un dossier `cours/{vendor}/{niveau}-{nom du cours}` avec le contenu par défaut suivant
+### Ajouter un cours `cm-create`
+
+~~~
+`cm-create {vendor} {niveau} {nom du cours}` 
+~~~
+
+Cree un dossier `cours/{vendor}/{niveau}-{nom du cours}` avec le contenu par défaut suivant
     - `Bibliographie`: stocke la bibliographie du cours (livres, fichiers PDF, etc.)
     - `module-00-presentation`: module de présentation du cours, avec ses sous-dossiers et son fichier deck de slides markdown.
     - `README.md`: description breve du cours (durée, contenu, ressources, niveau des apprenants, remarques). Contient le plan, les objectifs et le planning.
     - `index.html`: permet de naviguer dans le cours au format HTML
 
-
-Exemple
+Par exemple
 
 ~~~bash
 cm-create etablissement1 l2 php
@@ -52,9 +57,13 @@ cm-create etablissement1 l2 php
 
 crée le cours `l2-php` dans le dossier `cours/etablissement1`. Le dossier `l2-php` contient un dossier de biblio et un module de présentation par défaut `module-00-presentation`.
 
-- `cm-add-module [vendor] [niveau] {coursename} {modulename}`. Ajoute un module `modulename` au cours `coursename`. Son numéro est défini comme le dernier module + 1. 
+### Ajouter un module à un cours existant `cm-add-module`
 
-Exemple
+~~~
+`cm-add-module [vendor] [niveau] {coursename} {modulename}`
+~~~
+
+Ajoute un module `modulename` au cours `coursename`. Son numéro est défini comme le dernier module + 1. Par exemple
 
 ~~~bash
 cm-add-module php tableaux
