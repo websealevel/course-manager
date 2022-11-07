@@ -39,8 +39,7 @@ class FileManager
     public static function createDirectory(string $abspath)
     {
         if (is_dir($abspath)) {
-            Console::print(sprintf("Le répertoire %s existe déjà. Skip.", $abspath));
-            return false;
+            throw new \Exception(sprintf("Le cours %s existe déjà. Abandon.", $abspath));
         }
 
         $created = mkdir($abspath, recursive: true);

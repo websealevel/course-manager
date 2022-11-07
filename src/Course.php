@@ -2,7 +2,7 @@
 
 namespace Wsl\CourseManager;
 
-use Wsl\CourseManager\IFile;
+use Exception;
 use Wsl\CourseManager\Module;
 use Wsl\CourseManager\FileManager;
 use Wsl\CourseManager\DefaultContent;
@@ -10,6 +10,7 @@ use Wsl\CourseManager\DefaultContent;
 /**
  * Une classe qui décrit un cours. Un cours est placé dans un vendor (établissement, organisme, etc.)
  * et est définir par un niveau et un nom.
+ * Un cours est identifié par un vendor, level et name.
  */
 class Course
 {
@@ -49,8 +50,14 @@ class Course
      */
     public function createCourseDirectory()
     {
-        //Création du dossier du cours
-        FileManager::createDirectory($this->env->fullPath($this->path()));
+
+        //Création du dossier du cours. On vérifie que le cours n'existe pas déjà.
+        try {
+            FileManager::createDirectory($this->env->fullPath($this->path()));
+        } catch (Exception $e) {
+            Console::print($e->getMessage());
+            return;
+        }
 
         $defaultDirs = array(
             'Bibliographie',

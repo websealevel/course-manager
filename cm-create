@@ -15,7 +15,7 @@ use Wsl\CourseManager\Course;
 use Wsl\CourseManager\Console;
 
 if ($argc < 3) {
-    Console::print("Nombre d'arguments insuffisants. create-course [option] vendor level coursename");
+    Console::print("Nombre d'arguments insuffisants. cm-create vendor level coursename");
     exit;
 }
 
