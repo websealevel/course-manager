@@ -12,7 +12,6 @@ use Wsl\CourseManager\Console;
 
 class FileManager
 {
-
     /**
      * Crée le fichier $abspath et écrit le contenu dedans.
      * @param string $abspath Le path absolu du fichier à créée
@@ -51,5 +50,19 @@ class FileManager
         }
 
         return $created;
+    }
+
+
+    /**
+     * Retourne la liste des cours existants pour chaque vendor.
+     * Chaque cours est enregistré sous la clef de son vendor.
+     * @return Courses[]
+     */
+    public static function listCoursesByVendor(): array
+    {
+
+        $courses = array();
+
+        return $courses;
     }
 }
