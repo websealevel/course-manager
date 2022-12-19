@@ -84,6 +84,26 @@ Un fichier `index.html` local permet de passer d'une présentation à l'autre fa
 
 Enfin, un dossier `cours/public`  contient les cours publiés et distribués (fichiers générés au format PDF, HTML, etc. uniquement sans les notes, *aucun fichier source Markdown*). Il reflète la structure de `cours` (même arborescence). Tout le contenu de ce dossier est distribuable (cours publié).
 
+~~~
+#Exemple de l'architecture du système de gestion de cours
+
+cours
+  vendorA
+    coursA
+      bibliographie
+      module1
+        cours
+        exercices
+        tp
+        index.html
+        README.md
+      module2
+    coursB
+  vendorB
+    coursA
+      module1
+~~~
+
 ## Scripts
 
 > Note sur la syntaxe de la doc (arguments et options de la CLI)
