@@ -266,7 +266,7 @@ marp --pdf --allow-local-files {file.md}
 
 ~~~
 pandoc {file.md} -t html5 -o {file.pdf} --css style.css --pdf-engine-opt=--enable-local-file-access -->
-~~~
+<!-- ~~~ -->
 
 ## Ressources
 
