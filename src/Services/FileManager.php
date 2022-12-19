@@ -31,6 +31,20 @@ class FileManager
     }
 
     /**
+     * Action: supprime toutes les entrées du projet pointé dans le fichier de configuration global
+     * s'il existe. Si le projet est pointé par MAIN, le projet précédent est déclaré comme MAIN
+     * à la place. Sinon MAIN est vide.
+     */
+    public static function removeFromConfigFile(string $absPathToRootDir): void
+    {
+        //Lire le fichier de config
+
+        //Retirer toutes les occurences de $absPathToRootDir
+
+        //Replacer MAIN sur l'avant dernier projet dans la liste PROJETS, sinon le mettre à vide.
+    }
+
+    /**
      * Action: Crée un fichier de configuration .create-manager dans le répertoire home de l'utilisateur courant
      * s'il n'existe pas déjà
      * @param string $absPathToRootDir Le chemin absolu (et l'identifiant) du nouveau projet.
