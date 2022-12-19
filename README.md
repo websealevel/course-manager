@@ -9,15 +9,15 @@ Une application CLI, [basée sur le composant Console de Symfony](https://symfon
   - [Mettre à jour `course-manager`](#mettre-à-jour-course-manager)
   - [Philosophie](#philosophie)
   - [Guide de démarrage](#guide-de-démarrage)
-  - [Liste des commandes](#liste-des-commandes)
-    - [Initialiser un nouveau projet de gestion de cours `add:project`](#initialiser-un-nouveau-projet-de-gestion-de-cours-addproject)
+  - [Liste des commandes principales](#liste-des-commandes-principales)
+    - [Créer un nouveau projet de gestion de cours `add:project`](#créer-un-nouveau-projet-de-gestion-de-cours-addproject)
     - [Ajouter un nouveau cours au système courant `add:course`](#ajouter-un-nouveau-cours-au-système-courant-addcourse)
     - [Ajouter un module à un cours existant `cm add:module`](#ajouter-un-module-à-un-cours-existant-cm-addmodule)
-    - [(Re)Publier un module (à venir...)](#republier-un-module-à-venir)
-    - [(Re)Publier un cours (à venir...)](#republier-un-cours-à-venir)
+    - [Publier un module (à venir...)](#publier-un-module-à-venir)
+    - [Publier un cours (à venir...)](#publier-un-cours-à-venir)
       - [Contenus de type *présentation*: format HTML et PDF](#contenus-de-type-présentation-format-html-et-pdf)
       - [Contenus de type *document*: format HTML et PDF](#contenus-de-type-document-format-html-et-pdf)
-    - [Inspecter les cours (à venir...)](#inspecter-les-cours-à-venir)
+    - [Inspecter les cours du système courant (à venir...)](#inspecter-les-cours-du-système-courant-à-venir)
   - [Manuel général d'outils en ligne de commande: arguments, options et syntaxe utilisée dans la doc](#manuel-général-doutils-en-ligne-de-commande-arguments-options-et-syntaxe-utilisée-dans-la-doc)
     - [Argument d'une commande](#argument-dune-commande)
     - [Options d'une commande](#options-dune-commande)
@@ -147,13 +147,11 @@ cm add:course foo course-manager --level=L1,L2
 
 > Vous pouvez également ajouter un niveau du cours avec l'option `--level`. Par exemple `--level=L1` ou `--level=M1,M2`.
 
-## Liste des commandes
+## Liste des commandes principales
 
-Pour obtenir la liste des commandes disponibles `cm list`.
+> Pour obtenir la liste des commandes disponibles `cm list`. Pour obtenir des informations sur chaque commande (description, arguments, options) `cm <nom de la commande> --help` ou `cm <nom de la commande> -h`.
 
-Pour obtenir des informations sur chaque commande (description, arguments, options) `cm <nom de la commande> --help` ou `cm <nom de la commande> -h`.
-
-### Initialiser un nouveau projet de gestion de cours `add:project` 
+### Créer un nouveau projet de gestion de cours `add:project` 
 
 ~~~bash
 cm add:project <nom du système de gestion de cours>
@@ -196,9 +194,9 @@ Ajoute un module `modulename` au cours `coursename`. Son numéro est défini com
 
 Ajoute le module `module-01-tableaux` au cours `etablissement1/l2-php`. Comme il n'y a pas d'ambiguïté sur le cours, il n'est pas utile de préciser le `niveau` ni le `vendor`. L'identifiant du module est 1 car le seul module présent est le module de présentation ayant pour identifiant 0.  -->
 
-### (Re)Publier un module (à venir...)
+### Publier un module (à venir...)
 
-### (Re)Publier un cours (à venir...)
+### Publier un cours (à venir...)
 
 Publier un cours revient à publier l'intégralité de ses modules. 
 
@@ -206,7 +204,7 @@ Publier un cours revient à publier l'intégralité de ses modules.
 
 #### Contenus de type *document*: format HTML et PDF
 
-### Inspecter les cours (à venir...)
+### Inspecter les cours du système courant (à venir...)
 
 <!-- - script `course-ls {nom du cours}`: liste le contenu du cours (modules présents)
 
