@@ -72,28 +72,27 @@ Initialiser un votre premier système de gestion de cours avec `cm init`.
 
 ## Specs
 
-Un dossier `cours` (par défaut) est créé à la création du premier cours et sert de racine au projet. 
+Un dossier `cours` (par défaut) est créé à l'initialisation et sert de racine au projet. Il contient les fichiers suivants: 
 
-À la racine, un fichier `README.md` et `index.html` qui contient la liste de tous les cours et permet de naviguer dans tous les cours au format HTML.
+- `sources/` : les fichiers sources de vos cours (markdown, assets, images)
+- `templates/`: les styles globaux pour la publication de vos cours (CSS, XSLT, etc.)
+- `public/` : les cours publiés au format HTML et/ou PDF, distribuables, les notes n'y apparaissent pas
+- `index.html`: un fichier pour naviguer facilement dans vos cours via votre navigateur web
 
-Chaque `cours` est défini dans un `vendor` (un organisme, une école), eux-mêmes divisés en `modules`. Un module contient une partie du cours, des exercices et des tps.
+Chaque `cours` est défini dans un `vendor` (un organisme, une école, etc.), et se divise en `modules`. Un module contient une partie du cours, des exercices et des tps.
 
-Une présentation est générée par `module` dans le dossier `module/cours`. Chaque présentation est écrite en Markdown, et générée ensuite en HTML et PDF avec marpit. 
-
-Un fichier `index.html` local permet de passer d'une présentation à l'autre facilement. Les exercices, sujets de TP ou d'examen et les autres documents Markdown sont générés en PDF avec pandoc.
-
-Enfin, un dossier `cours/public`  contient les cours publiés et distribués (fichiers générés au format PDF, HTML, etc. uniquement sans les notes, *aucun fichier source Markdown*). Il reflète la structure de `cours` (même arborescence). Tout le contenu de ce dossier est distribuable (cours publié).
+Une présentation est générée par `module` au moment de la publication. Chaque présentation est écrite en Markdown, et générée ensuite en HTML et PDF avec marpit. 
 
 ~~~
 #Exemple de l'architecture du système de gestion de cours
-
 #Sources des cours
-cours/
+sources/
   - *vendorA*
     - coursA
       - bibliographie
       - module1
         - cours
+          #cours source: contenu du cours en markdown, commentaire et notes à l'intention du formateur·rice
           - cours.md
         - exercices
         - tp
@@ -113,6 +112,7 @@ public/
   - *vendorA*
     - coursA
       - cours
+        #cours publié: contenu en HTML/PDF, pas de commentaire ni de notes visibles
         - cours.html
         - cours.pdf
 ~~~
