@@ -196,6 +196,53 @@ class Config
     }
 
     /**
+     * Action: supprime toutes les entrées du projet pointé dans le fichier de configuration global
+     * s'il existe. Si le projet est pointé par MAIN, le projet précédent est déclaré comme MAIN
+     * à la place. Si pas d'autres projets enregistrés, on supprime le fichier de configuration.
+     */
+    public static function removeFromConfigFile(string $absPathToRootDir): bool
+    {
+        //Lire le fichier de config
+        $parsed = FileManager::parseIniFile(static::absPathOfGlobalConfigFile());
+
+        //Retirer toutes les occurences de $absPathToRootDir
+        if (!is_array($parsed))
+            return false;
+
+        //Tous les projets enregistrés
+        $projects = explode(',', $parsed['PROJECTS']);
+
+        //Tous les autres projets
+        $otherProjects = array_filter($projects, function ($project) use ($absPathToRootDir) {
+            return $project !== $absPathToRootDir;
+        });
+
+        //On retire le projet à supprimer des projets enregistrés.
+        $parsed['PROJECTS'] = implode(",", $otherProjects);
+
+        if ($parsed['MAIN'] === $absPathToRootDir) {
+
+            //Changer le curseur au projet précédent
+            if (empty($otherProjects)) {
+                //Si pas d'autres projets, on supprime le fichier de configuration globale
+                FileManager::removeFile(static::absPathOfGlobalConfigFile());
+                return true;
+            }
+
+            //Change le curseur de position sur un autre projet existant.
+            $parsed['MAIN'] = $otherProjects[0];
+        }
+
+        //Transform
+        $values = array(
+            sprintf("MAIN=%s", $parsed['MAIN']),
+            sprintf("PROJECTS=%s", $parsed['PROJECTS']),
+        );
+
+        return FileManager::createFile(static::absPathOfGlobalConfigFile(), implode("\n", $values));
+    }
+
+    /**
      * Retourne vrai si le fichier de configuration Global est initialisé (présence
      * des clefs MAIN et PROJECTS), faux sinon
      * @return bool
