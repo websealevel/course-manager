@@ -3,6 +3,8 @@
 
 namespace Wsl\CourseManager;
 
+use Wsl\CourseManager\Models\File;
+use Wsl\CourseManager\Services\DefaultContent;
 use Wsl\CourseManager\Services\FileManager;
 
 /**
@@ -10,6 +12,8 @@ use Wsl\CourseManager\Services\FileManager;
  */
 class Config
 {
+
+    public const COURSE_MANAGER_VERSION = 1.0;
 
     /**
      * Nom du fichier de configuration global du programme. Maintient la liste des tous les projets de gestion de cours,
@@ -98,13 +102,20 @@ class Config
     /**
      * Retourne la liste des fichiers crées par défaut 
      * à la racine du projet à l'initalisation d'un nouveau projet 
-     * @return array
+     * @return File[]
      */
     public static function projectDefaultFiles(): array
     {
         return array(
-            'index.html', 'config.ini'
+            new File('index.html', DefaultContent::indexHtmlContent('Liste des cours')),
+            new File('config.ini', Config::configIniContent())
         );
+    }
+
+
+    public static function configIniContent(): string
+    {
+        return sprintf("#course-manager");
     }
 
     /**
