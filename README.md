@@ -9,7 +9,7 @@ Une application CLI, [basée sur le composant Console de Symfony](https://symfon
   - [Mettre à jour `course-manager`](#mettre-à-jour-course-manager)
   - [Philosophie](#philosophie)
   - [Guide de démarrage](#guide-de-démarrage)
-  - [Liste des commandes principales](#liste-des-commandes-principales)
+  - [Liste des commandes disponibles](#liste-des-commandes-disponibles)
   - [Manuel général d'outils en ligne de commande: arguments, options et syntaxe utilisée dans la doc](#manuel-général-doutils-en-ligne-de-commande-arguments-options-et-syntaxe-utilisée-dans-la-doc)
     - [Argument d'une commande](#argument-dune-commande)
     - [Options d'une commande](#options-dune-commande)
@@ -142,9 +142,23 @@ Par défaut, le gestionnaire de cours vous à crée un dossier `foo/course-manag
  - `.metadata`: un fichier caché contenant des métadonnées sur le cours. Généré automatiquement. Permet de filtrer les cours via le programme.
 
 
-## Liste des commandes principales
+## Liste des commandes disponibles
 
-> Pour obtenir la liste des commandes disponibles `cm list`. Pour obtenir des informations sur chaque commande (description, arguments, options) `cm <nom de la commande> --help` ou `cm <nom de la commande> -h`.
+Pour obtenir des informations sur les commandes disponibles
+
+~~~bash
+cm list
+#ou simplement
+cm
+~~~
+
+Pour obtenir des informations sur chaque commande (description, arguments et options) 
+
+~~~bash
+cm <nom de la commande> --help
+#ou
+cm <nom de la commande> -h
+~~~
 
 <!-- ### Créer un nouveau projet de gestion de cours `add:project` 
 
