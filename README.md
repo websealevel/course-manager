@@ -88,7 +88,7 @@ Enfin, un dossier `cours/public`  contient les cours publiés et distribués (fi
 #Exemple de l'architecture du système de gestion de cours
 
 #Sources des cours
-cours
+cours/
   - *vendorA*
     - coursA
       - bibliographie
@@ -102,15 +102,16 @@ cours
       - module2
     - coursB
   - *vendorB*
-    - coursA
-      - module1
-       - etc.
+
+#Templates contenant la mise en page (style) globale des cours
+templates/
+  - css (html,pdf)
+  - xslt (pdf)
 
 #Cours publiés (format HTML/PDF)
-public
-  - vendorA
+public/
+  - *vendorA*
     - coursA
-      - bibliographie
       - cours
         - cours.html
         - cours.pdf
