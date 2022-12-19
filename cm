@@ -4,15 +4,15 @@
 require 'vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
-use Wsl\CourseManager\Commands\InitCommand;
-use Wsl\CourseManager\Commands\UninstallCommand;
+use Wsl\CourseManager\Commands\CreateProjectCommand;
+use Wsl\CourseManager\Commands\RemoveProjectCommand;
 
 $app = new Application('Course manager', '1.0');
 
 //Register commands
 
-$app->add(new InitCommand('init'));
-$app->add(new UninstallCommand('remove'));
+$app->add(new CreateProjectCommand('create'));
+$app->add(new RemoveProjectCommand('remove'));
 
 
 $app->run();
