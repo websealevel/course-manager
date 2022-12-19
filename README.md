@@ -1,9 +1,9 @@
-# `cm`: course-manager
+# `cm`: course-manager (en cours de développement)
 
 Une application CLI en PHP pour gérer les fichiers de cours, à destination des formateur·trices et enseignant·es. Tous les supports de cours sont écrits en Markdown puis publiés vers des formats HTML (présentations interactives) et PDF (distribution, exercices, sujet d'examens, etc.).
 
 
-- [`cm`: course-manager](#cm-course-manager)
+- [`cm`: course-manager (en cours de développement)](#cm-course-manager-en-cours-de-développement)
   - [Installation locale avec Composer](#installation-locale-avec-composer)
   - [Installation globale](#installation-globale)
   - [Dépendances](#dépendances)
