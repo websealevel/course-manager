@@ -22,8 +22,14 @@ class RemoveProjectCommand extends Command
     public function execute(InputInterface $input, OutputInterface $output)
     {
 
+        try {
+            $projects = Config::getAllProjectsRegisteredInGlobalConfiguration();
+        } catch (\Exception $e) {
+            $output->writeln("You do not have any projects registered on your machine.");
+            return COMMAND::FAILURE;
+        }
+
         $projectToDelete = $input->getArgument('root_dir');
-        $projects = Config::getAllProjectsRegisteredInGlobalConfiguration();
 
         //Offrir le choix parmi les projets enregistrés.
         if (!isset($projectToDelete)) {
@@ -38,11 +44,17 @@ class RemoveProjectCommand extends Command
             $projectToDelete = $choice;
         }
 
+        $output->writeln([
+            sprintf("Removing a courses managment project: %s", $projectToDelete),
+            '============',
+            '',
+        ]);
+
         //Demander la confirmation.
         $helper = $this->getHelper('question');
 
         $questionText = sprintf(
-            "You are about to remove the selected project %s. Are you sure you want to continue (y/n) ?",
+            "Are you sure you want to continue (y/n) ?",
             $projectToDelete
         );
 
