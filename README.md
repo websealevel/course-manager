@@ -142,7 +142,7 @@ Créer un nouveau projet de gestion de cours
 cm init mes-cours
 ~~~
 
->Lors de votre première création de projet, course-manager crée un fichier de configuration global dans votre répertoire home (`$HOME/.create-manager`). Ce fichier de configuration globale défini le projet de gestion de cours principal (`MAIN`) qui est utilisé si vous n'êtes pas placé à la racine d'un projet lors de l'utilisation de `create-manager`.
+> Lors de votre première création de projet, course-manager crée un fichier de configuration global dans votre répertoire home (`$HOME/.create-manager`). Ce fichier de configuration globale défini le projet de gestion de cours principal (`MAIN`) qui est utilisé si vous n'êtes pas placé à la racine d'un projet lors de l'utilisation de `create-manager`.
 
 Rentrer dans le dossier crée afin de pouvoir gérer votre projet
 
@@ -150,7 +150,7 @@ Rentrer dans le dossier crée afin de pouvoir gérer votre projet
 cd mes-cours
 ~~~
 
->Si c'est votre projet MAIN (voir $HOME/.create-manager), vous n'êtes pas obligé de vous rendre dans le repertoire courant pour travailler sur le projet.
+> Si c'est votre projet MAIN (voir $HOME/.create-manager), vous n'êtes pas obligé de vous rendre dans le repertoire courant pour travailler sur le projet.
 
 Créer un nouveau cours `cm-manager` dans le vendor `wsl`
 
