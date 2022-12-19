@@ -19,6 +19,7 @@ class ListAllProjectsCommand extends Command
     {
 
         $main = Config::getCurrentProjectDefinedInGlobalConfiguration();
+
         $projects = Config::getAllProjectsRegisteredInGlobalConfiguration();
 
         $output->writeln([

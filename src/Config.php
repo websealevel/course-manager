@@ -292,14 +292,30 @@ class Config
      */
     public static function getCurrentProjectDefinedInGlobalConfiguration(): string
     {
+        $values = static::getGlobalConfigurationValues();
+        return $values['MAIN'];
+    }
 
+
+    /**
+     * Retourne la liste des clefs/valeurs enregistrés dans le fichier de configuration
+     * global au format INI
+     * @return array
+     * @throws Exception - Si le fichier de configuration n'existe pas, n'a pas une syntaxe correcte.
+     */
+    public static function getGlobalConfigurationValues(): array
+    {
         if (!static::globalConfigFileIsInitialized()) {
             throw new \Exception("Le fichier de configuration global n'existe pas ou n'a pas une syntaxe correcte. Veuillez créer un nouveau projet pour initialiser le fichier de configuration global ou vérifier sa syntaxe.");
         }
 
         $values = FileManager::parseIniFile(static::absPathOfGlobalConfigFile());
 
-        return $values['MAIN'];
+
+        if (false === $values)
+            throw new \Exception("Impossible de lire le fichier de configuration global. Veuillez vérifier sa syntaxe.");
+
+        return $values;
     }
 
 
@@ -309,15 +325,45 @@ class Config
      */
     public static function getAllProjectsRegisteredInGlobalConfiguration(): array
     {
-        if (!static::globalConfigFileIsInitialized()) {
-            throw new \Exception("Le fichier de configuration global n'a pas une syntaxe correcte. 
-            Impossible de l'analyser. Veuillez vérifier sa syntaxe.");
-        }
-
-        $values = FileManager::parseIniFile(static::absPathOfGlobalConfigFile());
+        $values = static::getGlobalConfigurationValues();
 
         //Il faudrait checker que les dossiers existent toujours, sinon supprimer(clean) les projets enregistrés.
 
-        return explode(",", $values['PROJECTS']);
+        $projects = explode(",", $values['PROJECTS']);
+
+        $existingProjects = array();
+
+        //Pas ouf.
+        foreach ($projects as $project) {
+            if (!is_dir($project)) {
+                static::cleanRegisteredProject($project);
+            } else {
+                $existingProjects[] = $project;
+            }
+        }
+
+        return $existingProjects;
+    }
+
+    /**
+     * Nettoie le projet enregistré dans la configuration globale
+     * si leurs paths ne pointent sur rien (leurs ROOT_DIR a été supprimé)
+     */
+    public static function cleanRegisteredProject($projectToRemove)
+    {
+        $main = static::getCurrentProjectDefinedInGlobalConfiguration();
+        $projects = static::getAllProjectsRegisteredInGlobalConfiguration();
+
+        $clean = array_filter($projects, function ($project) use ($projectToRemove) {
+            return $project !== $projectToRemove;
+        });
+
+        //Transform
+        $values = array(
+            sprintf("MAIN=%s", $main),
+            sprintf("PROJECTS=%s", $clean),
+        );
+
+        return FileManager::createFile(static::absPathOfGlobalConfigFile(), implode("\n", $values));
     }
 }

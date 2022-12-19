@@ -12,6 +12,9 @@ namespace Wsl\CourseManager\Services;
 class FileManager
 {
 
+
+    private const CODE_DIR_ALREADY_EXISTS = 203;
+
     /**
      * Retourne le path absolu du dossier home/user
      * @return string
@@ -109,12 +112,37 @@ class FileManager
     public static function removeDir(string $abspath): bool
     {
         //Supprimer le dossier et tout son contenu de manière récursive.
-        return rmdir($abspath);
+
+        //Check que le PATH est sur le home (on ne veut pas toucher à des fichiers systeme)
+        if (!str_starts_with($abspath, '/home/') || str_contains($abspath, '.'))
+            throw new \Exception("Impossible de supprimer un fichier qui n'appartient pas à l'utilisateur courant.");
+
+        return FileManager::recursiveRmDir($abspath);
     }
 
     /**
-     * Action: crée le repertoire racine du projet de gestion de cours. Retourne
-     * vrai si la création du répertoire a réussi, faux sinon
+     * Action: supprime le dossier et tout son contenu de manière récursive
+     * @param string Le path du dossier a supprimé (ainsi que son contenu)
+     */
+    public static function recursiveRmDir($abspath): bool
+    {
+        $files = glob($abspath . '/*', GLOB_MARK);
+
+        foreach ($files as $file) {
+            if (is_dir($file))
+                FileManager::recursiveRmDir($file);
+            else
+                unlink($file);
+        }
+
+        if (is_dir($abspath)) rmdir($abspath);
+
+        return true;
+    }
+
+    /**
+     * Action: crée le repertoire racine du projet de gestion de cours s'il n'existe
+     * pas déjà. Retourne la chemin absolu du repertoire du projet
      * @return string Le chemin absolu vers le dossier ROOT du projet
      * @throws Exception @see createDirectory()
      */
@@ -124,7 +152,17 @@ class FileManager
         //Récuperer le répertoire courant
         $absPathRootDir = sprintf("%s/%s", getcwd(), $rootDir);
 
-        static::createDirectory($rootDir);
+        try {
+
+            static::createDirectory($rootDir);
+        } catch (\Exception $e) {
+            //Si le dossier existe déjà, on continue.
+            if (FileManager::CODE_DIR_ALREADY_EXISTS === $e->getCode())
+                return $absPathRootDir;
+
+            //Sinon on fait passer l'exception
+            throw new \Exception($e->getMessage());
+        }
 
         return $absPathRootDir;
     }
@@ -140,7 +178,13 @@ class FileManager
     {
 
         if (is_dir($path)) {
-            throw new \Exception(sprintf("Le projet <%s> existe déjà dans le repertoire courant. Abandon.", $path));
+            throw new \Exception(
+                sprintf(
+                    "Le projet <%s> existe déjà dans le repertoire courant.",
+                    $path
+                ),
+                FileManager::CODE_DIR_ALREADY_EXISTS
+            );
         }
 
         $created = mkdir($path, recursive: true);
@@ -163,9 +207,15 @@ class FileManager
     public static function createDirectories(array $dirs): bool
     {
         foreach ($dirs as $dir) {
-            static::createDirectory($dir);
+            try {
+                static::createDirectory($dir);
+            } catch (\Exception $e) {
+                //Si le sous-dossier existe déjà on ignore.
+                if ($e->getCode() === FileManager::CODE_DIR_ALREADY_EXISTS) {
+                    continue;
+                }
+            }
         }
-
         return true;
     }
 

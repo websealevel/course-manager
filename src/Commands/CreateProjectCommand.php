@@ -29,14 +29,12 @@ class CreateProjectCommand extends Command
             '',
         ]);
 
-        //Creer le dossier racine
         try {
             $absPathOfRootDir = FileManager::createRootDirectory($rootDir);
         } catch (\Exception $e) {
             $output->writeln([
                 $e->getMessage(),
             ]);
-            return COMMAND::FAILURE;
         }
 
         //Initialiser le fichier de configuration global dans le repertoire $HOME/.course-manager
