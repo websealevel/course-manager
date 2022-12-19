@@ -14,6 +14,8 @@ Une application CLI, [basée sur le composant Console de Symfony](https://symfon
     - [Argument d'une commande](#argument-dune-commande)
     - [Options d'une commande](#options-dune-commande)
   - [Ressources](#ressources)
+    - [Utilisateur·rice](#utilisateurrice)
+    - [Développeur·se](#développeurse)
 
 ## Dépendances tierces
 
@@ -270,13 +272,18 @@ pandoc {file.md} -t html5 -o {file.pdf} --css style.css --pdf-engine-opt=--enabl
 
 ## Ressources
 
+### Utilisateur·rice
+
 - [Site officiel du projet Markdown](https://daringfireball.net/projects/markdown/)
-- [Marp écosystème](https://marp.app/)
 - [Pandoc](https://pandoc.org/index.html), un convertisseur de document universel et éprouvé
+- [Marp](https://marp.app/)
 - [poc-marp](https://github.com/websealevel/poc-marp), un dépôt qui récapitule les possibilités essentielles de l'écosystème marp
+
+### Développeur·se
+
 - [The Console Component (Symfony)](https://symfony.com/doc/current/components/console.html)
 - [Console Commands](https://symfony.com/doc/current/console.html)
 - [Commands Lifecycle](https://symfony.com/doc/current/console.html#command-lifecycle)
 - [Console Input (Arguments & Options)](https://symfony.com/doc/current/console/input.html)
-- [Learn more](https://symfony.com/doc/current/components/console.html#learn-more)$
+- [Learn more (Symfony Console)](https://symfony.com/doc/current/components/console.html#learn-more)$
 - [PhpDocumentor (installation)](https://docs.phpdoc.org/3.0/guide/getting-started/installing.html#system-requirements)
