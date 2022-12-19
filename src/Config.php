@@ -203,26 +203,22 @@ class Config
     public static function removeFromConfigFile(string $absPathToRootDir): bool
     {
         //Lire le fichier de config
-        $parsed = FileManager::parseIniFile(static::absPathOfGlobalConfigFile());
+        $values = FileManager::parseIniFile(static::absPathOfGlobalConfigFile());
 
-        if (!is_array($parsed))
+        if (!is_array($values))
             return false;
 
         //Tous les projets enregistrés
-        $projects = explode(',', $parsed['PROJECTS']);
+        $projects = explode(',', $values['PROJECTS']);
 
         //Tous les autres projets
         $otherProjects = array_filter($projects, function ($project) use ($absPathToRootDir) {
             return $project !== $absPathToRootDir;
         });
 
-        var_dump($otherProjects);
-        // die;
+        $main = $values['MAIN'];
 
-        //On retire le projet à supprimer des projets enregistrés.
-        $parsed['PROJECTS'] = implode(",", $otherProjects);
-
-        if ($parsed['MAIN'] === $absPathToRootDir) {
+        if ($values['MAIN'] === $absPathToRootDir) {
 
             //Changer le curseur au projet précédent
             if (empty($otherProjects)) {
@@ -232,13 +228,26 @@ class Config
             }
 
             //Change le curseur de position sur un autre projet existant.
-            $parsed['MAIN'] = reset($otherProjects);
+            $main = reset($otherProjects);
         }
 
-        //Transform
+        return static::overWriteGlobalConfigFile($main,  implode(",", $otherProjects));
+    }
+
+
+    /**
+     * Action: ecrase le contenu du fichier de configuration global avec le nouveau contenu.
+     * Retourne vrai si l'écriture à réussi, faux sinon
+     * @param string $main Le nouveau projet courant
+     * @param string $projects Les nouveaux projets enregistrés
+     * @return bool 
+     * @see FileManager::createFile
+     */
+    public static function overWriteGlobalConfigFile(string $main, string $projects): bool
+    {
         $values = array(
-            sprintf("MAIN=%s", $parsed['MAIN']),
-            sprintf("PROJECTS=%s", $parsed['PROJECTS']),
+            sprintf("MAIN=%s", $main),
+            sprintf("PROJECTS=%s", $projects),
         );
 
         return FileManager::createFile(static::absPathOfGlobalConfigFile(), implode("\n", $values));

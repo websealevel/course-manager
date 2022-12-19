@@ -67,11 +67,11 @@ class FileManager
     }
 
     /**
-     * Action: Crée le fichier $abspath et écrit le contenu dedans.
+     * Action: Crée le fichier $abspath et écrit le contenu dedans. Retourne vrai en cas de réussite d'écriture, faux sinon.
      * @param string $abspath Le path absolu du fichier à créée
-     * @param string $content . Optionnel. Le contenu du fichier à écrire.
+     * @param string $content Optionnel. Le contenu du fichier à écrire.
      * @return bool
-     * @throws Exception - Si impossible d'ouvrir le fichier en écriture, impossible d'écrire dans le fichier.
+     * @throws Exception Si impossible d'ouvrir le fichier en écriture, impossible d'écrire dans le fichier.
      */
     public static function createFile(string $abspath, string|array $content = ''): bool
     {
