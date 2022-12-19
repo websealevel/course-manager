@@ -63,21 +63,6 @@ class FileManager
     }
 
     /**
-     * Retourne le chemin absolu du repertoire du projet courant
-     * @return string
-     */
-    public static function absPathToRootDir(): string
-    {
-
-        //Si dans un projet de create-manager (présence d'un fichier config.ini avec une clef course-manager pour
-        //le distinguer d'autres éventuels fichier .ini) alors le rootDir est le dossier courant.
-
-        //Sinon, récuperer le projet MAIN défini dans le fichier de configuration global
-
-        return '';
-    }
-
-    /**
      * Action: Crée le fichier $abspath et écrit le contenu dedans. Retourne vrai en cas de réussite d'écriture, faux sinon.
      * @param string $abspath Le path absolu du fichier à créée
      * @param string $content Optionnel. Le contenu du fichier à écrire.

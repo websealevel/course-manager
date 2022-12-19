@@ -377,4 +377,20 @@ class Config
 
         return $existingProjects;
     }
+
+
+    /**
+     * Retourne le chemin absolu du repertoire du projet courant
+     * @return string
+     */
+    public static function absPathToCurrentProject(): string
+    {
+
+        if (Config::isThereALocalConfigurationFileInTheCurrentDirectory())
+            //On est dans un projet course-manager, donc le currentPath est le pathCourant
+            return getcwd();
+
+        //Renvoyer le dossier courant défini dans la configuration globale.
+        return Config::getCurrentProjectDefinedInGlobalConfiguration();
+    }
 }
