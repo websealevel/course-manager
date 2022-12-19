@@ -88,20 +88,21 @@ Enfin, un dossier `cours/public`  contient les cours publiés et distribués (fi
 #Exemple de l'architecture du système de gestion de cours
 
 cours
-  vendorA
-    coursA
-      bibliographie
-      module1
-        cours
-        exercices
-        tp
-        index.html
-        README.md
-      module2
-    coursB
-  vendorB
-    coursA
-      module1
+  - *vendorA*
+    - coursA
+      - bibliographie
+      - module1
+        - cours
+        - exercices
+        - tp
+        - index.html
+        - README.md
+      - module2
+    - coursB
+  - *vendorB*
+    - coursA
+      - module1
+       - etc.
 ~~~
 
 ## Scripts
