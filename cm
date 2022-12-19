@@ -4,23 +4,38 @@
 require 'vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
+
 use Wsl\CourseManager\Commands\ChangeCurrentProjectCommand;
 use Wsl\CourseManager\Commands\CreateProjectCommand;
 use Wsl\CourseManager\Commands\ListAllProjectsCommand;
 use Wsl\CourseManager\Commands\RemoveProjectCommand;
 use Wsl\CourseManager\Commands\ShowCurrentProjetCommand;
 use Wsl\CourseManager\Commands\UninstallCommand;
+use Wsl\CourseManager\Commands\CreateCourseCommand;
 
-$app = new Application('Course manager', '1.0');
+use Wsl\CourseManager\Config;
+
+
+$app = new Application('Course manager', Config::COURSE_MANAGER_VERSION);
 
 //Register commands
 
+
+/**
+ * Gestion des projets, du programme.
+ */
 $app->add(new ShowCurrentProjetCommand('show:current-project'));
 $app->add(new ListAllProjectsCommand('show:projects'));
 $app->add(new ChangeCurrentProjectCommand('change:current-project'));
 $app->add(new CreateProjectCommand('add:project'));
 $app->add(new RemoveProjectCommand('remove:project'));
 $app->add(new UninstallCommand('uninstall'));
+
+/**
+ * Gestion des cours d'un projet
+ */
+
+$app->add(new CreateCourseCommand('add:course'));
 
 
 $app->run();
