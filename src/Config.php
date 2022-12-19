@@ -248,6 +248,10 @@ class Config
      */
     public static function globalConfigFileIsInitialized(): bool
     {
+
+        if (!FileManager::fileExists(static::absPathOfGlobalConfigFile()))
+            return false;
+
         $values = FileManager::parseIniFile(static::absPathOfGlobalConfigFile());
 
         if (false === $values)
@@ -290,8 +294,7 @@ class Config
     {
 
         if (!static::globalConfigFileIsInitialized()) {
-            throw new \Exception("Le fichier de configuration global n'a pas une syntaxe correcte. 
-            Impossible de l'analyser. Veuillez vérifier sa syntaxe.");
+            throw new \Exception("Le fichier de configuration global n'existe pas ou n'a pas une syntaxe correcte. Veuillez créer un nouveau projet pour initialiser le fichier de configuration global ou vérifier sa syntaxe.");
         }
 
         $values = FileManager::parseIniFile(static::absPathOfGlobalConfigFile());

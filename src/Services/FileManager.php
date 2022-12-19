@@ -108,6 +108,7 @@ class FileManager
      */
     public static function removeDir(string $abspath): bool
     {
+        //Supprimer le dossier et tout son contenu de manière récursive.
         return rmdir($abspath);
     }
 
