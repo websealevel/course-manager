@@ -1,6 +1,6 @@
 # `cm`: course-manager (en cours de développement)
 
-Une application CLI en PHP pour gérer les fichiers de cours, à destination des formateur·trices et enseignant·es. Tous les supports de cours sont écrits en Markdown puis publiés vers des formats HTML (présentations interactives) et PDF (distribution, exercices, sujet d'examens, etc.).
+Une application CLI, [basée sur le composant Console de Symfony](https://symfony.com/doc/current/components/console.html), pour gérer les fichiers de cours (contenu, publication), à destination des formateur·trices et enseignant·es. Tous les supports de cours sont écrits en Markdown *en un endroit*, puis publiés vers différents formats: HTML (présentations interactives), PDF (impression, exercices, sujet d'examens, etc.).
 
 
 - [`cm`: course-manager (en cours de développement)](#cm-course-manager-en-cours-de-développement)
@@ -299,5 +299,5 @@ pandoc {file.md} -t html5 -o {file.pdf} --css style.css --pdf-engine-opt=--enabl
 - [Site officiel du projet Markdown](https://daringfireball.net/projects/markdown/)
 - [Marp écosystème](https://marp.app/)
 - [Pandoc](https://pandoc.org/index.html), un convertisseur de document universel et éprouvé
-- [Minicli 3](https://github.com/minicli/minicli), un projet open source d'application CLI inspirant
 - [poc-marp](https://github.com/websealevel/poc-marp), un dépôt qui récapitule les possibilités essentielles de l'écosystème marp
+- [The Console Component (Symfony)](https://symfony.com/doc/current/components/console.html)
