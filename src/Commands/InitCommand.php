@@ -23,7 +23,6 @@ class InitCommand extends Command
         //Initialisation d'un nouveau système de gestion de cours
         $rootDir = $input->getArgument('root_dir') ?? FileManager::DEFAULT_ROOT_DIR;
 
-        //Outputs multiple lines to the console (adding "\n" at the end of each line)
         $output->writeln([
             sprintf("Creating a new courses managment project %s", $rootDir),
             '============',
@@ -44,10 +43,15 @@ class InitCommand extends Command
         try {
             FileManager::createHomeConfigFile(sprintf("MAIN=%s", $absPathToRootDir));
         } catch (\Exception $e) {
+
+            //Rollback: supprimer le dossier $rootDir
+            FileManager::removeDir($rootDir);
+
             $output->writeln([
                 sprintf("Impossible to create the global configuration file \$HOME/%s Check that the directory does 
-                not already exist or that you have the right permission.", FileManager::HOME_CONFIG_FILE),
+                not already exist or that you have the right permission. Initialisation du projet abandonnée", FileManager::HOME_CONFIG_FILE),
             ]);
+
             return COMMAND::FAILURE;
         }
 
@@ -75,6 +79,11 @@ class InitCommand extends Command
             $output->writeln([
                 $e->getMessage(),
             ]);
+
+            //Rollback: suppresion du $rootDir et du projet dans le fichier de configuration global
+            FileManager::removeDir($rootDir);
+            FileManager::removeFromConfigFile($rootDir);
+
             return COMMAND::FAILURE;
         }
 
