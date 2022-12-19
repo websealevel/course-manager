@@ -136,7 +136,23 @@ Une option **est par définition optionnelle**. Elle a un nom et peut être plac
 
 ## Guide de démarrage
 
-- créer un nouveau projet de gestion de cours avec `cm init [<root_dir>]`. L'argument optionnel `root_dir` vous permet de préciser le nom du dossier racine de votre projet.
+Créer un nouveau projet de gestion de cours 
+
+~~~bash
+cm init mes-cours
+~~~
+
+>Lors de votre première création de projet, course-manager crée un fichier de configuration global dans votre répertoire home (`$HOME/.create-manager`). Ce fichier de configuration globale défini le projet de gestion de cours principal (`MAIN`) qui est utilisé si vous n'êtes pas placé à la racine d'un projet lors de l'utilisation de `create-manager`.
+
+Rentrer dans le dossier crée afin de pouvoir gérer votre projet
+
+~~~bash
+cd mes-cours
+~~~
+
+>Si c'est votre projet MAIN (voir $HOME/.create-manager), vous n'êtes pas obligé de vous rendre dans le repertoire courant pour travailler sur le projet.
+
+Créer un nouveau cours `cm-manager` dans le vendor `wsl`
 
 ## Liste des commandes
 
