@@ -41,6 +41,17 @@ class FileManager
         return $result;
     }
 
+
+    /**
+     * Retourne vrai si le dossier existe, faux sinon
+     * @param string $absPathToDir Le chemin absolu du dossier
+     * @return bool
+     */
+    public static function dirExists(string $absPathToDir): bool
+    {
+        return is_dir($absPathToDir);
+    }
+
     /**
      * Retourne vrai si le fichier existe, faux sinon
      * @param string $absPathTofile Le path absolu du fichier
@@ -52,7 +63,7 @@ class FileManager
     }
 
     /**
-     * Retourne le chemin absolu du repertoire racine du projet
+     * Retourne le chemin absolu du repertoire du projet courant
      * @return string
      */
     public static function absPathToRootDir(): string
@@ -60,6 +71,7 @@ class FileManager
 
         //Si dans un projet de create-manager (présence d'un fichier config.ini avec une clef course-manager pour
         //le distinguer d'autres éventuels fichier .ini) alors le rootDir est le dossier courant.
+
         //Sinon, récuperer le projet MAIN défini dans le fichier de configuration global
 
         return '';
@@ -166,9 +178,9 @@ class FileManager
 
     /**
      * Action: crée le dossier $path s'il n'existe pas déjà. Retourne vrai si la création du dossier
-     * a réussi, faux sinon
+     * a réussi, faux sinon.
      * @param string $path. Le path du dossier à écrire
-     * @throws Exception -- Si impossible de créer le dossier à cause des droits d'écriture, si le dossier existe déjà.
+     * @throws Exception Si impossible de créer le dossier à cause des droits d'écriture, si le dossier existe déjà.
      * @return bool
      */
     public static function createDirectory(string $path): bool
@@ -177,7 +189,7 @@ class FileManager
         if (is_dir($path)) {
             throw new \Exception(
                 sprintf(
-                    "Le projet <%s> existe déjà dans le repertoire courant.",
+                    "Le projet <%s> existe déjà sur la machine.",
                     $path
                 ),
                 FileManager::CODE_DIR_ALREADY_EXISTS
@@ -188,7 +200,10 @@ class FileManager
 
         if (!$created) {
             throw new \Exception(
-                sprintf("Impossible de créer le dossier %s. Véfifier les droits en écriture sur le path. ", $path)
+                sprintf(
+                    "Impossible de créer le dossier <%s>. Véfifier les droits en écriture sur le path. ",
+                    $path
+                )
             );
         }
 
