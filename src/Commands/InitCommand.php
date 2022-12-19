@@ -6,12 +6,16 @@ namespace Wsl\CourseManager\Commands;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Wsl\CourseManager\Models\Course;
+use Symfony\Component\Console\Input\InputArgument;
 
 class InitCommand extends Command
 {
 
     protected static $defaultDescription = 'Initialize a new courses managment system';
+
+    public const CONF_FILE = 'config.ini';
+
+    public const PATH_SOURCES = 'courses';
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
@@ -26,5 +30,7 @@ class InitCommand extends Command
 
     public function configure(): void
     {
+        $this
+            ->addArgument('root_dir', InputArgument::OPTIONAL, 'The name of your root course managment folder.');
     }
 }

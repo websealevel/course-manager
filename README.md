@@ -8,7 +8,12 @@ Une application CLI en PHP pour gérer les fichiers de cours, à destination des
   - [Installation globale](#installation-globale)
   - [Dépendances](#dépendances)
   - [Specs](#specs)
-  - [Scripts](#scripts)
+  - [Manuel général d'outils en ligne de commande: arguments, options et syntaxe utilisée dans la doc](#manuel-général-doutils-en-ligne-de-commande-arguments-options-et-syntaxe-utilisée-dans-la-doc)
+    - [Argument d'une commande](#argument-dune-commande)
+    - [Options d'une commande](#options-dune-commande)
+  - [Guide de démarrage](#guide-de-démarrage)
+  - [Liste des commandes](#liste-des-commandes)
+    - [Initialiser un nouveau projet de gestion de cours : `cm init`](#initialiser-un-nouveau-projet-de-gestion-de-cours--cm-init)
     - [Ajouter un cours `cm add:course`](#ajouter-un-cours-cm-addcourse)
     - [Ajouter un module à un cours existant `cm add:module`](#ajouter-un-module-à-un-cours-existant-cm-addmodule)
     - [Publier un module (à venir...)](#publier-un-module-à-venir)
@@ -117,9 +122,36 @@ public/
         - cours.pdf
 ~~~
 
-## Scripts
+## Manuel général d'outils en ligne de commande: arguments, options et syntaxe utilisée dans la doc
 
-> Note sur la syntaxe de la doc (arguments et options de la CLI)
+Les *commandes* peuvent prendre des *arguments* ou des *options* en paramètre. Pour lister les arguments et les options disponibles de chaque commande, taper `cm <nom de la commande> --help`. 
+
+>Les chaines de caractères entre chevrons `<>` doivent être remplacés par un nom de commande, d'argument ou d'option.
+
+### Argument d'une commande
+
+Un argument est une chaine de caractère ajouté à la suite de la commande pour modifier son comportement. Les arguments sont séparés par des esapces. Un argument peut-être obligatoire ou optionnel. 
+
+Il s'écrit sous la forme `cm <nom de la commande> <nom de l'argument>`. Par exemple, `cm init mes-cours`. Attention, **les arguments sont ordonnés**, ils doivent être écrits dans l'ordre attendu par la commande. 
+
+>Un argument optionnel s'écrit entre crochets `cm <nom de la commande> |[<nom de l'argument optionnel>]`.
+
+### Options d'une commande
+
+Une option **est par définition optionnelle**. Elle a un nom et peut être placée n'importe où à la suite du nom de la commande (contrairement aux arguments). Elle sont préfixées par deux dashes `--`. Par exemple, `cm init --help`. Les options ont également un alias, un nom plus court. Un alias est préfixé par un dash `-`. Par exemple, `cm init --help` est équivalent à `cm init -h`; `-h` est l'alias de `--help`.
+
+
+## Guide de démarrage
+
+- créer un nouveau projet de gestion de cours avec `cm init [<root_dir>]`. L'argument optionnel root_dir vous permet de préciser le nom du dossier.
+
+## Liste des commandes
+
+Pour obtenir la liste des commandes disponibles `cm list`.
+
+Pour obtenir des informations sur chaque commande (description, arguments, options) `cm <nom de la commande> --help` ou `cm <nom de la commande> -h`.
+
+### Initialiser un nouveau projet de gestion de cours : `cm init`
 
 ### Ajouter un cours `cm add:course`
 
