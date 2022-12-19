@@ -16,10 +16,12 @@ Une application CLI, [basée sur le composant Console de Symfony](https://symfon
     - [Initialiser un nouveau projet de gestion de cours : `cm init`](#initialiser-un-nouveau-projet-de-gestion-de-cours--cm-init)
     - [Ajouter un cours `cm add:course`](#ajouter-un-cours-cm-addcourse)
     - [Ajouter un module à un cours existant `cm add:module`](#ajouter-un-module-à-un-cours-existant-cm-addmodule)
-    - [Publier un module (à venir...)](#publier-un-module-à-venir)
-    - [Publier un cours (à venir...)](#publier-un-cours-à-venir)
+    - [(Re)Publier un module (à venir...)](#republier-un-module-à-venir)
+    - [(Re)Publier un cours (à venir...)](#republier-un-cours-à-venir)
+      - [Contenus de type *présentation*: format HTML et PDF](#contenus-de-type-présentation-format-html-et-pdf)
+      - [Contenus de type *document*: format HTML et PDF](#contenus-de-type-document-format-html-et-pdf)
     - [Inspecter les cours (à venir...)](#inspecter-les-cours-à-venir)
-  - [Génération des documents au format HTML ou PDF](#génération-des-documents-au-format-html-ou-pdf)
+  - [Sous le capôt: génération des documents au format HTML ou PDF avec marp et pandoc](#sous-le-capôt-génération-des-documents-au-format-html-ou-pdf-avec-marp-et-pandoc)
     - [Générer un fichier HTML+CSS à partir d'un fichier Markdown (avec `marp`)](#générer-un-fichier-htmlcss-à-partir-dun-fichier-markdown-avec-marp)
     - [Générer la présentation au format PDF à partir d'un fichier Markdown (avec `marp`)](#générer-la-présentation-au-format-pdf-à-partir-dun-fichier-markdown-avec-marp)
     - [Générer un PDF à partir du Markdown en passant par HTML/CSS (avec `pandoc`)](#générer-un-pdf-à-partir-du-markdown-en-passant-par-htmlcss-avec-pandoc)
@@ -152,7 +154,7 @@ cd mes-cours
 
 > Si c'est votre projet MAIN (voir $HOME/.create-manager), vous n'êtes pas obligé de vous rendre dans le repertoire courant pour travailler sur le projet.
 
-Créer un nouveau cours `cm-manager` dans le vendor `wsl`
+Créer un nouveau cours sur cet outil pour le présenter à d'autres personnes `cm-manager` l'établissement (de manière général appelé *vendor*) `ecole-foo`
 
 ## Liste des commandes
 
@@ -164,7 +166,7 @@ Pour obtenir des informations sur chaque commande (description, arguments, optio
 
 ### Ajouter un cours `cm add:course`
 
-~~~bash
+<!-- ~~~bash
 ~~~
 
 Crée un dossier `cours/{vendor}/{niveau}-{nom du cours}` avec le contenu par défaut suivant
@@ -178,13 +180,13 @@ Par exemple
 
 ~~~bash
 cm-create etablissement1 l2 php
-~~~
+~~~ -->
 
-crée le cours `l2-php` dans le dossier `cours/etablissement1`. Le dossier `l2-php` contient un dossier de biblio et un module de présentation par défaut `module-00-presentation` contenant une présentation en Markdown initialisée.
+<!-- crée le cours `l2-php` dans le dossier `cours/etablissement1`. Le dossier `l2-php` contient un dossier de biblio et un module de présentation par défaut `module-00-presentation` contenant une présentation en Markdown initialisée. -->
 
 ### Ajouter un module à un cours existant `cm add:module`
 
-~~~
+<!-- ~~~
 cm-add-module [vendor] [niveau] {coursename} {modulename}
 ~~~
 
@@ -193,11 +195,17 @@ Ajoute un module `modulename` au cours `coursename`. Son numéro est défini com
 ~~~bash
 ~~~
 
-Ajoute le module `module-01-tableaux` au cours `etablissement1/l2-php`. Comme il n'y a pas d'ambiguïté sur le cours, il n'est pas utile de préciser le `niveau` ni le `vendor`. L'identifiant du module est 1 car le seul module présent est le module de présentation ayant pour identifiant 0. 
+Ajoute le module `module-01-tableaux` au cours `etablissement1/l2-php`. Comme il n'y a pas d'ambiguïté sur le cours, il n'est pas utile de préciser le `niveau` ni le `vendor`. L'identifiant du module est 1 car le seul module présent est le module de présentation ayant pour identifiant 0.  -->
 
-### Publier un module (à venir...)
+### (Re)Publier un module (à venir...)
 
-### Publier un cours (à venir...)
+### (Re)Publier un cours (à venir...)
+
+Publier un cours revient à publier l'intégralité de ses modules. 
+
+#### Contenus de type *présentation*: format HTML et PDF
+
+#### Contenus de type *document*: format HTML et PDF
 
 ### Inspecter les cours (à venir...)
 
@@ -206,7 +214,7 @@ Ajoute le module `module-01-tableaux` au cours `etablissement1/l2-php`. Comme il
 - script `course-export {nom du cours} {opt nom du module}`: génère les fichiers HTML et PDF du cours et fais une copie dans le dossier `Public` et Privé (presentation avec notes). Met à jour l'index.html local au cours et l'index.html global. -->
 
 
-## Génération des documents au format HTML ou PDF
+## Sous le capôt: génération des documents au format HTML ou PDF avec marp et pandoc
 
 ### Générer un fichier HTML+CSS à partir d'un fichier Markdown (avec `marp`)
 
