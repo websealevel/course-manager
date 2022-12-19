@@ -15,6 +15,8 @@ class CreateProjectCommand extends Command
 
     protected static $defaultDescription = 'Create a new courses managment system in the current directory.';
 
+    protected static $defaultName = 'add:project';
+
     public const CONF_FILE = 'config.ini';
 
 

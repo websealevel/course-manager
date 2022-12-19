@@ -111,8 +111,6 @@ class FileManager
      */
     public static function removeDir(string $abspath): bool
     {
-        //Supprimer le dossier et tout son contenu de manière récursive.
-
         //Check que le PATH est sur le home (on ne veut pas toucher à des fichiers systeme)
         if (!str_starts_with($abspath, '/home/') || str_contains($abspath, '.'))
             throw new \Exception("Impossible de supprimer un fichier qui n'appartient pas à l'utilisateur courant.");
