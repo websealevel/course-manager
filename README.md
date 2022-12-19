@@ -13,8 +13,8 @@ Une application CLI, [basée sur le composant Console de Symfony](https://symfon
     - [Options d'une commande](#options-dune-commande)
   - [Guide de démarrage](#guide-de-démarrage)
   - [Liste des commandes](#liste-des-commandes)
-    - [Initialiser un nouveau projet de gestion de cours : `cm create <nom du système de gestion de cours>`](#initialiser-un-nouveau-projet-de-gestion-de-cours--cm-create-nom-du-système-de-gestion-de-cours)
-    - [Ajouter un cours `cm add:course <vendor> <niveau> <nom du cours>`](#ajouter-un-cours-cm-addcourse-vendor-niveau-nom-du-cours)
+    - [Initialiser un nouveau projet de gestion de cours `add:project`](#initialiser-un-nouveau-projet-de-gestion-de-cours-addproject)
+    - [Ajouter un nouveau cours au système courant `add:course`](#ajouter-un-nouveau-cours-au-système-courant-addcourse)
     - [Ajouter un module à un cours existant `cm add:module`](#ajouter-un-module-à-un-cours-existant-cm-addmodule)
     - [(Re)Publier un module (à venir...)](#republier-un-module-à-venir)
     - [(Re)Publier un cours (à venir...)](#republier-un-cours-à-venir)
@@ -127,13 +127,13 @@ Les *commandes* peuvent prendre des *arguments* ou des *options* en paramètre. 
 
 Un argument est une chaine de caractère ajouté à la suite de la commande pour modifier son comportement. Les arguments sont séparés par des esapces. Un argument peut-être obligatoire ou optionnel. 
 
-Il s'écrit sous la forme `cm <nom de la commande> <nom de l'argument>`. Par exemple, `cm init mes-cours`. Attention, **les arguments sont ordonnés**, ils doivent être écrits dans l'ordre attendu par la commande. 
+Il s'écrit sous la forme `cm <nom de la commande> <nom de l'argument>`. Par exemple, `cm add:project mes-cours`. Attention, **les arguments sont ordonnés**, ils doivent être écrits dans l'ordre attendu par la commande. 
 
 >Un argument optionnel s'écrit entre crochets `cm <nom de la commande> |[<nom de l'argument optionnel>]`.
 
 ### Options d'une commande
 
-Une option **est par définition optionnelle**. Elle a un nom et peut être placée n'importe où à la suite du nom de la commande (contrairement aux arguments). Elle sont préfixées par deux dashes `--`. Par exemple, `cm init --help`. Les options ont également un alias, un nom plus court. Un alias est préfixé par un dash `-`. Par exemple, `cm init --help` est équivalent à `cm init -h`; `-h` est l'alias de `--help`.
+Une option **est par définition optionnelle**. Elle a un nom et peut être placée n'importe où à la suite du nom de la commande (contrairement aux arguments). Elle sont préfixées par deux dashes `--`. Par exemple, `cm add:project --help`. Les options ont également un alias, un nom plus court. Un alias est préfixé par un dash `-`. Par exemple, `cm add:project --help` est équivalent à `cm add:project -h`; `-h` est l'alias de `--help`.
 
 
 ## Guide de démarrage
@@ -141,7 +141,7 @@ Une option **est par définition optionnelle**. Elle a un nom et peut être plac
 Créer un nouveau projet de gestion de cours 
 
 ~~~bash
-cm create mes-cours
+cm add:project mes-cours
 ~~~
 
 > Lors de votre première création de projet, course-manager crée un fichier de configuration global dans votre répertoire home (`$HOME/.create-manager`). Ce fichier de configuration globale défini le projet de gestion de cours principal (`MAIN`) qui est utilisé si vous n'êtes pas placé à la racine d'un projet lors de l'utilisation de `create-manager`.
@@ -162,9 +162,17 @@ Pour obtenir la liste des commandes disponibles `cm list`.
 
 Pour obtenir des informations sur chaque commande (description, arguments, options) `cm <nom de la commande> --help` ou `cm <nom de la commande> -h`.
 
-### Initialiser un nouveau projet de gestion de cours : `cm create <nom du système de gestion de cours>`
+### Initialiser un nouveau projet de gestion de cours `add:project` 
 
-### Ajouter un cours `cm add:course <vendor> <niveau> <nom du cours>`
+~~~bash
+cm create <nom du système de gestion de cours>
+~~~
+
+### Ajouter un nouveau cours au système courant `add:course`
+
+~~~bash
+cm add:course <vendor> <niveau> <nom du cours>
+~~~
 
 <!-- ~~~bash
 ~~~

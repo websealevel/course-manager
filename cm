@@ -12,8 +12,8 @@ $app = new Application('Course manager', '1.0');
 
 //Register commands
 
-$app->add(new CreateProjectCommand('create'));
-$app->add(new RemoveProjectCommand('remove'));
+$app->add(new CreateProjectCommand('add:project'));
+$app->add(new RemoveProjectCommand('remove:project'));
 $app->add(new UninstallCommand('uninstall'));
 
 
