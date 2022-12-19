@@ -3,7 +3,6 @@
 namespace Wsl\CourseManager\Models;
 
 
-use Wsl\CourseManager\Config;
 use Wsl\CourseManager\Services\FileManager;
 use Wsl\CourseManager\Services\DefaultContent;
 
@@ -13,7 +12,7 @@ use Wsl\CourseManager\Services\DefaultContent;
 class Module
 {
     public function __construct(
-        readonly public Config $config,
+        readonly public string $absPath,
         readonly public int $id,
         readonly public string $name,
         readonly public array $directories = array(
