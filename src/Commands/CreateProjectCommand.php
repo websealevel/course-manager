@@ -19,7 +19,6 @@ class CreateProjectCommand extends Command
 
     public const CONF_FILE = 'config.ini';
 
-
     public function execute(InputInterface $input, OutputInterface $output)
     {
         //Initialisation d'un nouveau système de gestion de cours
