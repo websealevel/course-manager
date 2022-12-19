@@ -8,6 +8,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 
+use Wsl\CourseManager\Services\FileManager;
+
 class InitCommand extends Command
 {
 
@@ -15,15 +17,42 @@ class InitCommand extends Command
 
     public const CONF_FILE = 'config.ini';
 
-    public const PATH_SOURCES = 'courses';
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
         //Initialisation d'un nouveau système de gestion de cours
+        $rootDir = $input->getArgument('root_dir') ?? FileManager::DEFAULT_ROOT_DIR;
+
+        //Outputs multiple lines to the console (adding "\n" at the end of each line)
+        $output->writeln([
+            sprintf("Creating a new courses managment project %s", $rootDir),
+            '============',
+            '',
+        ]);
 
         //Creer le dossier racine
+        try {
+            $absPathToRootDir = FileManager::createRootDirectory($rootDir);
+        } catch (\Exception $e) {
+            $output->writeln([
+                $e->getMessage(),
+            ]);
+            return COMMAND::FAILURE;
+        }
+
+        //Initialiser le fichier de configuration global dans le repertoire home .course-manager
+        try {
+            FileManager::createHomeConfigFile(sprintf("MAIN=%s", $absPathToRootDir));
+        } catch (\Exception $e) {
+            $output->writeln([
+                sprintf("Impossible to create the global configuration file \$HOME/%s Check that the directory does 
+                not already exist or that you have the right permission.", FileManager::HOME_CONFIG_FILE),
+            ]);
+            return COMMAND::FAILURE;
+        }
+
         //Creer les dossiers sources, templates, public
-        //Creer les fichiers index.html, .env
+        //Creer les fichiers index.html, config.ini
 
         return COMMAND::SUCCESS;
     }

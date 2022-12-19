@@ -3,15 +3,24 @@
 
 namespace Wsl\CourseManager;
 
+use Wsl\CourseManager\Services\FileManager;
 
+/**
+ * Classe en charge de gérer la configuration d'un projet
+ */
 class Config
 {
 
-
-    public const PATH_ENV_FILE = __DIR__ . '/../conf.ini';
+    /**
+     * Le nom du fichier de configuration local à un projet
+     * @var string
+     */
+    public const CONFIG_FILE = 'conf.ini';
 
     /**
-     * Les clés/valeurs obligatoires à déclarer dans le fichier de configuration conf.ini
+     * Les clés (clés/valeurs) obligatoires dans le fichier de configuration
+     * local à un projet.
+     * @var string[]
      */
     public const MANDATORY_CONFIG_KEYS = array('path_courses');
 
@@ -25,7 +34,7 @@ class Config
 
         //Validation préalable
         if (php_sapi_name() !== 'cli') {
-            throw new \Exception("php doit être executé en mode CLI.");
+            throw new \Exception("PHP must be executed in the SAPI mode 'cli'.");
         }
 
         $variables = static::readConfigFile();
@@ -35,25 +44,26 @@ class Config
 
     /**
      * Retourne un tableau contenant les variables d'environnemnt
-     * @throws Exception - Si le fichier conf.ini n'est pas trouvé
-     * @throws Exception - Si le fichier conf.ini ne contient pas les variables obligatoires
+     * @throws Exception - Si le fichier de configuration local n'existe pas.
+     * @throws Exception - Si le fichier de configuration local ne contient pas les clefs/valeurs obligatoires.
      * @return array
      */
-    public static function readConfigFile(): array
+    public static function readConfigFilepublic(): array
     {
 
-        if (!file_exists(Config::PATH_ENV_FILE)) {
-            throw new \Exception("Fichier de configuration conf.ini manquant à la racine du projet.");
+        if (!FileManager::fileExists(Config::CONFIG_FILE)) {
+            throw new \Exception(
+                sprintf("Fichier de configuration %s manquant à la racine du projet.", Config::CONFIG_FILE)
+            );
         }
 
-        $variables = parse_ini_file(Config::PATH_ENV_FILE);
+        $variables = FileManager::parseIniFile(Config::CONFIG_FILE);
 
         if (false === $variables) {
             throw new \Exception("Impossible de lire le fichier de configuration. Fichier mal formatté.");
         }
 
         //Les cléfs/valeurs obligatoires du fichier de configuration
-        $mandatory_options = array('path_courses');
 
         $diff = array_diff(Config::MANDATORY_CONFIG_KEYS, array_keys($variables));
 
@@ -62,5 +72,29 @@ class Config
         }
 
         return $variables;
+    }
+
+    /**
+     * Retourne la liste des noms de dossier crées par défaut 
+     * à la racine du projet à l'initalisation d'un nouveau projet 
+     * @return array
+     */
+    public static function projectDefaultDirectories(): array
+    {
+        return array(
+            'sources', 'templates', 'public'
+        );
+    }
+
+    /**
+     * Retourne la liste des fichiers crées par défaut 
+     * à la racine du projet à l'initalisation d'un nouveau projet 
+     * @return array
+     */
+    public static function projectDefaultFiles(): array
+    {
+        return array(
+            'index.html', 'config.ini'
+        );
     }
 }
