@@ -165,7 +165,7 @@ Pour obtenir des informations sur chaque commande (description, arguments, optio
 ### Initialiser un nouveau projet de gestion de cours `add:project` 
 
 ~~~bash
-cm create <nom du système de gestion de cours>
+cm add:project <nom du système de gestion de cours>
 ~~~
 
 ### Ajouter un nouveau cours au système courant `add:course`
