@@ -10,7 +10,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Wsl\CourseManager\Config;
 use Wsl\CourseManager\Services\FileManager;
 
-class InitCommand extends Command
+class CreateProjectCommand extends Command
 {
 
     protected static $defaultDescription = 'Initialize a new courses managment system';
@@ -21,7 +21,7 @@ class InitCommand extends Command
     public function execute(InputInterface $input, OutputInterface $output)
     {
         //Initialisation d'un nouveau système de gestion de cours
-        $rootDir = $input->getArgument('root_dir') ?? FileManager::DEFAULT_ROOT_DIR;
+        $rootDir = $input->getArgument('root_dir') ?? Config::DEFAULT_ROOT_DIR;
 
         $output->writeln([
             sprintf("Creating a new courses managment project %s", $rootDir),
@@ -31,7 +31,7 @@ class InitCommand extends Command
 
         //Creer le dossier racine
         try {
-            $absPathToRootDir = FileManager::createRootDirectory($rootDir);
+            $absPathOfRootDir = FileManager::createRootDirectory($rootDir);
         } catch (\Exception $e) {
             $output->writeln([
                 $e->getMessage(),
@@ -41,15 +41,15 @@ class InitCommand extends Command
 
         //Initialiser le fichier de configuration global dans le repertoire $HOME/.course-manager
         try {
-            FileManager::createHomeConfigFile(sprintf("MAIN=%s", $absPathToRootDir));
+            Config::registerProject($absPathOfRootDir);
+
         } catch (\Exception $e) {
 
             //Rollback: supprimer le dossier $rootDir
             FileManager::removeDir($rootDir);
 
             $output->writeln([
-                sprintf("Impossible to create the global configuration file \$HOME/%s Check that the directory does 
-                not already exist or that you have the right permission. Initialisation du projet abandonnée", FileManager::HOME_CONFIG_FILE),
+                $e->getMessage()
             ]);
 
             return COMMAND::FAILURE;
@@ -62,12 +62,12 @@ class InitCommand extends Command
         $files = Config::projectDefaultFiles();
 
 
-        $absPathDirs = array_map(function ($dir) use ($absPathToRootDir) {
-            return sprintf("%s/%s", $absPathToRootDir, $dir);
+        $absPathDirs = array_map(function ($dir) use ($absPathOfRootDir) {
+            return sprintf("%s/%s", $absPathOfRootDir, $dir);
         }, $dirs);
 
-        $absPathFiles = array_map(function ($file) use ($absPathToRootDir) {
-            return sprintf("%s/%s", $absPathToRootDir, $file);
+        $absPathFiles = array_map(function ($file) use ($absPathOfRootDir) {
+            return sprintf("%s/%s", $absPathOfRootDir, $file);
         }, $files);
 
         try {
