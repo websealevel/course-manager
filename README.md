@@ -117,13 +117,14 @@ Créer un nouveau projet de gestion de cours
 cm add:project mes-cours
 ~~~
 
-> Lors de votre première création de projet, course-manager crée un fichier de configuration global dans votre répertoire home (`$HOME/.create-manager`). Ce fichier de configuration globale défini le projet de gestion de cours principal (`MAIN`) qui est utilisé si vous n'êtes pas placé à la racine d'un projet lors de l'utilisation de `create-manager`.
+> Lors de votre première création de projet, course-manager crée un fichier de configuration global dans votre répertoire home (`$HOME/.create-manager`).
 
-Si c'est votre premier projet, par défaut le projet mes-cours est votre projet courant, inutile donc de vous y déplacer pour l'administrer.
 
-> Le projet courant est configuré sous la clé `MAIN` dans le fichier de configuration global (voir $HOME/.create-manager). Vous changer de projet courant avec la commande `change:current-project` ou en vous rendant directement dans le repértoire d'un autre projet. 
+Si c'est votre premier projet alors, par défaut, `mes-cours` est votre projet *courant*, inutile donc de vous y déplacer pour l'administrer.
 
-Créer un nouveau cours sur le programme `course-manager` pour le présenter à des apprenant·es de l'établissement (de manière général appelé *vendor*) `foo`
+> Le projet *courant* est défini sous la clé `MAIN` dans le fichier de configuration global (voir $HOME/.create-manager). Vous pouvez changer de projet courant avec la commande `change:current-project` ou en vous rendant directement dans le repértoire d'un autre projet. 
+
+Créer un nouveau cours sur le programme `course-manager`, pour le présenter à des apprenant·es de l'établissement `foo`
 
 ~~~bash
 cm add:course foo course-manager
@@ -133,7 +134,7 @@ cm add:course foo course-manager --level=L1,L2,L3 --keywords=cli,gestion
 
 > Le `vendor` est un paramètre *optionnel*. Si vous ne renseigner pas de `vendor`, le cours sera enregistré dans le vendor global. Par exemple, `cm add:course course-manager` créera le cours `course-manager` directement dans le dossier `sources`, et celui-ci ne sera rattaché à aucun `vendor` en particulier.
 
-Par défaut, le gestionnaire de cours vous à crée un dossier `foo/course-manager` contenant les fichiers suivants:
+Par défaut, le programme vous crée un dossier `foo/course-manager` contenant les fichiers suivants:
 
  - `bibliographie`: pour stocker les documents bibliographiques du cours (ebook, fichiers PDF, images, etc.)
  - `module00-presentation`: module de présentation du cours, avec ses sous-dossiers et son fichier *deck* de slides Markdown
