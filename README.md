@@ -140,7 +140,6 @@ cd mes-cours
 Créer un nouveau cours sur le programme `course-manager` pour le présenter à des apprenant·es de l'établissement (de manière général appelé *vendor*) `foo`
 
 ~~~bash
-# cm add:course <vendor> <nom du cours> [--level=]
 cm add:course foo course-manager
 # Avec un niveau (ici L1 et L2)
 cm add:course foo course-manager --level=L1,L2
