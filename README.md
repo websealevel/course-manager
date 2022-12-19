@@ -6,6 +6,7 @@ Une application CLI en PHP pour gérer les fichiers de cours, à destination des
 - [`cm`: course-manager (en cours de développement)](#cm-course-manager-en-cours-de-développement)
   - [Dépendances tierces](#dépendances-tierces)
   - [Installation avec Composer](#installation-avec-composer)
+  - [Mettre à jour `course-manager`](#mettre-à-jour-course-manager)
   - [Philosophie](#philosophie)
   - [Manuel général d'outils en ligne de commande: arguments, options et syntaxe utilisée dans la doc](#manuel-général-doutils-en-ligne-de-commande-arguments-options-et-syntaxe-utilisée-dans-la-doc)
     - [Argument d'une commande](#argument-dune-commande)
@@ -68,6 +69,10 @@ export PATH="/path/to/course-manager:$PATH"
 ~~~
 
 Tester votre installation en tapant la commande `cm`.
+
+## Mettre à jour `course-manager`
+
+Pour mettre à jour course-manager, rendez-vous dans le dossier contenant le dépôt cloné. Assurez-vous d'être sur la branche `main` puis `git pull` pour récupérer le code-source à jour, et `composer update` pour mettre à jour les dépendances.
 
 ## Philosophie
 
