@@ -37,7 +37,7 @@ class Config
             throw new \Exception("PHP must be executed in the SAPI mode 'cli'.");
         }
 
-        $variables = static::readConfigFile();
+        $variables = static::readLocalConfigFile();
 
         return new Config($variables);
     }
@@ -48,7 +48,7 @@ class Config
      * @throws Exception - Si le fichier de configuration local ne contient pas les clefs/valeurs obligatoires.
      * @return array
      */
-    public static function readConfigFilepublic(): array
+    public static function readLocalConfigFile(): array
     {
 
         if (!FileManager::fileExists(Config::CONFIG_FILE)) {
