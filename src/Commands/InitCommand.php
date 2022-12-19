@@ -7,7 +7,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
-
+use Wsl\CourseManager\Config;
 use Wsl\CourseManager\Services\FileManager;
 
 class InitCommand extends Command
@@ -40,7 +40,7 @@ class InitCommand extends Command
             return COMMAND::FAILURE;
         }
 
-        //Initialiser le fichier de configuration global dans le repertoire home .course-manager
+        //Initialiser le fichier de configuration global dans le repertoire $HOME/.course-manager
         try {
             FileManager::createHomeConfigFile(sprintf("MAIN=%s", $absPathToRootDir));
         } catch (\Exception $e) {
@@ -51,8 +51,17 @@ class InitCommand extends Command
             return COMMAND::FAILURE;
         }
 
+
+        //Peupler le projet avec la structure de dossiers/fichiers par défaut.
+
+        $dirs = Config::projectDefaultDirectories();
+        $files = Config::projectDefaultFiles();
+
         //Creer les dossiers sources, templates, public
+        FileManager::createDirectories($dirs);
+
         //Creer les fichiers index.html, config.ini
+        FileManager::createFiles($files);
 
         return COMMAND::SUCCESS;
     }
