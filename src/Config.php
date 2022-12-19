@@ -11,24 +11,26 @@ class Config
     public const PATH_ENV_FILE = __DIR__ . '/../conf.ini';
 
     /**
-     * Factory qui retourne un environnement avec validation préalable
+     * Les clés/valeurs obligatoires à déclarer dans le fichier de configuration conf.ini
+     */
+    public const MANDATORY_CONFIG_KEYS = array('path_courses');
+
+    /**
+     * Retourne les variables d'environnement avec validation préalable
+     * @throws Exception - Si PHP n'est pas executé en mode (SAPI) 'cli'
      * @return Env
      */
     public static function create(): Config
     {
 
-        try {
-            if (php_sapi_name() !== 'cli') {
-                throw new \Exception("php doit être executé en mode CLI.");
-            }
-
-            $variables = static::readConfigFile();
-
-            return new Env($variables);
-        } catch (Exception $e) {
-            echo $e->getMessage() . PHP_EOL;
-            exit;
+        //Validation préalable
+        if (php_sapi_name() !== 'cli') {
+            throw new \Exception("php doit être executé en mode CLI.");
         }
+
+        $variables = static::readConfigFile();
+
+        return new Config($variables);
     }
 
     /**
@@ -53,7 +55,7 @@ class Config
         //Les cléfs/valeurs obligatoires du fichier de configuration
         $mandatory_options = array('path_courses');
 
-        $diff = array_diff($mandatory_options, array_keys($variables));
+        $diff = array_diff(Config::MANDATORY_CONFIG_KEYS, array_keys($variables));
 
         if (!empty($diff)) {
             throw new \Exception(sprintf("Variables d'environnement non initialisées: %s", implode(",", $diff)));

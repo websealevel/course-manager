@@ -3,10 +3,10 @@
 namespace Wsl\CourseManager\Models;
 
 
-use Exception;
-use Wsl\CourseManager\Module;
-use Wsl\CourseManager\FileManager;
-use Wsl\CourseManager\DefaultContent;
+use Wsl\CourseManager\Models\Module;
+use Wsl\CourseManager\Services\FileManager;
+use Wsl\CourseManager\Services\DefaultContent;
+use Wsl\CourseManager\Config;
 
 /**
  * Une classe qui décrit un cours. Un cours est placé dans un vendor (établissement, organisme, etc.)
@@ -18,7 +18,7 @@ class Course
     readonly public array $modules;
 
     public function __construct(
-        public Env $env,
+        public Config $config,
         readonly public string $vendor,
         readonly public string $level,
         readonly public string $name,
@@ -53,12 +53,7 @@ class Course
     {
 
         //Création du dossier du cours. On vérifie que le cours n'existe pas déjà.
-        try {
-            FileManager::createDirectory($this->env->fullPath($this->path()));
-        } catch (Exception $e) {
-            Console::print($e->getMessage());
-            return;
-        }
+        FileManager::createDirectory($this->env->fullPath($this->path()));
 
         $defaultDirs = array(
             'bibliographie',
