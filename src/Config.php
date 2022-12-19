@@ -192,9 +192,17 @@ class Config
     {
         $values = FileManager::parseIniFile(static::absPathOfGlobalConfigFile());
 
-        return in_array(
-            array('MAIN', 'PROJECTS'),
-            array_keys($values)
-        );
+        if (false === $values)
+            return false;
+
+        return
+            in_array(
+                'MAIN',
+                array_keys($values)
+            ) &&
+            in_array(
+                'PROJECTS',
+                array_keys($values)
+            );
     }
 }
