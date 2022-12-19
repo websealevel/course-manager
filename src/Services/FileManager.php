@@ -12,7 +12,6 @@ namespace Wsl\CourseManager\Services;
 class FileManager
 {
 
-
     private const CODE_DIR_ALREADY_EXISTS = 203;
 
     /**
@@ -208,7 +207,7 @@ class FileManager
             try {
                 static::createDirectory($dir);
             } catch (\Exception $e) {
-                //Si le sous-dossier existe déjà on ignore.
+                //Si le sous-dossier existe déjà, on ignore.
                 if ($e->getCode() === FileManager::CODE_DIR_ALREADY_EXISTS) {
                     continue;
                 }
@@ -218,15 +217,17 @@ class FileManager
     }
 
     /**
-     * Action: crée un ensemble de fichiers
-     * @param string[] Des paths de fichiers à créer
+     * Action: crée un ensemble de fichiers dans le dossier du projet.
+     * @param string $abstPathOfRootDir Le chemin absolu du projet
+     * @param File[] Des fichiers à créer
      * @return bool Retourne vrai si tous les fichiers ont été crées avec succès
      * @throws Exception - @see createFile
      */
-    public static function createFiles(array $files): bool
+    public static function createFiles(string $absPathOfRootDir, array $files): bool
     {
         foreach ($files as $file) {
-            static::createFile($file);
+            $path = sprintf("%s/%s", $absPathOfRootDir, $file->name);
+            static::createFile($path, $file->content);
         }
 
         return true;
