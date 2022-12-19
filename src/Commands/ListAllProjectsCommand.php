@@ -18,9 +18,16 @@ class ListAllProjectsCommand extends Command
     public function execute(InputInterface $input, OutputInterface $output)
     {
 
-        $main = Config::getCurrentProjectDefinedInGlobalConfiguration();
+        try {
 
-        $projects = Config::getAllProjectsRegisteredInGlobalConfiguration();
+            $main = Config::getCurrentProjectDefinedInGlobalConfiguration();
+            $projects = Config::getAllProjectsRegisteredInGlobalConfiguration();
+        } catch (\Exception $e) {
+            $output->writeln([
+                "You do not have any projects registered on your machine."
+            ]);
+            return COMMAND::FAILURE;
+        }
 
         $output->writeln([
             "There is the list of all your courses managment systems registered on your machine:"
