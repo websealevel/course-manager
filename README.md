@@ -76,13 +76,14 @@ Chaque `cours` est défini dans un `vendor` (un organisme, une école, etc.), et
 Une présentation est générée par `module` au moment de la publication. Chaque présentation est écrite en Markdown, et générée ensuite en HTML et PDF avec marpit. 
 
 ~~~
-#Exemple de l'architecture du système de gestion de cours
+#Exemple de l'architecture d'un projet de gestion de cours
 #Sources des cours
 sources/
-  - *vendorA*
-    - coursA
+  - *vendor-a*
+    - cours-a
       - bibliographie
-      - module1
+      - module00-presentation
+      - module01-mon-module
         - cours
           #cours source: contenu du cours en markdown, commentaire et notes à l'intention du formateur·rice
           - cours.md
@@ -91,9 +92,8 @@ sources/
         - index.html
         - README.md
       - module2
-    - coursB
-  - *vendorB*
-
+    - cours-b
+  - *vendor-b*
 #Templates contenant la mise en page (style) globale des cours
 templates/
   - css (html,pdf)
@@ -108,8 +108,6 @@ public/
         - cours.html
         - cours.pdf
 ~~~
-
-
 
 ## Guide de démarrage
 
@@ -129,8 +127,8 @@ Créer un nouveau cours sur le programme `course-manager` pour le présenter à 
 
 ~~~bash
 cm add:course foo course-manager
-# Avec un niveau (ici L1 et L2)
-cm add:course foo course-manager --level=L1,L2
+# Ou avec les options: renseigner des niveaux (L1, L2 et L3) et des mot-clefs (cli et gestion)
+cm add:course foo course-manager --level=L1,L2,L3 --keywords=cli,gestion
 ~~~
 
 > Le `vendor` est un paramètre *optionnel*. Si vous ne renseigner pas de vendor, le cours sera enregistré dans le vendor global. Par exemple, cm add:course course-manager créera le cours `course-manager` et celui-ci ne sera rattaché à aucun vendor en particulier.
@@ -141,9 +139,8 @@ Par défaut, le gestionnaire de cours vous à crée un dossier `foo/course-manag
  - `module00-presentation`: module de présentation du cours, avec ses sous-dossiers et son fichier *deck* de slides Markdown
  - `README.md`: description brève du cours (durée, contenu, ressources, niveau des apprenants (`--level`), remarques). Contient le plan, les objectifs, le planning, etc.
  - `index.html`: permet de naviguer dans le cours au format HTML.
- - `metadata.ini`: un fichier contenant des métadonnées sur le cours. Généré automatiquement. Permet de filtrer les cours via le programme.
+ - `.metadata`: un fichier caché contenant des métadonnées sur le cours. Généré automatiquement. Permet de filtrer les cours via le programme.
 
-> Vous pouvez également ajouter un niveau du cours avec l'option `--level`. Par exemple `--level=L1` ou `--level=M1,M2`. Le niveau est une métadonnée qui peut être utilisée pour filtrer les cours.
 
 ## Liste des commandes principales
 
@@ -233,7 +230,9 @@ Il s'écrit sous la forme `cm <nom de la commande> <nom de l'argument>`. Par exe
 
 ### Options d'une commande
 
-Une option **est par définition optionnelle**. Elle a un nom et peut être placée n'importe où à la suite du nom de la commande (contrairement aux arguments). Elle sont préfixées par deux dashes `--`. Par exemple, `cm add:project --help`. Les options ont également un alias, un nom plus court. Un alias est préfixé par un dash `-`. Par exemple, `cm add:project --help` est équivalent à `cm add:project -h`; `-h` est l'alias de `--help`.
+Une option **est par définition optionnelle**. Elle a un nom et peut être placée n'importe où à la suite du nom de la commande (contrairement aux arguments). Elle sont préfixées par deux dashes `--`. Par exemple, `cm add:project --help`. 
+
+Les options ont également un alias, un nom plus court. Un alias est préfixé par un dash `-`. Par exemple, `cm add:project --help` est équivalent à `cm add:project -h`; `-h` est l'alias de `--help`. Si l'option prend une valeur on la passera comme suit, `--option=foo`, ou en version abrégée `-ofoo`.
 
 
 
