@@ -99,9 +99,10 @@ templates/
 
 #Cours publiés (format HTML/PDF)
 public/
-  - *vendorA*
-    - coursA
-      - cours
+  - *vendor-a*
+    - cours-a
+      - module00-presentation
+      - module01-mon-module
         #cours publié: contenu en HTML/PDF, pas de commentaire ni de notes visibles
         - cours.html
         - cours.pdf
