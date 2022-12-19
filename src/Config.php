@@ -298,4 +298,23 @@ class Config
 
         return $values['MAIN'];
     }
+
+
+    /**
+     * Retourne la liste de tous les projets enregistrés (sous la clef PROJECTS)
+     * @return string[]
+     */
+    public static function getAllProjectsRegisteredInGlobalConfiguration(): array
+    {
+        if (!static::globalConfigFileIsInitialized()) {
+            throw new \Exception("Le fichier de configuration global n'a pas une syntaxe correcte. 
+            Impossible de l'analyser. Veuillez vérifier sa syntaxe.");
+        }
+
+        $values = FileManager::parseIniFile(static::absPathOfGlobalConfigFile());
+
+        //Il faudrait checker que les dossiers existent toujours, sinon supprimer(clean) les projets enregistrés.
+
+        return explode(",", $values['PROJECTS']);
+    }
 }

@@ -6,6 +6,7 @@ require 'vendor/autoload.php';
 use Symfony\Component\Console\Application;
 use Wsl\CourseManager\Commands\ChangeCurrentProjectCommand;
 use Wsl\CourseManager\Commands\CreateProjectCommand;
+use Wsl\CourseManager\Commands\ListAllProjectsCommand;
 use Wsl\CourseManager\Commands\RemoveProjectCommand;
 use Wsl\CourseManager\Commands\ShowCurrentProjetCommand;
 use Wsl\CourseManager\Commands\UninstallCommand;
@@ -15,6 +16,7 @@ $app = new Application('Course manager', '1.0');
 //Register commands
 
 $app->add(new ShowCurrentProjetCommand('show:current-project'));
+$app->add(new ListAllProjectsCommand('show:all-projects'));
 $app->add(new ChangeCurrentProjectCommand('change:current-project'));
 $app->add(new CreateProjectCommand('add:project'));
 $app->add(new RemoveProjectCommand('remove:project'));
