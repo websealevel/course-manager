@@ -158,27 +158,39 @@ class Config
      * Enregistre un nouveau projet dans le fichier de configuration global
      * @param string $absPathToRootDir Le path absolu du nouveau projet (unique)
      */
-    public static function registerProject(string $absPathToRootDir)
+    public static function registerProject(string $absPathToRootDir): void
     {
 
         if (!static::globalConfigExists()) {
             static::createGlobalConfigFile($absPathToRootDir);
         }
 
-        //Si les clefs MAIN et PROJECTS n'existent pas, on enregistre le projet
-        //dans PROJECTS et on fait pointer MAIN dessus.
+        $values = array();
+
         if (!static::globalConfigFileIsInitialized()) {
 
-            $iniData = array(
+            $values = array(
                 sprintf("MAIN=%s", $absPathToRootDir),
                 sprintf("PROJECTS=%s", $absPathToRootDir),
             );
-
-            FileManager::createFile(static::absPathOfGlobalConfigFile(), implode("\n", $iniData));
         } else {
-            //Ajouter le path aux paths existants
-            die('HERE');
+
+            $parsed = FileManager::parseIniFile(static::absPathOfGlobalConfigFile());
+
+            //Projet non encore enregistré
+            if (isset($parsed['PROJECTS']) && !str_contains($parsed['PROJECTS'], $absPathToRootDir)) {
+                $parsed['PROJECTS'] = $parsed['PROJECTS'] . "," . $absPathToRootDir;
+            }
+
+            //Transform
+            $values = array(
+                sprintf("MAIN=%s", $parsed['MAIN']),
+                sprintf("PROJECTS=%s", $parsed['PROJECTS']),
+            );
         }
+
+        if (false !== $values)
+            FileManager::createFile(static::absPathOfGlobalConfigFile(), implode("\n", $values));
 
         return;
     }
