@@ -216,6 +216,9 @@ class Config
             return $project !== $absPathToRootDir;
         });
 
+        var_dump($otherProjects);
+        // die;
+
         //On retire le projet à supprimer des projets enregistrés.
         $parsed['PROJECTS'] = implode(",", $otherProjects);
 
@@ -229,7 +232,7 @@ class Config
             }
 
             //Change le curseur de position sur un autre projet existant.
-            $parsed['MAIN'] = $otherProjects[0];
+            $parsed['MAIN'] = reset($otherProjects);
         }
 
         //Transform
@@ -311,9 +314,19 @@ class Config
 
         $values = FileManager::parseIniFile(static::absPathOfGlobalConfigFile());
 
-
         if (false === $values)
             throw new \Exception("Impossible de lire le fichier de configuration global. Veuillez vérifier sa syntaxe.");
+
+
+        if (isset($values['MAIN']) && empty($values['MAIN']))
+            throw new \Exception("Aucun projet courant défini dans le fichier de configuration global. Veuillez en définir un.");
+
+
+        if (isset($values['PROJECTS']) && empty($values['PROJECTS'])) {
+            //Si aucun projet n'est enregistré on supprime le fichier de configuration global.
+            FileManager::removeFile(static::absPathOfGlobalConfigFile());
+            throw new \Exception("Aucuns projets définis dans le fichier de configuration global. Veuillez en enregistrer.");
+        }
 
         return $values;
     }
@@ -321,49 +334,27 @@ class Config
 
     /**
      * Retourne la liste de tous les projets enregistrés (sous la clef PROJECTS)
+     * et qui existent sur le disque.
+     * Effet de bord: nettoie les projets enregistrés qui n'existent plus sur le disque.
      * @return string[]
      */
     public static function getAllProjectsRegisteredInGlobalConfiguration(): array
     {
         $values = static::getGlobalConfigurationValues();
 
-        //Il faudrait checker que les dossiers existent toujours, sinon supprimer(clean) les projets enregistrés.
+        $registeredProjects = explode(",", $values['PROJECTS']);
 
-        $projects = explode(",", $values['PROJECTS']);
+        $existingProjects = array_filter($registeredProjects, function ($project) {
+            return is_dir($project);
+        });
 
-        $existingProjects = array();
+        //Nettoyage
+        $projectsToUnregister = array_diff($registeredProjects, $existingProjects);
 
-        //Pas ouf.
-        foreach ($projects as $project) {
-            if (!is_dir($project)) {
-                static::cleanRegisteredProject($project);
-            } else {
-                $existingProjects[] = $project;
-            }
+        foreach ($projectsToUnregister as $p) {
+            Config::removeFromConfigFile($p);
         }
 
         return $existingProjects;
-    }
-
-    /**
-     * Nettoie le projet enregistré dans la configuration globale
-     * si leurs paths ne pointent sur rien (leurs ROOT_DIR a été supprimé)
-     */
-    public static function cleanRegisteredProject($projectToRemove)
-    {
-        $main = static::getCurrentProjectDefinedInGlobalConfiguration();
-        $projects = static::getAllProjectsRegisteredInGlobalConfiguration();
-
-        $clean = array_filter($projects, function ($project) use ($projectToRemove) {
-            return $project !== $projectToRemove;
-        });
-
-        //Transform
-        $values = array(
-            sprintf("MAIN=%s", $main),
-            sprintf("PROJECTS=%s", $clean),
-        );
-
-        return FileManager::createFile(static::absPathOfGlobalConfigFile(), implode("\n", $values));
     }
 }
