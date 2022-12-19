@@ -137,7 +137,15 @@ cd mes-cours
 
 > Si c'est votre projet MAIN (voir $HOME/.create-manager), vous n'êtes pas obligé de vous rendre dans le repertoire courant pour travailler sur le projet.
 
-Créer un nouveau cours sur cet outil pour le présenter à d'autres personnes `cm-manager` l'établissement (de manière général appelé *vendor*) `ecole-foo`
+Créer un nouveau cours sur cet outil pour le présenter à des étudiant·es `cm-manager` de l'établissement (de manière général appelé *vendor*) `foo`
+
+~~~bash
+cm add:course foo cm-manager
+# Avec un niveau (ici L1 et L2)
+cm add:course foo cm-manager --level=L1,L2
+~~~
+
+> Vous pouvez également ajouter un niveau du cours avec l'option `--level`. Par exemple `--level=L1` ou `--level=M1,M2`.
 
 ## Liste des commandes
 
