@@ -121,13 +121,9 @@ cm add:project mes-cours
 
 > Lors de votre première création de projet, course-manager crée un fichier de configuration global dans votre répertoire home (`$HOME/.create-manager`). Ce fichier de configuration globale défini le projet de gestion de cours principal (`MAIN`) qui est utilisé si vous n'êtes pas placé à la racine d'un projet lors de l'utilisation de `create-manager`.
 
-Rentrer dans le dossier crée afin de pouvoir gérer votre projet
+Si c'est votre premier projet, par défaut le projet mes-cours est votre projet courant, inutile donc de vous y déplacer pour l'administrer.
 
-~~~bash
-cd mes-cours
-~~~
-
-> Si c'est votre projet MAIN (voir $HOME/.create-manager), vous n'êtes pas obligé de vous rendre dans le repertoire courant pour travailler sur le projet.
+> Le projet courant est configuré sous la clé `MAIN` dans le fichier de configuration global (voir $HOME/.create-manager). Vous changer de projet courant avec la commande `change:current-project` ou en vous rendant directement dans le repértoire d'un autre projet. 
 
 Créer un nouveau cours sur le programme `course-manager` pour le présenter à des apprenant·es de l'établissement (de manière général appelé *vendor*) `foo`
 
@@ -139,7 +135,15 @@ cm add:course foo course-manager --level=L1,L2
 
 > Le `vendor` est un paramètre *optionnel*. Si vous ne renseigner pas de vendor, le cours sera enregistré dans le vendor global. Par exemple, cm add:course course-manager créera le cours `course-manager` et celui-ci ne sera rattaché à aucun vendor en particulier.
 
-> Vous pouvez également ajouter un niveau du cours avec l'option `--level`. Par exemple `--level=L1` ou `--level=M1,M2`.
+Par défaut, le gestionnaire de cours vous à crée un dossier `foo/course-manager` contenant les fichiers suivants:
+
+ - `bibliographie`: pour stocker les documents bibliographiques du cours (ebook, fichiers PDF, images, etc.)
+ - `module00-presentation`: module de présentation du cours, avec ses sous-dossiers et son fichier *deck* de slides Markdown
+ - `README.md`: description brève du cours (durée, contenu, ressources, niveau des apprenants (`--level`), remarques). Contient le plan, les objectifs, le planning, etc.
+ - `index.html`: permet de naviguer dans le cours au format HTML.
+ - `metadata.ini`: un fichier contenant des métadonnées sur le cours. Généré automatiquement. Permet de filtrer les cours via le programme.
+
+> Vous pouvez également ajouter un niveau du cours avec l'option `--level`. Par exemple `--level=L1` ou `--level=M1,M2`. Le niveau est une métadonnée qui peut être utilisée pour filtrer les cours.
 
 ## Liste des commandes principales
 
@@ -205,6 +209,14 @@ Publier un cours revient à publier l'intégralité de ses modules.
 - script `course-export {nom du cours} {opt nom du module}`: génère les fichiers HTML et PDF du cours et fais une copie dans le dossier `Public` et Privé (presentation avec notes). Met à jour l'index.html local au cours et l'index.html global. -->
 
 
+<!-- 
+
+idée de commandes à rajouter:
+
+- dans le config.ini ajouter un éditeur par défaut pour ouvrir le dossier d'un cours ou d'un module (par exemple vscode). Ensuite utiliser open:course <nom_du_cours> et il ouvrira le dossier du cours avec l'éditeur défini.
+- filtrer les cours par niveau, sujets
+-->
+
 ## Manuel général d'outils en ligne de commande: arguments, options et syntaxe utilisée dans la doc
 
 Les *commandes* peuvent prendre des *arguments* ou des *options* en paramètre. Pour lister les arguments et les options disponibles de chaque commande, taper `cm <nom de la commande> --help`. 
@@ -252,3 +264,7 @@ pandoc {file.md} -t html5 -o {file.pdf} --css style.css --pdf-engine-opt=--enabl
 - [Pandoc](https://pandoc.org/index.html), un convertisseur de document universel et éprouvé
 - [poc-marp](https://github.com/websealevel/poc-marp), un dépôt qui récapitule les possibilités essentielles de l'écosystème marp
 - [The Console Component (Symfony)](https://symfony.com/doc/current/components/console.html)
+- [Console Commands](https://symfony.com/doc/current/console.html)
+- [Commands Lifecycle](https://symfony.com/doc/current/console.html#command-lifecycle)
+- [Console Input (Arguments & Options)](https://symfony.com/doc/current/console/input.html)
+- [Learn more](https://symfony.com/doc/current/components/console.html#learn-more)
