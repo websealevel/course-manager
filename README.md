@@ -131,7 +131,7 @@ cm add:course foo course-manager
 cm add:course foo course-manager --level=L1,L2,L3 --keywords=cli,gestion
 ~~~
 
-> Le `vendor` est un paramètre *optionnel*. Si vous ne renseigner pas de vendor, le cours sera enregistré dans le vendor global. Par exemple, cm add:course course-manager créera le cours `course-manager` et celui-ci ne sera rattaché à aucun vendor en particulier.
+> Le `vendor` est un paramètre *optionnel*. Si vous ne renseigner pas de `vendor`, le cours sera enregistré dans le vendor global. Par exemple, `cm add:course course-manager` créera le cours `course-manager` directement dans le dossier `sources`, et celui-ci ne sera rattaché à aucun `vendor` en particulier.
 
 Par défaut, le gestionnaire de cours vous à crée un dossier `foo/course-manager` contenant les fichiers suivants:
 
