@@ -60,18 +60,20 @@ chmod +x cm
 ./cm
 ~~~
 
-Ajouter l'éxecutable à votre PATH, ou placer le dans un dossier déjà présent sur le PATH
+Pour rendre le programme globalement accessible sur votre machine, ajouter-le à votre `PATH`:
 
 ~~~
 #Sous Debian/Ubuntu
-sudo mv cm /usr/local/bin/cm
+export PATH="/path/to/course-manager:$PATH"
 ~~~
 
 Tester votre installation en tapant la commande `cm`.
 
 ## Philosophie
 
->Une source de vérité, plusieurs publications. Séparation du contenu et de la publication.
+>Écrivez une fois, publiez plusieurs fois dans différents formats.
+
+Ce gestionnaire de cours est basé sur le principe de la stricte et nécessaire séparation du contenu et de la forme. Vous écrivez, mettez à jour votre contenu en un endroit, puis vous le publier vers autant de formats que nécessaire (HTML,PDF,etc.).
 
 Un dossier `cours` (par défaut) est créé à l'initialisation et sert de racine au projet. Il contient les fichiers suivants: 
 
@@ -139,7 +141,7 @@ Une option **est par définition optionnelle**. Elle a un nom et peut être plac
 
 ## Guide de démarrage
 
-- créer un nouveau projet de gestion de cours avec `cm init [<root_dir>]`. L'argument optionnel root_dir vous permet de préciser le nom du dossier.
+- créer un nouveau projet de gestion de cours avec `cm init [<root_dir>]`. L'argument optionnel `root_dir` vous permet de préciser le nom du dossier racine de votre projet.
 
 ## Liste des commandes
 
