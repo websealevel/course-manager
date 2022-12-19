@@ -6,6 +6,7 @@ require 'vendor/autoload.php';
 use Symfony\Component\Console\Application;
 use Wsl\CourseManager\Commands\CreateProjectCommand;
 use Wsl\CourseManager\Commands\RemoveProjectCommand;
+use Wsl\CourseManager\Commands\UninstallCommand;
 
 $app = new Application('Course manager', '1.0');
 
@@ -13,6 +14,7 @@ $app = new Application('Course manager', '1.0');
 
 $app->add(new CreateProjectCommand('create'));
 $app->add(new RemoveProjectCommand('remove'));
+$app->add(new UninstallCommand('uninstall'));
 
 
 $app->run();

@@ -3,8 +3,9 @@
 namespace Wsl\CourseManager\Models;
 
 
-use Wsl\CourseManager\Env;
-use Wsl\CourseManager\FileManager;
+use Wsl\CourseManager\Config;
+use Wsl\CourseManager\Services\FileManager;
+use Wsl\CourseManager\Services\DefaultContent;
 
 /**
  * Un module est une partie d'un cours.
@@ -12,7 +13,7 @@ use Wsl\CourseManager\FileManager;
 class Module
 {
     public function __construct(
-        readonly public Env $env,
+        readonly public Config $config,
         readonly public int $id,
         readonly public string $name,
         readonly public array $directories = array(

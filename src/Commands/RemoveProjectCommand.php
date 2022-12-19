@@ -8,11 +8,22 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 
-class RemoveProjectCommand extends Command{
+class RemoveProjectCommand extends Command
+{
+
+    protected static $defaultDescription = 'Remove an existing courses managment system. Be careful.';
 
 
-    public function execute(InputInterface $input, OutputInterface $output){
+    public function execute(InputInterface $input, OutputInterface $output)
+    {
 
+        $rootDir = $input->getArgument('root_dir');
+
+        //Demander la confirmation.
+
+        //Supprimer le dossier root du projet.
+
+        //Supprimer le projet du fichier de configuration global.
 
         return COMMAND::SUCCESS;
     }
@@ -21,7 +32,6 @@ class RemoveProjectCommand extends Command{
     public function configure(): void
     {
         $this
-            ->addArgument('root_dir', InputArgument::OPTIONAL, 'The name of your root course managment folder.');
+            ->addArgument('root_dir', InputArgument::REQUIRED, 'The name of the root course you want to remove.');
     }
-
 }

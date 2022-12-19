@@ -13,7 +13,7 @@ use Wsl\CourseManager\Services\FileManager;
 class CreateProjectCommand extends Command
 {
 
-    protected static $defaultDescription = 'Initialize a new courses managment system';
+    protected static $defaultDescription = 'Create a new courses managment system in the current directory.';
 
     public const CONF_FILE = 'config.ini';
 

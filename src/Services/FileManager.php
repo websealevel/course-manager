@@ -12,8 +12,6 @@ namespace Wsl\CourseManager\Services;
 class FileManager
 {
 
-
-
     /**
      * Retourne le path absolu du dossier home/user
      * @return string
@@ -23,10 +21,6 @@ class FileManager
         $home = getenv("HOME");
         return $home;
     }
-
-
-
-
 
     /**
      * Retourne le contenu parsé d'un fichier de configuration au format INI
