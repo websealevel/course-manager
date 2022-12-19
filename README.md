@@ -285,5 +285,5 @@ pandoc {file.md} -t html5 -o {file.pdf} --css style.css --pdf-engine-opt=--enabl
 - [Console Commands](https://symfony.com/doc/current/console.html)
 - [Commands Lifecycle](https://symfony.com/doc/current/console.html#command-lifecycle)
 - [Console Input (Arguments & Options)](https://symfony.com/doc/current/console/input.html)
-- [Learn more (Symfony Console)](https://symfony.com/doc/current/components/console.html#learn-more)$
+- [Learn more (on Symfony Console)](https://symfony.com/doc/current/components/console.html#learn-more)
 - [PhpDocumentor (installation)](https://docs.phpdoc.org/3.0/guide/getting-started/installing.html#system-requirements)
