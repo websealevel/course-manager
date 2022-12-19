@@ -12,13 +12,7 @@ namespace Wsl\CourseManager\Services;
 class FileManager
 {
 
-    /**
-     * Nom du fichier de configuration global du programme. Maintient la liste des tous les projets de gestion de cours,
-     * et un pointeur MAIN sur le projet courant.
-     * @var string
-     */
-    public const HOME_CONFIG_FILE = '.course-manager';
-    public const DEFAULT_ROOT_DIR = 'courses';
+
 
     /**
      * Retourne le path absolu du dossier home/user
@@ -44,43 +38,7 @@ class FileManager
         //Replacer MAIN sur l'avant dernier projet dans la liste PROJETS, sinon le mettre à vide.
     }
 
-    /**
-     * Action: Crée un fichier de configuration .create-manager dans le répertoire home de l'utilisateur courant
-     * s'il n'existe pas déjà
-     * @param string $absPathToRootDir Le chemin absolu (et l'identifiant) du nouveau projet.
-     * @throws Exception - Si impossible de créer le fichier de configuration s'il n'existe pas déjà.
-     */
-    public static function createHomeConfigFile(string $absPathToRootDir): void
-    {
-        $pathHome = static::getHomeDirOfUser();
 
-        $absPathConfigHome = sprintf("%s/%s", $pathHome, FileManager::HOME_CONFIG_FILE);
-
-        //S'il existe déjà on ajoute le projet à la liste des projets maintenus
-        if (FileManager::fileExists($absPathConfigHome)) {
-
-            //Recuperer la valeur sous la clefs PROJECTS
-
-            //Ajouter le path aux paths existants
-
-            return;
-        }
-
-        //Sinon, on crée le fichier de config global, et on met le pointeur MAIN sur le projet courant
-        $success = static::createFile(
-            $absPathConfigHome,
-            sprintf(
-                "MAIN=%s\nPROJECTS=%s",
-                $absPathToRootDir,
-                $absPathToRootDir
-            )
-        );
-
-        if (!$success)
-            throw new \Exception("Impossible de créer le fichier de configuration %s.", $absPathConfigHome);
-
-        return;
-    }
 
     /**
      * Retourne le contenu parsé d'un fichier de configuration au format INI
@@ -89,10 +47,13 @@ class FileManager
      */
     public static function parseIniFile(string $absPathIniFile): array|false
     {
+        $size= filesize($absPathIniFile);
 
         $result = parse_ini_file($absPathIniFile);
-        if (!$result)
-            throw new \Exception("Impossible de parser le fichier de configuration. Veuillez vérifier sa syntaxe.");
+
+        //Un fichier vide n'est pas un fichier INI invalide.
+        if (false === $result && 0 !== $size)
+            throw new \Exception("Impossible de parser le fichier de configuration INI. Veuillez vérifier sa syntaxe.");
         return $result;
     }
 
@@ -127,7 +88,7 @@ class FileManager
      * @return bool
      * @throws Exception - Si impossible d'ouvrir le fichier en écriture, impossible d'écrire dans le fichier.
      */
-    public static function createFile(string $abspath, string $content = ''): bool
+    public static function createFile(string $abspath, string|array $content = ''): bool
     {
         $file = fopen(
             $abspath,
