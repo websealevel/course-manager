@@ -121,11 +121,11 @@ class FileManager
         );
 
         if (!$file) {
-            throw new \Exception("Impossible d'ouvrir le fichier %s", $abspath);
+            throw new \Exception(sprintf("Impossible d'ouvrir le fichier %s", $abspath));
         }
 
-        if (!fwrite($file, $content)) {
-            throw new \Exception("Impossible d'écrire dans le fichier %s", $abspath);
+        if (false === fwrite($file, $content)) {
+            throw new \Exception(sprintf("Impossible d'écrire dans le fichier %s", $abspath));
         }
 
         return fclose($file);

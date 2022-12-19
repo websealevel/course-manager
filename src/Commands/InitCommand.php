@@ -57,11 +57,27 @@ class InitCommand extends Command
         $dirs = Config::projectDefaultDirectories();
         $files = Config::projectDefaultFiles();
 
-        //Creer les dossiers sources, templates, public
-        FileManager::createDirectories($dirs);
 
-        //Creer les fichiers index.html, config.ini
-        FileManager::createFiles($files);
+        $absPathDirs = array_map(function ($dir) use ($absPathToRootDir) {
+            return sprintf("%s/%s", $absPathToRootDir, $dir);
+        }, $dirs);
+
+        $absPathFiles = array_map(function ($file) use ($absPathToRootDir) {
+            return sprintf("%s/%s", $absPathToRootDir, $file);
+        }, $files);
+
+        try {
+            //Creer les dossiers sources, templates, public
+            FileManager::createDirectories($absPathDirs);
+            //Creer les fichiers index.html, config.ini
+            FileManager::createFiles($absPathFiles);
+        } catch (\Exception $e) {
+            $output->writeln([
+                $e->getMessage(),
+            ]);
+            return COMMAND::FAILURE;
+        }
+
 
         return COMMAND::SUCCESS;
     }
