@@ -8,9 +8,6 @@ Une application CLI, [basée sur le composant Console de Symfony](https://symfon
   - [Installation avec Composer](#installation-avec-composer)
   - [Mettre à jour `course-manager`](#mettre-à-jour-course-manager)
   - [Philosophie](#philosophie)
-  - [Manuel général d'outils en ligne de commande: arguments, options et syntaxe utilisée dans la doc](#manuel-général-doutils-en-ligne-de-commande-arguments-options-et-syntaxe-utilisée-dans-la-doc)
-    - [Argument d'une commande](#argument-dune-commande)
-    - [Options d'une commande](#options-dune-commande)
   - [Guide de démarrage](#guide-de-démarrage)
   - [Liste des commandes](#liste-des-commandes)
     - [Initialiser un nouveau projet de gestion de cours `add:project`](#initialiser-un-nouveau-projet-de-gestion-de-cours-addproject)
@@ -21,6 +18,9 @@ Une application CLI, [basée sur le composant Console de Symfony](https://symfon
       - [Contenus de type *présentation*: format HTML et PDF](#contenus-de-type-présentation-format-html-et-pdf)
       - [Contenus de type *document*: format HTML et PDF](#contenus-de-type-document-format-html-et-pdf)
     - [Inspecter les cours (à venir...)](#inspecter-les-cours-à-venir)
+  - [Manuel général d'outils en ligne de commande: arguments, options et syntaxe utilisée dans la doc](#manuel-général-doutils-en-ligne-de-commande-arguments-options-et-syntaxe-utilisée-dans-la-doc)
+    - [Argument d'une commande](#argument-dune-commande)
+    - [Options d'une commande](#options-dune-commande)
   - [Sous le capôt: génération des documents au format HTML ou PDF avec marp et pandoc](#sous-le-capôt-génération-des-documents-au-format-html-ou-pdf-avec-marp-et-pandoc)
     - [Générer un fichier HTML+CSS à partir d'un fichier Markdown (avec `marp`)](#générer-un-fichier-htmlcss-à-partir-dun-fichier-markdown-avec-marp)
     - [Générer la présentation au format PDF à partir d'un fichier Markdown (avec `marp`)](#générer-la-présentation-au-format-pdf-à-partir-dun-fichier-markdown-avec-marp)
@@ -117,23 +117,6 @@ public/
         - cours.pdf
 ~~~
 
-## Manuel général d'outils en ligne de commande: arguments, options et syntaxe utilisée dans la doc
-
-Les *commandes* peuvent prendre des *arguments* ou des *options* en paramètre. Pour lister les arguments et les options disponibles de chaque commande, taper `cm <nom de la commande> --help`. 
-
->Les chaines de caractères entre chevrons `<>` doivent être remplacés par un nom de commande, d'argument ou d'option.
-
-### Argument d'une commande
-
-Un argument est une chaine de caractère ajouté à la suite de la commande pour modifier son comportement. Les arguments sont séparés par des esapces. Un argument peut-être obligatoire ou optionnel. 
-
-Il s'écrit sous la forme `cm <nom de la commande> <nom de l'argument>`. Par exemple, `cm add:project mes-cours`. Attention, **les arguments sont ordonnés**, ils doivent être écrits dans l'ordre attendu par la commande. 
-
->Un argument optionnel s'écrit entre crochets `cm <nom de la commande> |[<nom de l'argument optionnel>]`.
-
-### Options d'une commande
-
-Une option **est par définition optionnelle**. Elle a un nom et peut être placée n'importe où à la suite du nom de la commande (contrairement aux arguments). Elle sont préfixées par deux dashes `--`. Par exemple, `cm add:project --help`. Les options ont également un alias, un nom plus court. Un alias est préfixé par un dash `-`. Par exemple, `cm add:project --help` est équivalent à `cm add:project -h`; `-h` est l'alias de `--help`.
 
 
 ## Guide de démarrage
@@ -220,6 +203,26 @@ Publier un cours revient à publier l'intégralité de ses modules.
 <!-- - script `course-ls {nom du cours}`: liste le contenu du cours (modules présents)
 
 - script `course-export {nom du cours} {opt nom du module}`: génère les fichiers HTML et PDF du cours et fais une copie dans le dossier `Public` et Privé (presentation avec notes). Met à jour l'index.html local au cours et l'index.html global. -->
+
+
+## Manuel général d'outils en ligne de commande: arguments, options et syntaxe utilisée dans la doc
+
+Les *commandes* peuvent prendre des *arguments* ou des *options* en paramètre. Pour lister les arguments et les options disponibles de chaque commande, taper `cm <nom de la commande> --help`. 
+
+>Les chaines de caractères entre chevrons `<>` doivent être remplacés par un nom de commande, d'argument ou d'option.
+
+### Argument d'une commande
+
+Un argument est une chaine de caractère ajouté à la suite de la commande pour modifier son comportement. Les arguments sont séparés par des esapces. Un argument peut-être obligatoire ou optionnel. 
+
+Il s'écrit sous la forme `cm <nom de la commande> <nom de l'argument>`. Par exemple, `cm add:project mes-cours`. Attention, **les arguments sont ordonnés**, ils doivent être écrits dans l'ordre attendu par la commande. 
+
+>Un argument optionnel s'écrit entre crochets `cm <nom de la commande> |[<nom de l'argument optionnel>]`.
+
+### Options d'une commande
+
+Une option **est par définition optionnelle**. Elle a un nom et peut être placée n'importe où à la suite du nom de la commande (contrairement aux arguments). Elle sont préfixées par deux dashes `--`. Par exemple, `cm add:project --help`. Les options ont également un alias, un nom plus court. Un alias est préfixé par un dash `-`. Par exemple, `cm add:project --help` est équivalent à `cm add:project -h`; `-h` est l'alias de `--help`.
+
 
 
 ## Sous le capôt: génération des documents au format HTML ou PDF avec marp et pandoc
