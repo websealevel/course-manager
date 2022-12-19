@@ -1,9 +1,9 @@
-# `cm`: course-manager (en cours de développement)
+# Course-manager
 
 Une application CLI, [basée sur le composant Console de Symfony](https://symfony.com/doc/current/components/console.html), pour gérer les fichiers de cours (contenu, publication), à destination des formateur·trices et enseignant·es. Tous les supports de cours sont écrits en Markdown *en un endroit*, puis publiés vers différents formats: HTML (présentations interactives), PDF (impression, exercices, sujet d'examens, etc.).
 
 
-- [`cm`: course-manager (en cours de développement)](#cm-course-manager-en-cours-de-développement)
+- [Course-manager](#course-manager)
   - [Dépendances tierces](#dépendances-tierces)
   - [Installation avec Composer](#installation-avec-composer)
   - [Mettre à jour `course-manager`](#mettre-à-jour-course-manager)
