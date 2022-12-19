@@ -4,10 +4,9 @@ Une application CLI en PHP pour gérer les fichiers de cours, à destination des
 
 
 - [`cm`: course-manager (en cours de développement)](#cm-course-manager-en-cours-de-développement)
-  - [Installation locale avec Composer](#installation-locale-avec-composer)
-  - [Installation globale](#installation-globale)
-  - [Dépendances](#dépendances)
-  - [Specs](#specs)
+  - [Dépendances tierces](#dépendances-tierces)
+  - [Installation avec Composer](#installation-avec-composer)
+  - [Philosophie](#philosophie)
   - [Manuel général d'outils en ligne de commande: arguments, options et syntaxe utilisée dans la doc](#manuel-général-doutils-en-ligne-de-commande-arguments-options-et-syntaxe-utilisée-dans-la-doc)
     - [Argument d'une commande](#argument-dune-commande)
     - [Options d'une commande](#options-dune-commande)
@@ -35,11 +34,17 @@ Une application CLI en PHP pour gérer les fichiers de cours, à destination des
     - [Générer un PDF à partir du Markdown en passant par HTML/CSS (avec `pandoc`)](#générer-un-pdf-à-partir-du-markdown-en-passant-par-htmlcss-avec-pandoc)
   - [Ressources](#ressources)
 
-## Installation locale avec Composer
+## Dépendances tierces
 
-Installer php (>v8.2.*).
+Pour pouvoir utiliser le programme, assurez vous d'installer les programmes suivants:
 
-Installer Composer.
+- [PHP](https://www.php.net/downloads) (>8.2.*)
+- [Marp](https://marp.app/)
+- [Pandoc](https://pandoc.org/)
+
+## Installation avec Composer
+
+Installer [Composer](https://getcomposer.org/download/).
 
 Télécharger le [code source](https://github.com/websealevel/course-manager).
 
@@ -47,39 +52,30 @@ Télécharger le [code source](https://github.com/websealevel/course-manager).
 composer install
 ~~~
 
-Créer un fichier `conf.ini` à la racine de votre dossier
-
-~~~ini
-path_courses=/chemin/vers/la/ou/vous/voulez/stocker/les/cours
-~~~
-
 Rendre le script `cm` exécutable
 
 ~~~
 chmod +x cm
-//Lister toutes les commandes
+# Tester et lister toutes les commandes
 ./cm
 ~~~
 
-Ajouter l'éxecutable sur votre PATH.
+Ajouter l'éxecutable à votre PATH, ou placer le dans un dossier déjà présent sur le PATH
 
-Initialiser un votre premier système de gestion de cours avec `cm init`.
+~~~
+#Sous Debian/Ubuntu
+sudo mv cm /usr/local/bin/cm
+~~~
 
-## Installation globale
+Tester votre installation en tapant la commande `cm`.
 
-À venir...
+## Philosophie
 
-## Dépendances
-
-- PHP (8.2.*)
-- Marp
-- Pandoc
-
-## Specs
+>Une source de vérité, plusieurs publications. Séparation du contenu et de la publication.
 
 Un dossier `cours` (par défaut) est créé à l'initialisation et sert de racine au projet. Il contient les fichiers suivants: 
 
-- `sources/` : les fichiers sources de vos cours (markdown, assets, images)
+- `sources/` : les fichiers sources de vos cours (markdown, assets, images). *La source de vérité*
 - `templates/`: les styles globaux pour la publication de vos cours (CSS, XSLT, etc.)
 - `public/` : les cours publiés au format HTML et/ou PDF, distribuables, les notes n'y apparaissent pas
 - `index.html`: un fichier pour naviguer facilement dans vos cours via votre navigateur web
