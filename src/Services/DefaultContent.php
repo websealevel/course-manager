@@ -1,6 +1,7 @@
 <?php
 
-namespace Wsl\CourseManager;
+namespace Wsl\CourseManager\Services;
+
 
 class DefaultContent
 {
@@ -57,7 +58,7 @@ class DefaultContent
         return $content;
     }
 
-     /**
+    /**
      * Retourne le contenu du index.html d'un cours à sa création
      * @return string
      */

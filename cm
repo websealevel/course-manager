@@ -1,0 +1,16 @@
+#!/bin/php
+<?php
+
+require 'vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+use Wsl\CourseManager\Commands\InitCommand;
+
+$app = new Application('Course manager', '1.0');
+
+//Register commands
+
+$app->add(new InitCommand('init'));
+
+
+$app->run();

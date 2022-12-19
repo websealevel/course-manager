@@ -6,9 +6,8 @@
  * @package wsl
  */
 
-namespace Wsl\CourseManager;
+namespace Wsl\CourseManager\Services;
 
-use Wsl\CourseManager\Console;
 
 class FileManager
 {
@@ -45,24 +44,10 @@ class FileManager
 
         if (!$created) {
             throw new \Exception(
-                sprintf("Impossible de créer le dossier %s. Véfifier les droits en écriture sur le path. ", $path)
+                sprintf("Impossible de créer le dossier %s. Véfifier les droits en écriture sur le path. ", $abspath)
             );
         }
 
         return $created;
-    }
-
-
-    /**
-     * Retourne la liste des cours existants pour chaque vendor.
-     * Chaque cours est enregistré sous la clef de son vendor.
-     * @return Courses[]
-     */
-    public static function listCoursesByVendor(): array
-    {
-
-        $courses = array();
-
-        return $courses;
     }
 }

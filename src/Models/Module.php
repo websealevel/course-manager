@@ -1,6 +1,7 @@
 <?php
 
-namespace Wsl\CourseManager;
+namespace Wsl\CourseManager\Models;
+
 
 use Wsl\CourseManager\Env;
 use Wsl\CourseManager\FileManager;

@@ -13,5 +13,7 @@
             "email": "contact@websealevel.com"
         }
     ],
-    "require": {}
+    "require": {
+        "symfony/console": "^6.2"
+    }
 }

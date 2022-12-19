@@ -8,23 +8,23 @@
  * @package wsl
  */
 
-require 'vendor/autoload.php';
+// require 'vendor/autoload.php';
 
-use Wsl\CourseManager\Env;
-use Wsl\CourseManager\Course;
-use Wsl\CourseManager\Console;
-use Wsl\CourseManager\FileManager;
+// use Wsl\CourseManager\Env;
+// use Wsl\CourseManager\Course;
+// use Wsl\CourseManager\Console;
+// use Wsl\CourseManager\FileManager;
 
-if ($argc < 3) {
-    Console::print("Nombre d'arguments insuffisants. cm-add-module [vendor] [level] coursename modulename");
-    exit;
-}
+// if ($argc < 3) {
+//     Console::print("Nombre d'arguments insuffisants. cm-add-module [vendor] [level] coursename modulename");
+//     exit;
+// }
 
-$env = Env::create();
+// $env = Env::create();
 
-$courseName = $argv[1];
+// $courseName = $argv[1];
 
-$courses = FileManager::listCoursesByVendor();
+// $courses = FileManager::listCoursesByVendor();
 
 //Rechercher parmi les vendor un cours avec le nom courseName (avec ou sans le niveau)
 //S'il y'en a plusieurs, on ne peut pas discriminer il faut ajouter [vendor].

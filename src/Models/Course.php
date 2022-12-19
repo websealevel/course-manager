@@ -1,6 +1,7 @@
 <?php
 
-namespace Wsl\CourseManager;
+namespace Wsl\CourseManager\Models;
+
 
 use Exception;
 use Wsl\CourseManager\Module;
@@ -23,7 +24,7 @@ class Course
         readonly public string $name,
     ) {
 
-        $this->modules = array( new Module($this->env, 0, 'presentation'));
+        $this->modules = array(new Module($this->env, 0, 'presentation'));
     }
 
     /**
