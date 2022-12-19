@@ -9,8 +9,8 @@ Une application CLI en PHP pour gérer les fichiers de cours, à destination des
   - [Dépendances](#dépendances)
   - [Specs](#specs)
   - [Scripts](#scripts)
-    - [Ajouter un cours `cm-create`](#ajouter-un-cours-cm-create)
-    - [Ajouter un module à un cours existant `cm-add-module`](#ajouter-un-module-à-un-cours-existant-cm-add-module)
+    - [Ajouter un cours `cm add:course`](#ajouter-un-cours-cm-addcourse)
+    - [Ajouter un module à un cours existant `cm add:module`](#ajouter-un-module-à-un-cours-existant-cm-addmodule)
     - [Publier un module (à venir...)](#publier-un-module-à-venir)
     - [Publier un cours (à venir...)](#publier-un-cours-à-venir)
     - [Inspecter les cours (à venir...)](#inspecter-les-cours-à-venir)
@@ -32,14 +32,14 @@ Une application CLI en PHP pour gérer les fichiers de cours, à destination des
 
 ## Installation locale avec Composer
 
-Installer php.
+Installer php (>v8.2.*).
 
 Installer Composer.
 
 Télécharger le [code source](https://github.com/websealevel/course-manager).
 
 ~~~bash
-composer update
+composer install
 ~~~
 
 Créer un fichier `conf.ini` à la racine de votre dossier
@@ -48,7 +48,17 @@ Créer un fichier `conf.ini` à la racine de votre dossier
 path_courses=/chemin/vers/la/ou/vous/voulez/stocker/les/cours
 ~~~
 
-Créer votre premier cours avec [cm-create](#ajouter-un-cours-cm-create).
+Rendre le script `cm` exécutable
+
+~~~
+chmod +x cm
+//Lister toutes les commandes
+./cm
+~~~
+
+Ajouter l'éxecutable sur votre PATH.
+
+Initialiser un votre premier système de gestion de cours avec `cm init`.
 
 ## Installation globale
 
@@ -56,13 +66,13 @@ Créer votre premier cours avec [cm-create](#ajouter-un-cours-cm-create).
 
 ## Dépendances
 
-- php (8.1)
-- marp
-- pandoc
+- PHP (8.2.*)
+- Marp
+- Pandoc
 
 ## Specs
 
-Un dossier `cours` est créé à la création du premier cours et sert de racine au projet. 
+Un dossier `cours` (par défaut) est créé à la création du premier cours et sert de racine au projet. 
 
 À la racine, un fichier `README.md` et `index.html` qui contient la liste de tous les cours et permet de naviguer dans tous les cours au format HTML.
 
@@ -72,16 +82,15 @@ Une présentation est générée par `module` dans le dossier `module/cours`. Ch
 
 Un fichier `index.html` local permet de passer d'une présentation à l'autre facilement. Les exercices, sujets de TP ou d'examen et les autres documents Markdown sont générés en PDF avec pandoc.
 
-Enfin, un dossier `cours/Public`  contient les cours publiés et distribués (fichiers générés au format PDF, HTML, etc. uniquement sans les notes, *aucun fichier source Markdown*). Il reflète la structure de `cours` (même arborescence). Tout le contenu de ce dossier est distribuable (publication).
+Enfin, un dossier `cours/public`  contient les cours publiés et distribués (fichiers générés au format PDF, HTML, etc. uniquement sans les notes, *aucun fichier source Markdown*). Il reflète la structure de `cours` (même arborescence). Tout le contenu de ce dossier est distribuable (cours publié).
 
 ## Scripts
 
-> Les arguments définis entre accolades sont obligatoires, les arguments définis entre crochets sont optionnels.
+> Note sur la syntaxe de la doc (arguments et options de la CLI)
 
-### Ajouter un cours `cm-create`
+### Ajouter un cours `cm add:course`
 
 ~~~bash
-cm-create {vendor} {niveau} {nom du cours}
 ~~~
 
 Crée un dossier `cours/{vendor}/{niveau}-{nom du cours}` avec le contenu par défaut suivant
@@ -99,7 +108,7 @@ cm-create etablissement1 l2 php
 
 crée le cours `l2-php` dans le dossier `cours/etablissement1`. Le dossier `l2-php` contient un dossier de biblio et un module de présentation par défaut `module-00-presentation` contenant une présentation en Markdown initialisée.
 
-### Ajouter un module à un cours existant `cm-add-module`
+### Ajouter un module à un cours existant `cm add:module`
 
 ~~~
 cm-add-module [vendor] [niveau] {coursename} {modulename}
@@ -108,7 +117,6 @@ cm-add-module [vendor] [niveau] {coursename} {modulename}
 Ajoute un module `modulename` au cours `coursename`. Son numéro est défini comme le dernier module + 1. Par exemple
 
 ~~~bash
-cm-add-module php tableaux
 ~~~
 
 Ajoute le module `module-01-tableaux` au cours `etablissement1/l2-php`. Comme il n'y a pas d'ambiguïté sur le cours, il n'est pas utile de préciser le `niveau` ni le `vendor`. L'identifiant du module est 1 car le seul module présent est le module de présentation ayant pour identifiant 0. 
@@ -123,6 +131,9 @@ Ajoute le module `module-01-tableaux` au cours `etablissement1/l2-php`. Comme il
 
 
 - script `course-export {nom du cours} {opt nom du module}`: génère les fichiers HTML et PDF du cours et fais une copie dans le dossier `Public` et Privé (presentation avec notes). Met à jour l'index.html local au cours et l'index.html global. -->
+
+
+
 
 ## Génération des présentations avec [marp](https://marp.app)
 
