@@ -8,8 +8,11 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+
+use Wsl\CourseManager\Config;
 use Wsl\CourseManager\Services\FileManager;
 use Wsl\CourseManager\Services\Formatter;
+use Wsl\CourseManager\Models\Course;
 
 class CreateCourseCommand extends Command
 {
@@ -29,24 +32,30 @@ class CreateCourseCommand extends Command
 
         $levels = $input->getOption('level');
 
-        var_dump(array(
-            $courseName, $vendorName, $keywords, $levels
-        ));
+        // var_dump(array(
+        //     $courseName, $vendorName, $keywords, $levels
+        // ));
 
         //Check que vendorName/courseName n'existe pas déjà, sinon renvoyer une erreur.
 
-        $dirName = Formatter::pathOfCourse($courseName, $vendorName);
+        $abs = Config::absPathToCurrentProject();
 
-        if (FileManager::dirExists($dirName)) {
+        $course = new Course(
+            $courseName,
+            $abs,
+            $vendorName,
+            $levels,
+            $keywords
+        );
+
+        if (FileManager::dirExists($course->path())) {
             $output->writeln(
-                sprintf("Le cours %s existe déjà.", $dirName)
+                sprintf("Le cours %s existe déjà.", $course->path())
             );
             return COMMAND::FAILURE;
         }
 
-        //Creer le dossier 
-
-        FileManager::createDirectory($dirName);
+        // $success = FileManager::createDirectory($course->path());
 
         //Initialiser le contenu par défaut (dont les métadonnées)
 
