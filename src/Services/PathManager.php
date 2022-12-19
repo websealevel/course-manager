@@ -7,8 +7,7 @@ use Exception;
 
 /**
  * Cette classe n'a que la responsabilité de lire le path de la racine
- * du projet et de retourner les chemins absolus ou relatifs. Elle devrait s'appeler path.
- * Elle lit également le fichier de config et test si le sapi de php est bien CLI.
+ * du projet et de retourner les chemins absolus ou relatifs. 
  */
 
 class PathManager
@@ -19,10 +18,6 @@ class PathManager
         readonly public array $variables
     ) {
     }
-
-
-
-
 
     /**
      * Retourne le path absolu de la racine du projet (avec trailing slash)

@@ -22,7 +22,7 @@ class Config
      * Le nom du fichier de configuration local à un projet
      * @var string
      */
-    public const LOCAL_CONFIG_FILE = 'conf.ini';
+    public const LOCAL_CONFIG_FILE = 'config.ini';
 
     public const DEFAULT_ROOT_DIR = 'courses';
 
@@ -36,7 +36,7 @@ class Config
     /**
      * Retourne les variables d'environnement avec validation préalable
      * @throws Exception - Si PHP n'est pas executé en mode (SAPI) 'cli'
-     * @return Env
+     * @return Config
      */
     public static function create(): Config
     {
@@ -196,16 +196,15 @@ class Config
     }
 
     /**
-     * Action: supprime toutes les entrées du projet pointé dans le fichier de configuration global
-     * s'il existe. Si le projet est pointé par MAIN, le projet précédent est déclaré comme MAIN
-     * à la place. Si pas d'autres projets enregistrés, on supprime le fichier de configuration.
+     * Action: supprime toutes les entrées du projet du fichier de configuration global
+     * s'il existe. Si le projet a retiré est le projet MAIN, le projet précédent est déclaré comme MAIN
+     * à la place. Si aucun autre projet enregistré n'existe, le fichier de configuration global est supprimé.
      */
     public static function removeFromConfigFile(string $absPathToRootDir): bool
     {
         //Lire le fichier de config
         $parsed = FileManager::parseIniFile(static::absPathOfGlobalConfigFile());
 
-        //Retirer toutes les occurences de $absPathToRootDir
         if (!is_array($parsed))
             return false;
 
@@ -263,5 +262,40 @@ class Config
                 'PROJECTS',
                 array_keys($values)
             );
+    }
+
+
+    /**
+     * Retourne vrai si le dossier courant est un repertoire de gestion de cours
+     * manipuable par le programme, faux sinon
+     * @return bool
+     */
+    public static function isThereALocalConfigurationFileInTheCurrentDirectory(): bool
+    {
+        $absPathToLocalConfigurationFile = sprintf("%s/%s", getcwd(), Config::LOCAL_CONFIG_FILE);
+
+        $localConfigurationFile = FileManager::fileExists($absPathToLocalConfigurationFile);
+
+        //Rajouter une clef dans le fichier pour le distinguer d'autres fichiers config.ini qui pourraient s'y trouver.
+
+        return $localConfigurationFile;
+    }
+
+
+    /**
+     * Retourne le projet courant défini dans la configuration globale (sous la clef MAIN)
+     * @return string
+     */
+    public static function getCurrentProjectDefinedInGlobalConfiguration(): string
+    {
+
+        if (!static::globalConfigFileIsInitialized()) {
+            throw new \Exception("Le fichier de configuration global n'a pas une syntaxe correcte. 
+            Impossible de l'analyser. Veuillez vérifier sa syntaxe.");
+        }
+
+        $values = FileManager::parseIniFile(static::absPathOfGlobalConfigFile());
+
+        return $values['MAIN'];
     }
 }

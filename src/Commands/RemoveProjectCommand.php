@@ -33,5 +33,7 @@ class RemoveProjectCommand extends Command
     {
         $this
             ->addArgument('root_dir', InputArgument::REQUIRED, 'The name of the root course you want to remove.');
+
+        //Ajouter une option --force qui ne demande pas la confirmation
     }
 }

@@ -10,14 +10,6 @@ Une application CLI, [basée sur le composant Console de Symfony](https://symfon
   - [Philosophie](#philosophie)
   - [Guide de démarrage](#guide-de-démarrage)
   - [Liste des commandes principales](#liste-des-commandes-principales)
-    - [Créer un nouveau projet de gestion de cours `add:project`](#créer-un-nouveau-projet-de-gestion-de-cours-addproject)
-    - [Ajouter un nouveau cours au système courant `add:course`](#ajouter-un-nouveau-cours-au-système-courant-addcourse)
-    - [Ajouter un module à un cours existant `cm add:module`](#ajouter-un-module-à-un-cours-existant-cm-addmodule)
-    - [Publier un module (à venir...)](#publier-un-module-à-venir)
-    - [Publier un cours (à venir...)](#publier-un-cours-à-venir)
-      - [Contenus de type *présentation*: format HTML et PDF](#contenus-de-type-présentation-format-html-et-pdf)
-      - [Contenus de type *document*: format HTML et PDF](#contenus-de-type-document-format-html-et-pdf)
-    - [Inspecter les cours du système courant (à venir...)](#inspecter-les-cours-du-système-courant-à-venir)
   - [Manuel général d'outils en ligne de commande: arguments, options et syntaxe utilisée dans la doc](#manuel-général-doutils-en-ligne-de-commande-arguments-options-et-syntaxe-utilisée-dans-la-doc)
     - [Argument d'une commande](#argument-dune-commande)
     - [Options d'une commande](#options-dune-commande)
@@ -145,13 +137,15 @@ cm add:course foo course-manager
 cm add:course foo course-manager --level=L1,L2
 ~~~
 
+> Le `vendor` est un paramètre *optionnel*. Si vous ne renseigner pas de vendor, le cours sera enregistré dans le vendor global. Par exemple, cm add:course course-manager créera le cours `course-manager` et celui-ci ne sera rattaché à aucun vendor en particulier.
+
 > Vous pouvez également ajouter un niveau du cours avec l'option `--level`. Par exemple `--level=L1` ou `--level=M1,M2`.
 
 ## Liste des commandes principales
 
 > Pour obtenir la liste des commandes disponibles `cm list`. Pour obtenir des informations sur chaque commande (description, arguments, options) `cm <nom de la commande> --help` ou `cm <nom de la commande> -h`.
 
-### Créer un nouveau projet de gestion de cours `add:project` 
+<!-- ### Créer un nouveau projet de gestion de cours `add:project` 
 
 ~~~bash
 cm add:project <nom du système de gestion de cours>
@@ -161,7 +155,7 @@ cm add:project <nom du système de gestion de cours>
 
 ~~~bash
 cm add:course <vendor> <niveau> <nom du cours>
-~~~
+~~~ -->
 
 <!-- ~~~bash
 ~~~
@@ -181,7 +175,7 @@ cm-create etablissement1 l2 php
 
 <!-- crée le cours `l2-php` dans le dossier `cours/etablissement1`. Le dossier `l2-php` contient un dossier de biblio et un module de présentation par défaut `module-00-presentation` contenant une présentation en Markdown initialisée. -->
 
-### Ajouter un module à un cours existant `cm add:module`
+<!-- ### Ajouter un module à un cours existant `cm add:module` -->
 
 <!-- ~~~
 cm-add-module [vendor] [niveau] {coursename} {modulename}
@@ -194,7 +188,7 @@ Ajoute un module `modulename` au cours `coursename`. Son numéro est défini com
 
 Ajoute le module `module-01-tableaux` au cours `etablissement1/l2-php`. Comme il n'y a pas d'ambiguïté sur le cours, il n'est pas utile de préciser le `niveau` ni le `vendor`. L'identifiant du module est 1 car le seul module présent est le module de présentation ayant pour identifiant 0.  -->
 
-### Publier un module (à venir...)
+<!-- ### Publier un module (à venir...)
 
 ### Publier un cours (à venir...)
 
@@ -204,7 +198,7 @@ Publier un cours revient à publier l'intégralité de ses modules.
 
 #### Contenus de type *document*: format HTML et PDF
 
-### Inspecter les cours du système courant (à venir...)
+### Inspecter les cours du système courant (à venir...) -->
 
 <!-- - script `course-ls {nom du cours}`: liste le contenu du cours (modules présents)
 
