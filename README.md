@@ -13,8 +13,8 @@ Une application CLI, [basée sur le composant Console de Symfony](https://symfon
     - [Options d'une commande](#options-dune-commande)
   - [Guide de démarrage](#guide-de-démarrage)
   - [Liste des commandes](#liste-des-commandes)
-    - [Initialiser un nouveau projet de gestion de cours : `cm init`](#initialiser-un-nouveau-projet-de-gestion-de-cours--cm-init)
-    - [Ajouter un cours `cm add:course`](#ajouter-un-cours-cm-addcourse)
+    - [Initialiser un nouveau projet de gestion de cours : `cm create <nom du système de gestion de cours>`](#initialiser-un-nouveau-projet-de-gestion-de-cours--cm-create-nom-du-système-de-gestion-de-cours)
+    - [Ajouter un cours `cm add:course <vendor> <niveau> <nom du cours>`](#ajouter-un-cours-cm-addcourse-vendor-niveau-nom-du-cours)
     - [Ajouter un module à un cours existant `cm add:module`](#ajouter-un-module-à-un-cours-existant-cm-addmodule)
     - [(Re)Publier un module (à venir...)](#republier-un-module-à-venir)
     - [(Re)Publier un cours (à venir...)](#republier-un-cours-à-venir)
@@ -141,7 +141,7 @@ Une option **est par définition optionnelle**. Elle a un nom et peut être plac
 Créer un nouveau projet de gestion de cours 
 
 ~~~bash
-cm init mes-cours
+cm create mes-cours
 ~~~
 
 > Lors de votre première création de projet, course-manager crée un fichier de configuration global dans votre répertoire home (`$HOME/.create-manager`). Ce fichier de configuration globale défini le projet de gestion de cours principal (`MAIN`) qui est utilisé si vous n'êtes pas placé à la racine d'un projet lors de l'utilisation de `create-manager`.
@@ -162,9 +162,9 @@ Pour obtenir la liste des commandes disponibles `cm list`.
 
 Pour obtenir des informations sur chaque commande (description, arguments, options) `cm <nom de la commande> --help` ou `cm <nom de la commande> -h`.
 
-### Initialiser un nouveau projet de gestion de cours : `cm init`
+### Initialiser un nouveau projet de gestion de cours : `cm create <nom du système de gestion de cours>`
 
-### Ajouter un cours `cm add:course`
+### Ajouter un cours `cm add:course <vendor> <niveau> <nom du cours>`
 
 <!-- ~~~bash
 ~~~
