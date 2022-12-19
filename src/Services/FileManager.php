@@ -12,10 +12,13 @@ namespace Wsl\CourseManager\Services;
 class FileManager
 {
 
-    public const HOME_CONFIG_FILE = '.create-manager';
-
-    public const DEFAULT_ROOT_DIR = 'cours';
-
+    /**
+     * Nom du fichier de configuration global du programme. Maintient la liste des tous les projets de gestion de cours,
+     * et un pointeur MAIN sur le projet courant.
+     * @var string
+     */
+    public const HOME_CONFIG_FILE = '.course-manager';
+    public const DEFAULT_ROOT_DIR = 'courses';
 
     /**
      * Retourne le path absolu du dossier home/user
@@ -30,21 +33,34 @@ class FileManager
     /**
      * Action: Crée un fichier de configuration .create-manager dans le répertoire home de l'utilisateur courant
      * s'il n'existe pas déjà
-     * @param string $content Le contenu du fichier de configuration
+     * @param string $absPathToRootDir Le chemin absolu (et l'identifiant) du nouveau projet.
      * @throws Exception - Si impossible de créer le fichier de configuration s'il n'existe pas déjà.
      */
-    public static function createHomeConfigFile(string $content): void
+    public static function createHomeConfigFile(string $absPathToRootDir): void
     {
         $pathHome = static::getHomeDirOfUser();
 
         $absPathConfigHome = sprintf("%s/%s", $pathHome, FileManager::HOME_CONFIG_FILE);
 
-        //S'il existe déjà on ne fait rien
+        //S'il existe déjà on ajoute le projet à la liste des projets maintenus
+        if (FileManager::fileExists($absPathConfigHome)) {
 
-        if (FileManager::fileExists($absPathConfigHome))
+            //Recuperer la valeur sous la clefs PROJECTS
+
+            //Ajouter le path aux paths existants
+
             return;
+        }
 
-        $success = static::createFile($absPathConfigHome, $content);
+        //Sinon, on crée le fichier de config global, et on met le pointeur MAIN sur le projet courant
+        $success = static::createFile(
+            $absPathConfigHome,
+            sprintf(
+                "MAIN=%s\nPROJECTS=%s",
+                $absPathToRootDir,
+                $absPathToRootDir
+            )
+        );
 
         if (!$success)
             throw new \Exception("Impossible de créer le fichier de configuration %s.", $absPathConfigHome);
@@ -76,8 +92,18 @@ class FileManager
         return file_exists($absPathToFile);
     }
 
-    public static function absPathToRootDir()
+    /**
+     * Retourne le chemin absolu du repertoire racine du projet
+     * @return string
+     */
+    public static function absPathToRootDir(): string
     {
+
+        //Si dans un projet de create-manager (présence d'un fichier config.ini avec une clef course-manager pour
+        //le distinguer d'autres éventuels fichier .ini) alors le rootDir est le dossier courant.
+        //Sinon, récuperer le projet MAIN défini dans le fichier de configuration global
+
+        return '';
     }
 
     /**
@@ -85,6 +111,7 @@ class FileManager
      * @param string $abspath Le path absolu du fichier à créée
      * @param string $content . Optionnel. Le contenu du fichier à écrire.
      * @return bool
+     * @throws Exception - Si impossible d'ouvrir le fichier en écriture, impossible d'écrire dans le fichier.
      */
     public static function createFile(string $abspath, string $content = ''): bool
     {
@@ -92,7 +119,15 @@ class FileManager
             $abspath,
             'w'
         );
-        fwrite($file, $content);
+
+        if (!$file) {
+            throw new \Exception("Impossible d'ouvrir le fichier %s", $abspath);
+        }
+
+        if (!fwrite($file, $content)) {
+            throw new \Exception("Impossible d'écrire dans le fichier %s", $abspath);
+        }
+
         return fclose($file);
     }
 
@@ -136,5 +171,35 @@ class FileManager
         }
 
         return $created;
+    }
+
+    /**
+     * Action: crée un ensemble de dossiers
+     * @param string[] Des paths de dossiers à créer
+     * @return bool Retourne vrai si tous les dossiers ont été crées avec succès
+     * @throws Exception - @see createDirectory
+     */
+    public static function createDirectories(array $dirs): bool
+    {
+        foreach ($dirs as $dir) {
+            static::createDirectory($dir);
+        }
+
+        return true;
+    }
+
+    /**
+     * Action: crée un ensemble de fichiers
+     * @param string[] Des paths de fichiers à créer
+     * @return bool Retourne vrai si tous les fichiers ont été crées avec succès
+     * @throws Exception - @see createFile
+     */
+    public static function createFiles(array $files): bool
+    {
+        foreach ($files as $file) {
+            static::createFile($file);
+        }
+
+        return true;
     }
 }
