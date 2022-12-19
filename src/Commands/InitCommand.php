@@ -15,12 +15,11 @@ class InitCommand extends Command
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
+        //Initialisation d'un nouveau système de gestion de cours
 
-        //Récuperer de l'input: vendor, level et name
-
-        // $cours = new Course(Config::create(),);
-        //Initialisation du contenu du dossier du cours
-        // $course->createCourseDirectory();
+        //Creer le dossier racine
+        //Creer les dossiers sources, templates, public
+        //Creer les fichiers index.html, .env
 
         return COMMAND::SUCCESS;
     }
