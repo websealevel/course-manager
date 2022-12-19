@@ -131,6 +131,29 @@ class FileManager
         return fclose($file);
     }
 
+
+    /**
+     * Action: supprime le fichier sur le path $abspath. Retourne vrai si la suppression
+     * a eu lieu, faux sinon.
+     * @param $abspath Le path du fichier à supprimer
+     * @return bool
+     */
+    public static function removeFile(string $abspath): bool
+    {
+        return unlink($abspath);
+    }
+
+    /**
+     * Action: supprime le dossier sur le path $abspath. Retourne vrai si la suppression
+     * a eu lieu, faux sinon.
+     * @param $abspath Le path du fichier à supprimer
+     * @return bool
+     */
+    public static function removeDir(string $abspath): bool
+    {
+        return rmdir($abspath);
+    }
+
     /**
      * Action: crée le repertoire racine du projet de gestion de cours. Retourne
      * vrai si la création du répertoire a réussi, faux sinon
