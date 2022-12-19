@@ -38,7 +38,6 @@ class CreateProjectCommand extends Command
             ]);
         }
 
-        //Initialiser le fichier de configuration global dans le repertoire $HOME/.course-manager
         try {
             Config::registerProject($absPathOfRootDir);
         } catch (\Exception $e) {
@@ -53,6 +52,7 @@ class CreateProjectCommand extends Command
             return COMMAND::FAILURE;
         }
 
+        //A deplacer dans la classe Config.
 
         //Peupler le projet avec la structure de dossiers/fichiers par défaut.
 
@@ -64,15 +64,11 @@ class CreateProjectCommand extends Command
             return sprintf("%s/%s", $absPathOfRootDir, $dir);
         }, $dirs);
 
-        $absPathFiles = array_map(function ($file) use ($absPathOfRootDir) {
-            return sprintf("%s/%s", $absPathOfRootDir, $file);
-        }, $files);
-
         try {
             //Creer les dossiers sources, templates, public
             FileManager::createDirectories($absPathDirs);
             //Creer les fichiers index.html, config.ini
-            FileManager::createFiles($absPathFiles);
+            FileManager::createFiles($absPathOfRootDir, $files);
         } catch (\Exception $e) {
             $output->writeln([
                 $e->getMessage(),
