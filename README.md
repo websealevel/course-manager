@@ -13,10 +13,6 @@ Une application CLI, [basée sur le composant Console de Symfony](https://symfon
   - [Manuel général des outils CLI: arguments, options et syntaxe utilisée dans la documentation](#manuel-général-des-outils-cli-arguments-options-et-syntaxe-utilisée-dans-la-documentation)
     - [Argument d'une commande](#argument-dune-commande)
     - [Options d'une commande](#options-dune-commande)
-  - [Sous le capôt: génération des documents au format HTML ou PDF avec marp et pandoc](#sous-le-capôt-génération-des-documents-au-format-html-ou-pdf-avec-marp-et-pandoc)
-    - [Générer un fichier HTML+CSS à partir d'un fichier Markdown (avec `marp`)](#générer-un-fichier-htmlcss-à-partir-dun-fichier-markdown-avec-marp)
-    - [Générer la présentation au format PDF à partir d'un fichier Markdown (avec `marp`)](#générer-la-présentation-au-format-pdf-à-partir-dun-fichier-markdown-avec-marp)
-    - [Générer un PDF à partir du Markdown en passant par HTML/CSS (avec `pandoc`)](#générer-un-pdf-à-partir-du-markdown-en-passant-par-htmlcss-avec-pandoc)
   - [Ressources](#ressources)
 
 ## Dépendances tierces
@@ -252,7 +248,7 @@ Une option **est par définition optionnelle**. Elle a un nom et peut être plac
 Les options ont également un *alias*, un nom plus court. Un alias est préfixé par un dash `-`. Par exemple, `cm add:project --help` est équivalent à `cm add:project -h`; `-h` est l'alias de `--help`. Si l'option prend une valeur, on la passera comme suit: `--option=foo`, ou en version abrégée `-ofoo` (en supposant ici que l'*alias* de `option` est `o`).
 
 
-## Sous le capôt: génération des documents au format HTML ou PDF avec marp et pandoc
+<!-- ## Sous le capôt: génération des documents au format HTML ou PDF avec marp et pandoc
 
 ### Générer un fichier HTML+CSS à partir d'un fichier Markdown (avec `marp`)
 
@@ -269,7 +265,7 @@ marp --pdf --allow-local-files {file.md}
 ### Générer un PDF à partir du Markdown en passant par HTML/CSS (avec `pandoc`)
 
 ~~~
-pandoc {file.md} -t html5 -o {file.pdf} --css style.css --pdf-engine-opt=--enable-local-file-access
+pandoc {file.md} -t html5 -o {file.pdf} --css style.css --pdf-engine-opt=--enable-local-file-access -->
 ~~~
 
 ## Ressources
@@ -282,4 +278,5 @@ pandoc {file.md} -t html5 -o {file.pdf} --css style.css --pdf-engine-opt=--enabl
 - [Console Commands](https://symfony.com/doc/current/console.html)
 - [Commands Lifecycle](https://symfony.com/doc/current/console.html#command-lifecycle)
 - [Console Input (Arguments & Options)](https://symfony.com/doc/current/console/input.html)
-- [Learn more](https://symfony.com/doc/current/components/console.html#learn-more)
+- [Learn more](https://symfony.com/doc/current/components/console.html#learn-more)$
+- [PhpDocumentor (installation)](https://docs.phpdoc.org/3.0/guide/getting-started/installing.html#system-requirements)
