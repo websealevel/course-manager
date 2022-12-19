@@ -24,19 +24,7 @@ class FileManager
         return $home;
     }
 
-    /**
-     * Action: supprime toutes les entrées du projet pointé dans le fichier de configuration global
-     * s'il existe. Si le projet est pointé par MAIN, le projet précédent est déclaré comme MAIN
-     * à la place. Sinon MAIN est vide.
-     */
-    public static function removeFromConfigFile(string $absPathToRootDir): void
-    {
-        //Lire le fichier de config
 
-        //Retirer toutes les occurences de $absPathToRootDir
-
-        //Replacer MAIN sur l'avant dernier projet dans la liste PROJETS, sinon le mettre à vide.
-    }
 
 
 
@@ -47,7 +35,7 @@ class FileManager
      */
     public static function parseIniFile(string $absPathIniFile): array|false
     {
-        $size= filesize($absPathIniFile);
+        $size = filesize($absPathIniFile);
 
         $result = parse_ini_file($absPathIniFile);
 

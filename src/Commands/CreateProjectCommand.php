@@ -42,7 +42,6 @@ class CreateProjectCommand extends Command
         //Initialiser le fichier de configuration global dans le repertoire $HOME/.course-manager
         try {
             Config::registerProject($absPathOfRootDir);
-
         } catch (\Exception $e) {
 
             //Rollback: supprimer le dossier $rootDir
@@ -82,7 +81,8 @@ class CreateProjectCommand extends Command
 
             //Rollback: suppresion du $rootDir et du projet dans le fichier de configuration global
             FileManager::removeDir($rootDir);
-            FileManager::removeFromConfigFile($rootDir);
+            //Rollback à tester
+            Config::removeFromConfigFile($rootDir);
 
             return COMMAND::FAILURE;
         }
