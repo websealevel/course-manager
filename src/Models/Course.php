@@ -22,12 +22,19 @@ class Course extends AbstractNode
         readonly public string $keyWords,
     ) {
 
-        $this->modules = array(new Module($this->absPathRootDirectory, 0, 'presentation'));
+        //Initialisation des modules par défaut
+        $this->modules = array(new Module($this->absPath(), 0, 'presentation'));
+    }
+
+
+    protected function hookAfterBuilding()
+    {
+        //Création des modules par défaut.
     }
 
     public function getAbsPathOfParentDirectory(): string
     {
-        return $this->absPathRootDirectory;
+        return sprintf("%s/%s", $this->absPathRootDirectory, $this->path());
     }
 
     public function getDefaultDirectories(): array
@@ -59,15 +66,21 @@ class Course extends AbstractNode
      */
     public function fullName(): string
     {
+        if (empty($this->vendor))
+            return sprintf("%s", strtolower($this->name));
+
         return sprintf("%s/%s", strtolower($this->vendor), strtolower($this->name));
     }
 
     /**
-     * Retourne le chemin relatif du cours
+     * Retourne le chemin relatif du cours par rapport au projet courant
      * @return string
      */
     public function path(): string
     {
+        if (empty($this->vendor))
+            return sprintf("%s", strtolower($this->name));
+
         return sprintf("%s/%s", strtolower($this->vendor), strtolower($this->name));
     }
 
