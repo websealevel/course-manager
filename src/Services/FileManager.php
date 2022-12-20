@@ -120,7 +120,7 @@ class FileManager
      */
     public static function recursiveRmDir($abspath): bool
     {
-        $files = glob($abspath . '/*', GLOB_MARK);
+        $files = glob($abspath . '/{,.metadata}*', GLOB_BRACE);
 
         foreach ($files as $file) {
             if (is_dir($file))
