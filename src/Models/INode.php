@@ -13,7 +13,7 @@ interface INode
      * Retourne le chemin absolu du repertoire dans lequel le noeud existe
      * @return string
      */
-    public function getAbsPathOfRootDirectory(): string;
+    public function getAbsPathOfParentDirectory(): string;
 
     /**
      * Retourne la liste des repertoires par défaut dans le noeud

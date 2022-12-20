@@ -16,22 +16,23 @@ abstract class AbstractNode implements INode
 
     /**
      * Action: crée les dossiers et les fichiers par défaut du Noeud.
+     * @param string $label Un label qui décrit ce que l'on build
      * @return void
      * @throws Exception
      */
-    private function build(): void
+    private function build($label): void
     {
 
         //Création des dossiers par défaut
         foreach ($this->getDefaultDirectories() as $dir) {
             //Possibilité de recursion ici avec le Model Directory.
-            $absPath = sprintf("%s/%s", $this->getAbsPathOfRootDirectory(), $dir->name);
-            FileManager::createDirectory($absPath);
+            $absPath = sprintf("%s/%s", $this->getAbsPathOfParentDirectory(), $dir->name);
+            FileManager::createDirectory($absPath, $label);
         }
 
         //Création des fichiers par défaut
         foreach ($this->getDefaultFiles() as $file) {
-            $absPath =  sprintf("%s/%s", $this->getAbsPathOfRootDirectory(), $file->name);
+            $absPath =  sprintf("%s/%s", $this->getAbsPathOfParentDirectory(), $file->name);
             FileManager::createFile($absPath, $file->content);
         }
     }
@@ -54,10 +55,10 @@ abstract class AbstractNode implements INode
      * Action: Execution du build (création des fichiers et des dossiers) et des hooks
      * @throws Exception
      */
-    public function create()
+    public function create($label = 'directory')
     {
         $this->hookBeforeBuilding();
-        $this->build();
+        $this->build($label);
         $this->hookAfterBuilding();
     }
 }

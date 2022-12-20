@@ -18,7 +18,7 @@ class Project extends AbstractNode
     ) {
     }
 
-    public function getAbsPathOfRootDirectory(): string
+    public function getAbsPathOfParentDirectory(): string
     {
         return $this->absPath;
     }

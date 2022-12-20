@@ -25,7 +25,7 @@ class Course extends AbstractNode
         $this->modules = array(new Module($this->absPathRootDirectory, 0, 'presentation'));
     }
 
-    public function getAbsPathOfRootDirectory(): string
+    public function getAbsPathOfParentDirectory(): string
     {
         return $this->absPathRootDirectory;
     }
@@ -43,7 +43,7 @@ class Course extends AbstractNode
         $metaDataContent = <<< INI
         name={$this->name}
         level={$this->level}
-        keywords={$this->keywords}
+        keywords={$this->keyWords}
         INI;
 
         return array(
