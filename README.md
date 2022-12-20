@@ -13,6 +13,7 @@ Une application CLI, [basée sur le composant Console de Symfony](https://symfon
   - [Manuel général des outils CLI: arguments, options et syntaxe utilisée dans la documentation](#manuel-général-des-outils-cli-arguments-options-et-syntaxe-utilisée-dans-la-documentation)
     - [Argument d'une commande](#argument-dune-commande)
     - [Options d'une commande](#options-dune-commande)
+  - [Backlog (idées de commandes à ajouter)](#backlog-idées-de-commandes-à-ajouter)
   - [Ressources](#ressources)
     - [Utilisateur·rice](#utilisateurrice)
     - [Développeur·se](#développeurse)
@@ -210,18 +211,8 @@ Publier un cours revient à publier l'intégralité de ses modules.
 
 ### Inspecter les cours du système courant (à venir...) -->
 
-<!-- - script `course-ls {nom du cours}`: liste le contenu du cours (modules présents)
-
-- script `course-export {nom du cours} {opt nom du module}`: génère les fichiers HTML et PDF du cours et fais une copie dans le dossier `Public` et Privé (presentation avec notes). Met à jour l'index.html local au cours et l'index.html global. -->
 
 
-<!-- 
-
-idée de commandes à rajouter:
-
-- dans le config.ini ajouter un éditeur par défaut pour ouvrir le dossier d'un cours ou d'un module (par exemple vscode). Ensuite utiliser open:course <nom_du_cours> et il ouvrira le dossier du cours avec l'éditeur défini.
-- filtrer les cours par niveau, sujets
--->
 
 ## Manuel général des outils CLI: arguments, options et syntaxe utilisée dans la documentation
 
@@ -265,6 +256,16 @@ marp --pdf --allow-local-files {file.md}
 ~~~
 pandoc {file.md} -t html5 -o {file.pdf} --css style.css --pdf-engine-opt=--enable-local-file-access -->
 <!-- ~~~ -->
+
+## Backlog (idées de commandes à ajouter)
+
+- dans le `config.ini` ajouter un éditeur par défaut pour ouvrir le dossier d'un cours ou d'un module (par exemple vscode, emacs, vim, etc.). Ensuite utiliser `open:course <nom_du_cours>` et il ouvrira le dossier du cours avec l'éditeur défini.
+- filtrer les cours par niveau, sujets
+- ajouter une option à `add:course --prompt` pour proposer de guider l'utilisateur dans la création de cours:
+  - vendor
+  - liste de modules à ajouter des le debut
+- ajouter une commande qui installer un projet demo avec un cours demo sur course-manager
+- ajouter une commande pour publier sur un repo distant le contenu de sources et le contenu de public (possiblement séparés)
 
 ## Ressources
 
