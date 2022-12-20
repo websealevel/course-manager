@@ -10,7 +10,8 @@ class Directory
     public function __construct(
         public readonly string $name,
         public readonly array $directories = array(),
-        public readonly array $files = array()
+        public readonly array $files = array(),
+        public readonly string $description = ''
     ) {
     }
 
