@@ -168,14 +168,15 @@ class FileManager
      * @throws Exception Si impossible de créer le dossier à cause des droits d'écriture, si le dossier existe déjà.
      * @return bool
      */
-    public static function createDirectory(string $path): bool
+    public static function createDirectory(string $path, string $label = 'projet'): bool
     {
 
         if (is_dir($path)) {
             throw new \Exception(
                 sprintf(
-                    "Le projet <%s> existe déjà sur la machine.",
-                    $path
+                    "Le %s <%s> existe déjà sur la machine.",
+                    $label,
+                    $path,
                 ),
                 FileManager::CODE_DIR_ALREADY_EXISTS
             );
