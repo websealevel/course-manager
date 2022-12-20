@@ -23,13 +23,16 @@ class Course extends AbstractNode
     ) {
 
         //Initialisation des modules par défaut
-        $this->modules = array(new Module($this->absPath(), 0, 'presentation'));
+        $this->modules = array(new Module($this, 0, 'presentation'));
     }
 
 
     protected function hookAfterBuilding()
     {
         //Création des modules par défaut.
+        foreach($this->modules as $module){
+
+        }
     }
 
     public function getAbsPathOfParentDirectory(): string
