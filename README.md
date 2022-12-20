@@ -14,6 +14,7 @@ Une application CLI, [basée sur le composant Console de Symfony](https://symfon
     - [Argument d'une commande](#argument-dune-commande)
     - [Options d'une commande](#options-dune-commande)
   - [Backlog (idées de commandes à ajouter)](#backlog-idées-de-commandes-à-ajouter)
+  - [phpDocumentor](#phpdocumentor)
   - [Ressources](#ressources)
     - [Utilisateur·rice](#utilisateurrice)
     - [Développeur·se](#développeurse)
@@ -267,6 +268,17 @@ pandoc {file.md} -t html5 -o {file.pdf} --css style.css --pdf-engine-opt=--enabl
 - ajouter une commande qui installer un projet demo avec un cours demo sur course-manager
 - ajouter une commande pour publier sur un repo distant le contenu de sources et le contenu de public (possiblement séparés)
 - ajouter des abstractions Abstract Factory pour laisser l'utilisateur implementer ses projets, modules et cours (dossiers et fichiers par défaut, structure personnalisée)
+
+## phpDocumentor
+
+La documentation du code est générée par [phpDocumentor](https://docs.phpdoc.org/3.0/) et se trouve dans le dossier `docs`. Elle est [consultable dans le navigateur depuis ce fichier](./docs/index.html).
+
+Regénérer la documentation du projet à partir des sources
+
+~~~
+#installer docker pour pouvoir générér la documentation de cette manière
+docker run --rm -v "$(pwd):/data" "phpdoc/phpdoc:3" run -dsrc -tdocs
+~~~
 
 
 ## Ressources
