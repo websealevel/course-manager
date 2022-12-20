@@ -9,6 +9,10 @@ Une application CLI, [basée sur le composant Console de Symfony](https://symfon
   - [Mettre à jour `course-manager`](#mettre-à-jour-course-manager)
   - [Philosophie](#philosophie)
   - [Guide de démarrage](#guide-de-démarrage)
+    - [Créer un nouveau projet](#créer-un-nouveau-projet)
+    - [Ajouter un nouveau cours](#ajouter-un-nouveau-cours)
+    - [Ajouter un nouveau module à un cours](#ajouter-un-nouveau-module-à-un-cours)
+    - [Publier un cours](#publier-un-cours)
   - [Liste des commandes disponibles](#liste-des-commandes-disponibles)
   - [Manuel général des outils CLI: arguments, options et syntaxe utilisée dans la documentation](#manuel-général-des-outils-cli-arguments-options-et-syntaxe-utilisée-dans-la-documentation)
     - [Argument d'une commande](#argument-dune-commande)
@@ -105,6 +109,8 @@ public/
 
 ## Guide de démarrage
 
+### Créer un nouveau projet
+
 Créer un nouveau projet de gestion de cours 
 
 ~~~bash
@@ -117,6 +123,8 @@ cm add:project mes-cours
 Si c'est votre premier projet alors, par défaut, `mes-cours` est votre projet *courant*, inutile donc de vous y déplacer pour l'administrer.
 
 > Le projet *courant* est défini sous la clé `MAIN` dans le fichier de configuration global (voir $HOME/.create-manager). Vous pouvez changer de projet courant avec la commande `change:current-project` ou en vous rendant directement dans le repértoire d'un autre projet. 
+
+### Ajouter un nouveau cours
 
 Créer un nouveau cours sur le programme `course-manager`, pour le présenter à des apprenant·es de l'établissement `mon-ecole`
 
@@ -139,6 +147,13 @@ Par défaut, le programme vous crée un dossier `mon-ecole/course-manager` conte
  - `index.html`: permet de naviguer dans le cours au format HTML.
  - `.metadata`: un fichier caché contenant des métadonnées sur le cours. Généré automatiquement. Permet de filtrer les cours via le programme.
 
+### Ajouter un nouveau module à un cours
+
+A venir...
+
+### Publier un cours
+
+A venir...
 
 ## Liste des commandes disponibles
 
