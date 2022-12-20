@@ -261,6 +261,8 @@ pandoc {file.md} -t html5 -o {file.pdf} --css style.css --pdf-engine-opt=--enabl
 
 ## Backlog (idées de commandes à ajouter)
 
+- `add:module`, ajouter un module a un cours existant
+- publication et formats
 - dans le `config.ini` ajouter un éditeur par défaut pour ouvrir le dossier d'un cours ou d'un module (par exemple vscode, emacs, vim, etc.). Ensuite utiliser `open:course <nom_du_cours>` et il ouvrira le dossier du cours avec l'éditeur défini.
 - filtrer les cours par niveau, sujets
 - ajouter une option à `add:course --prompt` pour proposer de guider l'utilisateur dans la création de cours:
