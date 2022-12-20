@@ -17,13 +17,13 @@ class Course
 
     public function __construct(
         readonly public string $name,
-        public readonly string $absPath,
+        public readonly string $absPathRootDirectory,
         readonly public string $vendor,
         readonly public string $level,
         readonly public string $keyWords,
     ) {
 
-        $this->modules = array(new Module($this->absPath, 0, 'presentation'));
+        $this->modules = array(new Module($this->absPathRootDirectory, 0, 'presentation'));
     }
 
     /**
@@ -36,7 +36,7 @@ class Course
     }
 
     /**
-     * Retourne le chemin du cours
+     * Retourne le chemin relatif du cours
      * @return string
      */
     public function path(): string
@@ -45,40 +45,56 @@ class Course
     }
 
     /**
-     * Initialise le répertoire d'un cours nouvellement créee (création de dossiers et de fichiers par défaut)
-     * @return void
+     * Retourne le chemin absolu du cours
+     * @return string
      */
-    public function createCourseDirectory()
+    public function absPath(): string
+    {
+        return sprintf("%s%s", $this->absPathRootDirectory, $this->path());
+    }
+
+    /**
+     * Initialise le répertoire d'un cours nouvellement créee (création de dossiers et de fichiers par défaut)
+     * @return bool
+     */
+    public function create(): bool
     {
 
-        //Création du dossier du cours. On vérifie que le cours n'existe pas déjà.
-        FileManager::createDirectory($this->env->fullPath($this->path()));
+        FileManager::createDirectory($this->absPath(), 'cours');
 
         $defaultDirs = array(
             'bibliographie',
         );
+
+        $metaDataContent = <<< INI
+        name={$this->name}
+        level={$this->level}
+        keywords={$this->keywords}
+        INI;
+
         $defaultFiles = array(
             'README.md' => DefaultContent::readmeContent($this->name),
-            'index.html' => DefaultContent::indexHtmlContent($this->name)
+            'index.html' => DefaultContent::indexHtmlContent($this->name),
+            '.metadata' => $metaDataContent
         );
 
         //Création des sous dossiers par défaut
         foreach ($defaultDirs as $dir) {
-            $relativePath = sprintf("%s/%s", $this->path(), $dir);
-            $absPath = $this->env->fullPath($relativePath);
+            $absPath = sprintf("%s/%s", $this->absPath(), $dir);
             FileManager::createDirectory($absPath);
         }
 
         //Création des fichiers par défaut
         foreach ($defaultFiles as $file => $content) {
-            $relativePath =  sprintf("%s/%s", $this->path(), $file);
-            $absPath = $this->env->fullPath($relativePath);
+            $absPath =  sprintf("%s/%s", $this->absPath(), $file);
             FileManager::createFile($absPath, $content);
         }
 
         //Préparation des repertoires des modules
         foreach ($this->modules as $module) {
-            $module->prepareModuleDirectory($this->path(), $this->level);
+            // $module->prepareModuleDirectory($this->path(), $this->level);
         }
+
+        return true;
     }
 }
