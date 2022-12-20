@@ -60,18 +60,16 @@ Pour mettre à jour course-manager, rendez-vous dans le dossier contenant le dé
 
 >Écrivez une fois, publiez plusieurs fois dans différents formats.
 
-Ce gestionnaire de cours est basé sur le principe de la stricte et nécessaire séparation du contenu et de la forme. Vous écrivez, mettez à jour votre contenu en un endroit, puis vous le publier vers autant de formats que nécessaire (HTML, PDF, etc.).
+Ce gestionnaire de cours est basé sur le principe de la *stricte et nécessaire séparation du contenu et de la forme*. Vous écrivez, mettez à jour votre contenu **en un endroit**, puis vous le publier **vers autant de formats que nécessaire** (HTML, PDF, etc.).
 
-Un dossier `cours` (par défaut) est créé à l'initialisation et sert de racine au projet. Il contient les fichiers suivants: 
+Un projet de gestion de cours se compose des élements suivants:
 
-- `sources/` : les fichiers sources de vos cours (markdown, assets, images). *La source de vérité*
+- `sources/` : les fichiers sources de vos cours (Markdown, assets, images). *La source de vérité*
 - `templates/`: les styles globaux pour la publication de vos cours (CSS, XSLT, etc.)
 - `public/` : les cours publiés au format HTML et/ou PDF, distribuables, les notes n'y apparaissent pas
 - `index.html`: un fichier pour naviguer facilement dans vos cours via votre navigateur web
 
-Chaque `cours` est défini dans un `vendor` (un organisme, une école, etc.), et se divise en `modules`. Un module contient une partie du cours, des exercices et des tps.
-
-Une présentation est générée par `module` au moment de la publication. Chaque présentation est écrite en Markdown, et générée ensuite en HTML et PDF avec marpit. 
+Vous écrivez vos contenus de cours en Markdown. Le programme vous convertit tous vos supports aux formats HTML et PDF dans le dossier `public`, prêt à être imprimés ou distribués à vos étudiant·es.
 
 ~~~
 #Exemple de l'architecture d'un projet de gestion de cours
