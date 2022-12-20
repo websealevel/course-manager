@@ -3,8 +3,6 @@
 
 namespace Wsl\CourseManager;
 
-use Wsl\CourseManager\Models\File;
-use Wsl\CourseManager\Services\DefaultContent;
 use Wsl\CourseManager\Services\FileManager;
 
 /**
@@ -56,7 +54,7 @@ class Config
     }
 
     /**
-     * Retourne un tableau contenant les variables d'environnemnt
+     * Retourne un tableau contenant les variables de configuration local d'un projet.
      * @throws Exception - Si le fichier de configuration local n'existe pas.
      * @throws Exception - Si le fichier de configuration local ne contient pas les clefs/valeurs obligatoires.
      * @return array
@@ -81,7 +79,7 @@ class Config
         $diff = array_diff(Config::MANDATORY_CONFIG_KEYS, array_keys($variables));
 
         if (!empty($diff)) {
-            throw new \Exception(sprintf("Variables d'environnement non initialisées: %s", implode(",", $diff)));
+            throw new \Exception(sprintf("Le projet est mal configuré: %s", implode(",", $diff)));
         }
 
         return $variables;
