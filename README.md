@@ -121,23 +121,24 @@ Si c'est votre premier projet alors, par défaut, `mes-cours` est votre projet *
 
 > Le projet *courant* est défini sous la clé `MAIN` dans le fichier de configuration global (voir $HOME/.create-manager). Vous pouvez changer de projet courant avec la commande `change:current-project` ou en vous rendant directement dans le repértoire d'un autre projet. 
 
-Créer un nouveau cours sur le programme `course-manager`, pour le présenter à des apprenant·es de l'établissement `foo`
+Créer un nouveau cours sur le programme `course-manager`, pour le présenter à des apprenant·es de l'établissement `mon-ecole`
 
 ~~~bash
-cm add:course foo course-manager
-# Ou avec les options: renseigner des niveaux (L1, L2 et L3) et des mot-clefs (cli et gestion)
-cm add:course foo course-manager --level=L1,L2,L3 --keywords=cli,gestion
+cm add:course course-manager mon-ecole
+# Ou avec les options: renseigner des niveaux (L1) et des mot-clefs (cli et gestion)
+cm add:course course-manager mon-ecole --level=L1 --keywords=cli,gestion
 ~~~
 
-> Le `vendor` est un paramètre *optionnel*. Si vous ne renseigner pas de `vendor`, le cours sera enregistré dans le vendor global. Par exemple, `cm add:course course-manager` créera le cours `course-manager` directement dans le dossier `sources`, et celui-ci ne sera rattaché à aucun `vendor` en particulier.
+> Le `vendor` est un paramètre *optionnel*. Si vous ne renseignez pas de `vendor`, le cours sera enregistré dans le vendor global. Par exemple, `cm add:course course-manager` créera le cours `course-manager` directement dans le dossier `sources`, et celui-ci ne sera rattaché à aucun `vendor` en particulier.
 
-Par défaut, le programme vous crée un dossier `foo/course-manager` contenant les fichiers suivants:
+Par défaut, le programme vous crée un dossier `mon-ecole/course-manager` contenant les fichiers suivants:
 
  - `bibliographie`: pour stocker les documents bibliographiques du cours (ebook, fichiers PDF, images, etc.)
  - `module00-presentation`: module de présentation du cours
    - `cours`: contient le fichier de présentation `slides.md`. Placer ici les supports de cours.
    - `exercices`: placer ici les fiches d'exercices (énoncés, corrections)
  - `README.md`: description brève du cours (durée, contenu, ressources, niveau des apprenants (`--level`), remarques). Contient le plan, les objectifs, le planning, etc.
+ - `tp`: pour stocker les sujets de TP, TP fil rouge, etc.
  - `index.html`: permet de naviguer dans le cours au format HTML.
  - `.metadata`: un fichier caché contenant des métadonnées sur le cours. Généré automatiquement. Permet de filtrer les cours via le programme.
 
