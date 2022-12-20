@@ -87,32 +87,11 @@ class Config
         return $variables;
     }
 
-    /**
-     * Retourne la liste des noms de dossier crées par défaut 
-     * à la racine du projet à l'initalisation d'un nouveau projet 
-     * @return array
-     */
-    public static function projectDefaultDirectories(): array
-    {
-        return array(
-            'sources', 'templates', 'public'
-        );
-    }
 
     /**
-     * Retourne la liste des fichiers crées par défaut 
-     * à la racine du projet à l'initalisation d'un nouveau projet 
-     * @return File[]
+     * Le contenu du fichier INI de configuration local du projet par défaut
+     * @return string
      */
-    public static function projectDefaultFiles(): array
-    {
-        return array(
-            new File('index.html', DefaultContent::indexHtmlContent('Liste des cours')),
-            new File('config.ini', Config::configIniContent())
-        );
-    }
-
-
     public static function configIniContent(): string
     {
         return sprintf("#course-manager");
