@@ -5,6 +5,7 @@ namespace Wsl\CourseManager\Models;
 
 use Wsl\CourseManager\Services\DefaultContent;
 use Wsl\CourseManager\Models\AbstractNode;
+use Wsl\CourseManager\Services\FileManager;
 
 /**
  * Un module est une partie d'un cours.
@@ -42,7 +43,19 @@ class Module extends AbstractNode
 
     public function getAbsPathOfParentDirectory(): string
     {
-        return $this->course->absPath();
+        return sprintf("%s/%s", $this->course->absPath(), $this->path());
     }
 
+    public function path(): string{
+        return $this->name();
+    }
+
+    /**
+     * Retourne le nom formatté du module
+     * @return string
+     */
+    public function name(): string
+    {
+        return sprintf("module%02d-%s", $this->id, $this->name);
+    }
 }
