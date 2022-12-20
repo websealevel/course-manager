@@ -4,6 +4,7 @@
 namespace Wsl\CourseManager;
 
 use Wsl\CourseManager\Services\FileManager;
+use Wsl\CourseManager\Models\Project;
 
 /**
  * Classe en charge de gérer la configuration d'un projet
@@ -369,5 +370,15 @@ class Config
 
         //Renvoyer le dossier courant défini dans la configuration globale.
         return Config::getCurrentProjectDefinedInGlobalConfiguration();
+    }
+
+    /**
+     * Retourne le projet courant
+     * @return Project
+     */
+    public static function loadCurrentProject(): Project
+    {
+        $path = static::absPathToCurrentProject();
+        return new Project($path);
     }
 }
