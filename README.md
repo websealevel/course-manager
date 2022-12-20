@@ -266,6 +266,8 @@ pandoc {file.md} -t html5 -o {file.pdf} --css style.css --pdf-engine-opt=--enabl
   - liste de modules à ajouter des le debut
 - ajouter une commande qui installer un projet demo avec un cours demo sur course-manager
 - ajouter une commande pour publier sur un repo distant le contenu de sources et le contenu de public (possiblement séparés)
+- ajouter des abstractions Abstract Factory pour laisser l'utilisateur implementer ses projets, modules et cours (dossiers et fichiers par défaut, structure personnalisée)
+
 
 ## Ressources
 
