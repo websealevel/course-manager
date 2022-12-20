@@ -75,8 +75,8 @@ Vous écrivez vos contenus de cours en Markdown. Le programme vous convertit tou
 #Exemple de l'architecture d'un projet de gestion de cours
 #Sources des cours
 sources/
-  - *vendor-a*/
-    - cours-a/
+  - mon-ecole/
+    - moncours/
       - bibliographie/
       - module00-presentation/
       - module01-mon-module/
@@ -87,7 +87,6 @@ sources/
       - tp/
       - index.html
       - README.md
-    - cours-b/
 #Templates contenant la mise en page (style) globale des cours
 templates/
   - css (html,pdf)
@@ -95,13 +94,11 @@ templates/
 
 #Cours publiés (format HTML/PDF)
 public/
-  - *vendor-a*
-    - cours-a
-      - module00-presentation
-      - module01-mon-module
-        #cours publié: contenu en HTML/PDF, pas de commentaire ni de notes visibles
-        - slides.html
-        - slides.pdf
+  - mon-ecole/
+    - moncours/
+      - module00-presentation-slides.pdf
+      - module01-moncours-slides.pdf
+      - etc.
 ~~~
 
 ## Guide de démarrage
