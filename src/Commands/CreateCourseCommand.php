@@ -17,17 +17,22 @@ class CreateCourseCommand extends Command
 {
 
     protected static $defaultDescription = 'Create a new course in the current project.';
-
     protected static $defaultName = 'add:course';
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
 
+        /**
+         * Récuperer les options et les arguments
+         */
         $courseName = $input->getArgument('course_name');
         $vendorName = $input->getArgument('vendor_name') ?? '';
         $keywords = $input->getOption('keywords');
         $levels = $input->getOption('level');
 
+        /**
+         * Logique métier de la commande
+         */
         $currentProject = Config::loadCurrentProject();
         $sourcesDir = $currentProject->getDefaultDirectory('sources');
 
@@ -45,7 +50,15 @@ class CreateCourseCommand extends Command
             ParserOptions::flatten($keywords, ',')
         );
 
-        $course->create();
+        try {
+            $course->create();
+        } catch (\Exception $e) {
+            $output->writeln("Une erreur est survenue lors de la création du cours" . $courseName);
+            $output->writeln(
+                $e->getMessage()
+            );
+            //Rollback: supprimer tout le dossier du cours
+        }
 
         return COMMAND::SUCCESS;
     }
@@ -54,7 +67,6 @@ class CreateCourseCommand extends Command
     {
 
         //Arguments
-
         $this
             ->addArgument(
                 'course_name',
@@ -70,7 +82,6 @@ class CreateCourseCommand extends Command
             );
 
         //Options
-
         $this
             ->addOption(
                 // this is the name that users must type to pass this option (e.g. --iterations=5)
