@@ -24,9 +24,10 @@ class Course extends AbstractNode
     ) {
 
         //Initialisation des modules par défaut
-        $this->modules = array(new Module($this, 0, 'presentation'));
+        $this->modules = array(
+            new Module($this, 0, 'presentation')
+        );
     }
-
 
     protected function hookAfterBuilding()
     {
