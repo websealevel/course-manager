@@ -94,6 +94,6 @@ class Course extends AbstractNode
      */
     public function absPath(): string
     {
-        return sprintf("%s%s", $this->absPathProjectDirectory, $this->path());
+        return sprintf("%s/%s", $this->absPathProjectDirectory, $this->path());
     }
 }
