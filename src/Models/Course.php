@@ -46,6 +46,7 @@ class Course extends AbstractNode
     {
         return array(
             new Directory('bibliographie'),
+            new Directory('tp'),
         );
     }
 

@@ -77,21 +77,19 @@ Une présentation est générée par `module` au moment de la publication. Chaqu
 #Exemple de l'architecture d'un projet de gestion de cours
 #Sources des cours
 sources/
-  - *vendor-a*
-    - cours-a
-      - bibliographie
-      - module00-presentation
-      - module01-mon-module
-        - cours
-          #cours source: contenu du cours en markdown, commentaire et notes à l'intention du formateur·rice
-          - cours.md
-        - exercices
-        - tp
-        - index.html
-        - README.md
-      - module2
-    - cours-b
-  - *vendor-b*
+  - *vendor-a*/
+    - cours-a/
+      - bibliographie/
+      - module00-presentation/
+      - module01-mon-module/
+        - cours/
+          #cours source: presentation et notes à l'intention du formateur·rice
+          - slides.md
+        - exercices/
+      - tp/
+      - index.html
+      - README.md
+    - cours-b/
 #Templates contenant la mise en page (style) globale des cours
 templates/
   - css (html,pdf)
@@ -104,8 +102,8 @@ public/
       - module00-presentation
       - module01-mon-module
         #cours publié: contenu en HTML/PDF, pas de commentaire ni de notes visibles
-        - cours.html
-        - cours.pdf
+        - slides.html
+        - slides.pdf
 ~~~
 
 ## Guide de démarrage
