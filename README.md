@@ -136,7 +136,9 @@ cm add:course foo course-manager --level=L1,L2,L3 --keywords=cli,gestion
 Par défaut, le programme vous crée un dossier `foo/course-manager` contenant les fichiers suivants:
 
  - `bibliographie`: pour stocker les documents bibliographiques du cours (ebook, fichiers PDF, images, etc.)
- - `module00-presentation`: module de présentation du cours, avec ses sous-dossiers et son fichier *deck* de slides Markdown
+ - `module00-presentation`: module de présentation du cours
+   - `cours`: contient le fichier de présentation `slides.md`. Placer ici les supports de cours.
+   - `exercices`: placer ici les fiches d'exercices (énoncés, corrections)
  - `README.md`: description brève du cours (durée, contenu, ressources, niveau des apprenants (`--level`), remarques). Contient le plan, les objectifs, le planning, etc.
  - `index.html`: permet de naviguer dans le cours au format HTML.
  - `.metadata`: un fichier caché contenant des métadonnées sur le cours. Généré automatiquement. Permet de filtrer les cours via le programme.
