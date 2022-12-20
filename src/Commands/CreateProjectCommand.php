@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Wsl\CourseManager\Config;
+use Wsl\CourseManager\Models\Project;
 use Wsl\CourseManager\Services\FileManager;
 
 class CreateProjectCommand extends Command
@@ -52,33 +53,17 @@ class CreateProjectCommand extends Command
             return COMMAND::FAILURE;
         }
 
-        //A deplacer dans la classe Config.
-
-        //Peupler le projet avec la structure de dossiers/fichiers par défaut.
-
-        $dirs = Config::projectDefaultDirectories();
-        $files = Config::projectDefaultFiles();
-
-
-        $absPathDirs = array_map(function ($dir) use ($absPathOfRootDir) {
-            return sprintf("%s/%s", $absPathOfRootDir, $dir);
-        }, $dirs);
+        $project = new Project($absPathOfRootDir);
 
         try {
-            //Creer les dossiers sources, templates, public
-            FileManager::createDirectories($absPathDirs);
-            //Creer les fichiers index.html, config.ini
-            FileManager::createFiles($absPathOfRootDir, $files);
+            $project->create();
         } catch (\Exception $e) {
             $output->writeln([
                 $e->getMessage(),
             ]);
-
             //Rollback: suppresion du $rootDir et du projet dans le fichier de configuration global
             FileManager::removeDir($rootDir);
-            //Rollback à tester
             Config::removeFromConfigFile($rootDir);
-
             return COMMAND::FAILURE;
         }
 
