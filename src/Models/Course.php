@@ -8,7 +8,8 @@ use Wsl\CourseManager\Services\DefaultContent;
 
 /**
  * Une classe qui décrit un cours. Un cours est éventuellement placé dans un vendor (établissement, organisme, etc.)
- * et est défini par un nom. Un cours possède des métadonnées (niveau des apprenant·es, mots-clefs, etc.)
+ * et est défini par un nom. Un cours possède des métadonnées (niveau des apprenant·es, mots-clefs, etc.). Un cours
+ * est composé de modules.
  */
 class Course extends AbstractNode
 {
@@ -30,8 +31,8 @@ class Course extends AbstractNode
     protected function hookAfterBuilding()
     {
         //Création des modules par défaut.
-        foreach($this->modules as $module){
-
+        foreach ($this->modules as $module) {
+            $module->create();
         }
     }
 
