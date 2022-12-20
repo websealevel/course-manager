@@ -13,4 +13,13 @@ class Directory
         public readonly array $files = array()
     ) {
     }
+
+    /**
+     * Retourne vrai si le repertoire est supposé contenir
+     * des fichiers, faux sinon.
+     */
+    public function hasFiles(): bool
+    {
+        return 0 !== count($this->files);
+    }
 }

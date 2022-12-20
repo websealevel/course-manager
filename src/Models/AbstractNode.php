@@ -26,6 +26,11 @@ abstract class AbstractNode implements INode
         //Création des dossiers par défaut
         foreach ($this->getDefaultDirectories() as $dir) {
             //Possibilité de recursion ici avec le Model Directory.
+
+            if ($dir->hasFiles()) {
+                echo 'Des fichiers à construire';
+            }
+
             $absPath = sprintf("%s/%s", $this->getAbsPathOfParentDirectory(), $dir->name);
             FileManager::createDirectory($absPath, $label);
         }
