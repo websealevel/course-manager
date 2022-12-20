@@ -9,7 +9,8 @@ class File
 {
     public function __construct(
         public readonly string $name,
-        public readonly string $content
+        public readonly string $content,
+        public readonly string $description =''
     ) {
     }
 }
