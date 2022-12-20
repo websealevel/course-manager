@@ -10,7 +10,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
 use Wsl\CourseManager\Config;
-use Wsl\CourseManager\Services\FileManager;
 use Wsl\CourseManager\Models\Course;
 use Wsl\CourseManager\Services\ParserOptions;
 
@@ -32,13 +31,6 @@ class CreateCourseCommand extends Command
 
         $levels = $input->getOption('level');
 
-        var_dump(array(
-            $courseName, $vendorName, $keywords, $levels
-        ));
-
-
-        //Check que vendorName/courseName n'existe pas déjà, sinon renvoyer une erreur.
-
         $abs = Config::absPathToCurrentProject();
 
         $course = new Course(
@@ -49,9 +41,8 @@ class CreateCourseCommand extends Command
             ParserOptions::flatten($keywords, ',')
         );
 
+        //Créer le cours dans le dossier projet courant/sources
         $course->create();
-
-        //Initialiser le contenu par défaut (dont les métadonnées)
 
         return COMMAND::SUCCESS;
     }
@@ -98,11 +89,8 @@ class CreateCourseCommand extends Command
             ->addOption(
                 'level',
                 '-l',
-                // this is the type of option (e.g. requires a value, can be passed more than once, etc.)
                 InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
-                // the option description displayed when showing the command help
                 'Labels to describe the level of the course. Separate each level by a comma (e.g --keywords=B1,B2)',
-                // the default value of the option (for those which allow to pass values)
                 []
             );
     }
