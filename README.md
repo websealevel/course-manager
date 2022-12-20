@@ -60,7 +60,7 @@ Pour mettre à jour course-manager, rendez-vous dans le dossier contenant le dé
 
 >Écrivez une fois, publiez plusieurs fois dans différents formats.
 
-Ce gestionnaire de cours est basé sur le principe de la stricte et nécessaire séparation du contenu et de la forme. Vous écrivez, mettez à jour votre contenu en un endroit, puis vous le publier vers autant de formats que nécessaire (HTML,PDF,etc.).
+Ce gestionnaire de cours est basé sur le principe de la stricte et nécessaire séparation du contenu et de la forme. Vous écrivez, mettez à jour votre contenu en un endroit, puis vous le publier vers autant de formats que nécessaire (HTML, PDF, etc.).
 
 Un dossier `cours` (par défaut) est créé à l'initialisation et sert de racine au projet. Il contient les fichiers suivants: 
 
