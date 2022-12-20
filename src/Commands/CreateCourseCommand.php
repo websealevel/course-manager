@@ -11,8 +11,8 @@ use Symfony\Component\Console\Input\InputOption;
 
 use Wsl\CourseManager\Config;
 use Wsl\CourseManager\Services\FileManager;
-use Wsl\CourseManager\Services\Formatter;
 use Wsl\CourseManager\Models\Course;
+use Wsl\CourseManager\Services\ParserOptions;
 
 class CreateCourseCommand extends Command
 {
@@ -32,9 +32,10 @@ class CreateCourseCommand extends Command
 
         $levels = $input->getOption('level');
 
-        // var_dump(array(
-        //     $courseName, $vendorName, $keywords, $levels
-        // ));
+        var_dump(array(
+            $courseName, $vendorName, $keywords, $levels
+        ));
+
 
         //Check que vendorName/courseName n'existe pas déjà, sinon renvoyer une erreur.
 
@@ -44,18 +45,11 @@ class CreateCourseCommand extends Command
             $courseName,
             $abs,
             $vendorName,
-            $levels,
-            $keywords
+            ParserOptions::flatten($levels, ','),
+            ParserOptions::flatten($keywords, ',')
         );
 
-        if (FileManager::dirExists($course->path())) {
-            $output->writeln(
-                sprintf("Le cours %s existe déjà.", $course->path())
-            );
-            return COMMAND::FAILURE;
-        }
-
-        // $success = FileManager::createDirectory($course->path());
+        $course->create();
 
         //Initialiser le contenu par défaut (dont les métadonnées)
 
