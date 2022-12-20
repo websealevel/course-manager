@@ -8,6 +8,7 @@
 
 namespace Wsl\CourseManager\Services;
 
+use Exception;
 
 class FileManager
 {
@@ -27,7 +28,7 @@ class FileManager
     /**
      * Retourne le contenu parsé d'un fichier de configuration au format INI
      * @param string $absPathIniFile Le chemin absolu vers le fichier de configuration du projet 
-     * @return array|false
+     * @return string[]|false
      */
     public static function parseIniFile(string $absPathIniFile): array|false
     {
@@ -54,7 +55,7 @@ class FileManager
 
     /**
      * Retourne vrai si le fichier existe, faux sinon
-     * @param string $absPathTofile Le path absolu du fichier
+     * @param string $absPathToFile Le path absolu du fichier
      * @return bool
      */
     public static function fileExists(string $absPathToFile): bool
@@ -65,7 +66,7 @@ class FileManager
     /**
      * Action: Crée le fichier $abspath et écrit le contenu dedans. Retourne vrai en cas de réussite d'écriture, faux sinon.
      * @param string $abspath Le path absolu du fichier à créée
-     * @param string $content Optionnel. Le contenu du fichier à écrire.
+     * @param string|string[] $content Optionnel. Le contenu du fichier à écrire.
      * @return bool
      * @throws Exception Si impossible d'ouvrir le fichier en écriture, impossible d'écrire dans le fichier.
      */
@@ -116,11 +117,11 @@ class FileManager
 
     /**
      * Action: supprime le dossier et tout son contenu de manière récursive
-     * @param string Le path du dossier a supprimé (ainsi que son contenu)
+     * @param string $absPath Le path du dossier a supprimé (ainsi que son contenu)
      */
-    public static function recursiveRmDir($abspath): bool
+    public static function recursiveRmDir($absPath): bool
     {
-        $files = glob($abspath . '/{,.metadata}*', GLOB_BRACE);
+        $files = glob($absPath . '/{,.metadata}*', GLOB_BRACE);
 
         foreach ($files as $file) {
             if (is_dir($file))
@@ -129,7 +130,7 @@ class FileManager
                 unlink($file);
         }
 
-        if (is_dir($abspath)) rmdir($abspath);
+        if (is_dir($absPath)) rmdir($absPath);
 
         return true;
     }
@@ -198,7 +199,7 @@ class FileManager
 
     /**
      * Action: crée un ensemble de dossiers
-     * @param string[] Des paths de dossiers à créer
+     * @param string[] $dirs Des paths de dossiers à créer
      * @return bool Retourne vrai si tous les dossiers ont été crées avec succès
      * @throws Exception - @see createDirectory
      */
@@ -219,8 +220,8 @@ class FileManager
 
     /**
      * Action: crée un ensemble de fichiers dans le dossier du projet.
-     * @param string $abstPathOfRootDir Le chemin absolu du projet
-     * @param File[] Des fichiers à créer
+     * @param string $absPathOfRootDir Le chemin absolu du projet
+     * @param File[] $files Des fichiers à créer
      * @return bool Retourne vrai si tous les fichiers ont été crées avec succès
      * @throws Exception - @see createFile
      */

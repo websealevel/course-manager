@@ -15,6 +15,7 @@ Une application CLI, [basée sur le composant Console de Symfony](https://symfon
     - [Options d'une commande](#options-dune-commande)
   - [Backlog (idées de commandes à ajouter)](#backlog-idées-de-commandes-à-ajouter)
   - [phpDocumentor](#phpdocumentor)
+  - [phpStan](#phpstan)
   - [Ressources](#ressources)
     - [Utilisateur·rice](#utilisateurrice)
     - [Développeur·se](#développeurse)
@@ -280,6 +281,14 @@ Regénérer la documentation du projet à partir des sources
 docker run --rm -v "$(pwd):/data" "phpdoc/phpdoc:3" run -dsrc -tdocs
 ~~~
 
+## phpStan
+
+Pour analyser le code source statiquement ([au level 6](https://phpstan.org/user-guide/rule-levels)) avec [phpStan](https://phpstan.org/) et corriger les erreurs
+
+~~~
+#Analyser le code au level 6
+vendor/bin/phpstan analyse src -l6
+~~~
 
 ## Ressources
 

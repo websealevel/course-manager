@@ -53,12 +53,7 @@ class RemoveProjectCommand extends Command
         //Demander la confirmation.
         $helper = $this->getHelper('question');
 
-        $questionText = sprintf(
-            "Are you sure you want to continue (y/n) ?",
-            $projectToDelete
-        );
-
-        $question = new ConfirmationQuestion($questionText, false);
+        $question = new ConfirmationQuestion("Are you sure you want to continue (y/n) ?", false);
 
         $continue = $helper->ask($input, $output, $question);
 

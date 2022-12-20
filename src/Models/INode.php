@@ -17,7 +17,7 @@ interface INode
 
     /**
      * Retourne la liste des repertoires par défaut dans le noeud
-     * @return array
+     * @return Directory[]
      */
     public function getDefaultDirectories(): array;
 

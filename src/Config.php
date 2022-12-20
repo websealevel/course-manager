@@ -6,6 +6,8 @@ namespace Wsl\CourseManager;
 use Wsl\CourseManager\Services\FileManager;
 use Wsl\CourseManager\Models\Project;
 
+use Exception;
+
 /**
  * Classe en charge de gérer la configuration d'un projet
  */
@@ -29,6 +31,14 @@ class Config
 
     public const DEFAULT_ROOT_DIR = 'courses';
 
+
+    /**
+     * @param string[] $variables
+     */
+    public function __construct(public readonly array $variables)
+    {
+    }
+
     /**
      * Les clés (clés/valeurs) obligatoires dans le fichier de configuration
      * local à un projet.
@@ -38,7 +48,7 @@ class Config
 
     /**
      * Retourne les variables d'environnement avec validation préalable
-     * @throws Exception - Si PHP n'est pas executé en mode (SAPI) 'cli'
+     * @throws \Exception - Si PHP n'est pas executé en mode (SAPI) 'cli'
      * @return Config
      */
     public static function create(): Config
@@ -58,7 +68,7 @@ class Config
      * Retourne un tableau contenant les variables de configuration local d'un projet.
      * @throws Exception - Si le fichier de configuration local n'existe pas.
      * @throws Exception - Si le fichier de configuration local ne contient pas les clefs/valeurs obligatoires.
-     * @return array
+     * @return string[]
      */
     public static function readLocalConfigFile(): array
     {
@@ -117,7 +127,12 @@ class Config
         );
 
         if (!$success)
-            throw new \Exception("Impossible de créer le fichier de configuration global %s.", $absPathGlobalConfig);
+            throw new \Exception(
+                sprintf(
+                    "Impossible de créer le fichier de configuration global %s.",
+                    $absPathGlobalConfig
+                )
+            );
 
         return true;
     }
@@ -151,7 +166,7 @@ class Config
     {
 
         if (!static::globalConfigExists()) {
-            static::createGlobalConfigFile($absPathToRootDir);
+            static::createGlobalConfigFile();
         }
 
         $values = array();
@@ -294,6 +309,7 @@ class Config
     public static function getCurrentProjectDefinedInGlobalConfiguration(): string
     {
         $values = static::getGlobalConfigurationValues();
+
         return $values['MAIN'];
     }
 
@@ -301,7 +317,7 @@ class Config
     /**
      * Retourne la liste des clefs/valeurs enregistrés dans le fichier de configuration
      * global au format INI
-     * @return array
+     * @return string[]
      * @throws Exception - Si le fichier de configuration n'existe pas, n'a pas une syntaxe correcte.
      */
     public static function getGlobalConfigurationValues(): array

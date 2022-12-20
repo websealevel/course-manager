@@ -13,6 +13,11 @@ use Wsl\CourseManager\Services\DefaultContent;
  */
 class Course extends AbstractNode
 {
+
+    /**
+     * Liste des modules contenus dans le cours
+     * @var Module[]
+     */
     readonly public array $modules;
 
     public function __construct(
@@ -29,7 +34,7 @@ class Course extends AbstractNode
         );
     }
 
-    protected function hookAfterBuilding()
+    protected function hookAfterBuilding(): void
     {
         //Création des modules par défaut.
         foreach ($this->modules as $module) {

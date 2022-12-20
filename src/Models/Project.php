@@ -23,6 +23,9 @@ class Project extends AbstractNode
         return $this->absPath;
     }
 
+    /**
+     * @return Directory[]
+     */
     public function getDefaultDirectories(): array
     {
         return array(

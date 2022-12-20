@@ -12,10 +12,10 @@ class ParserOptions
 
     /**
      * Retourne les options d'une commande dans une chaine de caractères
-     * @param array $options Les options récupérées par une Commande
+     * @param string[] $options Les options récupérées par une Commande
      * @return string
      */
-    public static function flatten(array $options, $separator = " "): string
+    public static function flatten(array $options, string $separator = " "): string
     {
         $str = implode($separator, $options);
         return str_replace(',', $separator, $str);
