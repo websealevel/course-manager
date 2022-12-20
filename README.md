@@ -84,20 +84,19 @@ sources/
           #cours source: presentation et notes à l'intention du formateur·rice
           - slides.md
         - exercices/
+          - td-01.md
       - tp/
-      - index.html
-      - README.md
 #Templates contenant la mise en page (style) globale des cours
 templates/
   - css (html,pdf)
   - xslt (pdf)
-
 #Cours publiés (format HTML/PDF)
 public/
   - mon-ecole/
     - moncours/
       - module00-presentation-slides.pdf
-      - module01-moncours-slides.pdf
+      - module01-mon-module-slides.pdf
+      - module01-td-01.pdf
       - etc.
 ~~~
 
