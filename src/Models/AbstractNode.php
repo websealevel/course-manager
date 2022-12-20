@@ -37,6 +37,24 @@ abstract class AbstractNode implements INode
         }
     }
 
+
+    /**
+     * Retourne le repertoire par défaut par nom
+     * @return Directory
+     * @throws Exception Si le repertoire par défaut n'existe pas
+     */
+    public function getDefaultDirectory(string $name): Directory
+    {
+        $defaultDirectories = $this->getDefaultDirectories();
+
+        foreach ($defaultDirectories as $dir) {
+            if ($dir->name === $name)
+                return $dir;
+        }
+
+        throw new \Exception("Le repertoire %s n'existe pas");
+    }
+
     /**
      * Hook mis à disposition pour executer du code avant le build
      */
