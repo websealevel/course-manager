@@ -24,24 +24,27 @@ class CreateCourseCommand extends Command
     {
 
         $courseName = $input->getArgument('course_name');
-
         $vendorName = $input->getArgument('vendor_name') ?? '';
-
         $keywords = $input->getOption('keywords');
-
         $levels = $input->getOption('level');
 
-        $abs = Config::absPathToCurrentProject();
+        $currentProject = Config::loadCurrentProject();
+        $sourcesDir = $currentProject->getDefaultDirectory('sources');
+
+        $absPathOfParentDirectory = sprintf(
+            "%s/%s",
+            Config::absPathToCurrentProject(),
+            $sourcesDir->name
+        );
 
         $course = new Course(
             $courseName,
-            $abs,
+            $absPathOfParentDirectory,
             $vendorName,
             ParserOptions::flatten($levels, ','),
             ParserOptions::flatten($keywords, ',')
         );
 
-        //Créer le cours dans le dossier projet courant/sources
         $course->create();
 
         return COMMAND::SUCCESS;
