@@ -16,7 +16,7 @@ class Course extends AbstractNode
 
     public function __construct(
         readonly public string $name,
-        public readonly string $absPathRootDirectory,
+        public readonly string $absPathProjectDirectory,
         readonly public string $vendor,
         readonly public string $level,
         readonly public string $keyWords,
@@ -34,7 +34,7 @@ class Course extends AbstractNode
 
     public function getAbsPathOfParentDirectory(): string
     {
-        return sprintf("%s/%s", $this->absPathRootDirectory, $this->path());
+        return sprintf("%s/%s", $this->absPathProjectDirectory, $this->path());
     }
 
     public function getDefaultDirectories(): array
@@ -90,6 +90,6 @@ class Course extends AbstractNode
      */
     public function absPath(): string
     {
-        return sprintf("%s%s", $this->absPathRootDirectory, $this->path());
+        return sprintf("%s%s", $this->absPathProjectDirectory, $this->path());
     }
 }
