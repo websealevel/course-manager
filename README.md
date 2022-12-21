@@ -47,7 +47,7 @@ composer install
 
 Rendre le script `cm` exécutable
 
-~~~
+~~~bash
 chmod +x cm
 # Tester et lister toutes les commandes
 ./cm
@@ -55,7 +55,7 @@ chmod +x cm
 
 Pour rendre le programme globalement accessible sur votre machine, ajouter-le à votre `PATH`:
 
-~~~
+~~~bash
 #Sous Debian/Ubuntu
 export PATH="/path/to/course-manager:$PATH"
 ~~~
@@ -68,8 +68,7 @@ Pour mettre à jour le programme, rendez-vous dans le dossier contenant le dép�
 
 ~~~bash
 #Dans le repertoire du projet cloné sur github
-git pull
-composer update
+git pull && composer update
 ~~~
 
 ## Philosophie
