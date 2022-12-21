@@ -263,4 +263,31 @@ class FileManager
 
         return true;
     }
+
+
+    /**
+     * Retourne la structure de fichiers présent sur le path
+     * @param string $absPath
+     * @return string[]
+     */
+    public static function treeStructureUnderPath(string $path): array
+    {
+        if (!is_dir($path))
+            return array($path => array());
+
+        //Le but est de reconstruire l'arbre des fichiers sur le path et de 
+        //le mapper à un arbre d'hyperliens en HTML
+
+
+        return array();
+    }
+
+    public static function mapTreeStructureToHTML(string $path): array
+    {
+        $filesTree = FileManager::treeStructureUnderPath($path);
+
+        //Transformer le filesTree en listes d'hyperliens HTML ayant la même structure.
+
+        return array();
+    }
 }
