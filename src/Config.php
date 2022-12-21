@@ -281,8 +281,7 @@ class Config
 
 
     /**
-     * Retourne vrai si le dossier courant est un repertoire de gestion de cours
-     * manipuable par le programme, faux sinon
+     * Retourne vrai si le dossier courant est un repertoire de gestion de cours, faux sinon
      * @return bool
      */
     public static function isThereALocalConfigurationFileInTheCurrentDirectory(): bool
