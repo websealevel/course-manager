@@ -14,7 +14,7 @@ use Exception;
 class Config
 {
 
-    public const COURSE_MANAGER_VERSION = 1.0;
+    public const COURSE_MANAGER_VERSION = "1.0";
 
     /**
      * Nom du fichier de configuration global du programme. Maintient la liste des tous les projets de gestion de cours,
@@ -31,7 +31,6 @@ class Config
 
     public const DEFAULT_ROOT_DIR = 'courses';
 
-
     /**
      * @param string[] $variables
      */
@@ -44,25 +43,11 @@ class Config
      * local à un projet.
      * @var string[]
      */
-    public const MANDATORY_CONFIG_KEYS = array('path_courses');
-
-    /**
-     * Retourne les variables d'environnement avec validation préalable
-     * @throws \Exception - Si PHP n'est pas executé en mode (SAPI) 'cli'
-     * @return Config
-     */
-    public static function create(): Config
-    {
-
-        //Validation préalable
-        if (php_sapi_name() !== 'cli') {
-            throw new \Exception("PHP must be executed in the SAPI mode 'cli'.");
-        }
-
-        $variables = static::readLocalConfigFile();
-
-        return new Config($variables);
-    }
+    public const MANDATORY_LOCAL_CONFIG_KEYS = array(
+        'project' => array(
+            'type', 'version', 'editor'
+        )
+    );
 
     /**
      * Retourne un tableau contenant les variables de configuration local d'un projet.
@@ -79,7 +64,7 @@ class Config
             );
         }
 
-        $variables = FileManager::parseIniFile(Config::LOCAL_CONFIG_FILE);
+        $variables = FileManager::parseIniFile(Config::LOCAL_CONFIG_FILE, processSections: true);
 
         if (false === $variables) {
             throw new \Exception("Impossible de lire le fichier de configuration. Fichier mal formatté.");
@@ -87,7 +72,7 @@ class Config
 
         //Les cléfs/valeurs obligatoires du fichier de configuration
 
-        $diff = array_diff(Config::MANDATORY_CONFIG_KEYS, array_keys($variables));
+        $diff = array_diff(Config::MANDATORY_LOCAL_CONFIG_KEYS, array_keys($variables));
 
         if (!empty($diff)) {
             throw new \Exception(sprintf("Le projet est mal configuré: %s", implode(",", $diff)));
@@ -103,7 +88,17 @@ class Config
      */
     public static function configIniContent(): string
     {
-        return sprintf("#course-manager");
+
+        $version = Config::COURSE_MANAGER_VERSION;
+
+        $INI = <<< INI
+        [project]
+        type=course-manager
+        version={$version}
+        editor=code
+        INI;
+
+        return $INI;
     }
 
     /**
@@ -294,11 +289,18 @@ class Config
     {
         $absPathToLocalConfigurationFile = sprintf("%s/%s", getcwd(), Config::LOCAL_CONFIG_FILE);
 
-        $localConfigurationFile = FileManager::fileExists($absPathToLocalConfigurationFile);
+        $localConfigurationFileExists = FileManager::fileExists($absPathToLocalConfigurationFile);
+
+        if (false === $localConfigurationFileExists)
+            return false;
 
         //Rajouter une clef dans le fichier pour le distinguer d'autres fichiers config.ini qui pourraient s'y trouver.
+        $content = FileManager::parseIniFile($absPathToLocalConfigurationFile, processSections: true);
 
-        return $localConfigurationFile;
+        if (false === $content)
+            return false;
+
+        return isset($content['project']['type']) && 'course-manager' === $content['project']['type'];
     }
 
 
