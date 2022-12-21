@@ -1,6 +1,8 @@
 # Course-manager
 
-Une application CLI, [basée sur le composant Console de Symfony](https://symfony.com/doc/current/components/console.html), pour gérer les fichiers de cours (contenu, publication), à destination des formateur·trices et enseignant·es. Tous les supports de cours sont écrits en Markdown *en un endroit*, puis publiés vers différents formats: HTML (présentations interactives), PDF (impression, exercices, sujet d'examens, etc.).
+Une application CLI [basée sur le composant Console de Symfony](https://symfony.com/doc/current/components/console.html), à destination des formateur·trices et enseignant·es, pour gérer les fichiers de cours et supports pédagogiques. 
+
+Tous les contenus du cours (cours, sujets de TD,TP, corrections, fiches, etc.) sont écrits en [Markdown](https://fr.wikipedia.org/wiki/Markdown) *en un endroit*, puis publiés vers différents autant de formats que nécessaires: HTML (présentations interactives, pages web, etc.), PDF (impression, exercices, sujet d'examens, etc.), LaTeX, etc.
 
 
 - [Course-manager](#course-manager)
@@ -26,7 +28,7 @@ Une application CLI, [basée sur le composant Console de Symfony](https://symfon
 
 ## Dépendances tierces
 
-Pour pouvoir utiliser le programme, assurez vous d'installer les programmes suivants:
+Pour pouvoir utiliser le programme, assurez-vous d'installer les programmes suivants:
 
 - [PHP](https://www.php.net/downloads) (>8.2.*)
 - [Marp](https://marp.app/)
@@ -36,7 +38,7 @@ Pour pouvoir utiliser le programme, assurez vous d'installer les programmes suiv
 
 Installer [Composer](https://getcomposer.org/download/).
 
-Télécharger le [code source](https://github.com/websealevel/course-manager).
+Téléchargez-le [code source](https://github.com/websealevel/course-manager).
 
 ~~~bash
 composer install
@@ -67,16 +69,16 @@ Pour mettre à jour course-manager, rendez-vous dans le dossier contenant le dé
 
 >Écrivez une fois, publiez plusieurs fois dans différents formats.
 
-Ce gestionnaire de cours est basé sur le principe de la *stricte et nécessaire séparation du contenu et de la forme*. Vous écrivez, mettez à jour votre contenu **en un endroit**, puis vous le publier **vers autant de formats que nécessaire** (HTML, PDF, etc.).
+Ce gestionnaire de cours est basé sur le principe de la *stricte et nécessaire séparation du contenu et de la forme*. Vous écrivez, mettez à jour votre contenu **en un endroit**, puis vous le publiez **vers autant de formats que nécessaire** (HTML, PDF, etc.).
 
-Un projet de gestion de cours se compose des élements suivants:
+Un projet de gestion de cours se compose des éléments suivants:
 
 - `sources/` : les fichiers sources de vos cours (Markdown, assets, images). *La source de vérité*
 - `templates/`: les styles globaux pour la publication de vos cours (CSS, XSLT, etc.)
-- `public/` : les cours publiés au format HTML et/ou PDF, distribuables, les notes n'y apparaissent pas
+- `public/` : les cours publiés au format HTML et/ou PDF, distribuable, les notes n'y apparaissent pas
 - `index.html`: un fichier pour naviguer facilement dans vos cours via votre navigateur web
 
-Vous écrivez vos contenus de cours en Markdown. Le programme vous convertit tous vos supports aux formats HTML et PDF dans le dossier `public`, prêt à être imprimés ou distribués à vos étudiant·es.
+Vous écrivez vos contenus de cours en Markdown. Le programme vous convertit tous vos supports aux formats HTML et PDF dans le dossier `public`, prêts à être imprimés ou distribués à vos étudiant·es.
 
 ~~~
 #Exemple de l'architecture d'un projet de gestion de cours
@@ -122,7 +124,7 @@ cm add:project mes-cours
 
 Si c'est votre premier projet alors, par défaut, `mes-cours` est votre projet *courant*, inutile donc de vous y déplacer pour l'administrer.
 
-> Le projet *courant* est défini sous la clé `MAIN` dans le fichier de configuration global (voir $HOME/.create-manager). Vous pouvez changer de projet courant avec la commande `change:current-project` ou en vous rendant directement dans le repértoire d'un autre projet. 
+> Le projet *courant* est défini sous la clé `MAIN` dans le fichier de configuration global (voir $HOME/.create-manager). Vous pouvez changer de projet courant avec la commande `change:current-project` ou en vous rendant directement dans le répertoire d'un autre projet. 
 
 ### Ajouter un nouveau cours
 
@@ -149,11 +151,11 @@ Par défaut, le programme vous crée un dossier `mon-ecole/course-manager` conte
 
 ### Ajouter un nouveau module à un cours
 
-A venir...
+À venir...
 
 ### Publier un cours
 
-A venir...
+À venir...
 
 ## Liste des commandes disponibles
 
@@ -201,7 +203,7 @@ Par exemple
 cm-create etablissement1 l2 php
 ~~~ -->
 
-<!-- crée le cours `l2-php` dans le dossier `cours/etablissement1`. Le dossier `l2-php` contient un dossier de biblio et un module de présentation par défaut `module-00-presentation` contenant une présentation en Markdown initialisée. -->
+<!-- crée le cours `l2-php` dans le dossier `cours/etablissement1`. Le dossier `l2-php` contiens un dossier de biblio et un module de présentation par défaut `module-00-presentation` contenant une présentation en Markdown initialisée. -->
 
 <!-- ### Ajouter un module à un cours existant `cm add:module` -->
 
@@ -237,11 +239,11 @@ Publier un cours revient à publier l'intégralité de ses modules.
 
 Les *commandes* peuvent prendre des *arguments* ou des *options* en paramètre. Pour lister les arguments et les options disponibles de chaque commande, taper `cm <nom de la commande> --help`. 
 
->Les chaînes de caractères entre chevrons `<>` doivent être remplacés par un nom de commande, d'argument ou d'option.
+>Les chaînes de caractères entre chevrons `<>` doivent être remplacées par un nom de commande, d'argument ou d'option.
 
 ### Argument d'une commande
 
-Un argument est une chaine de caractère ajouté à la suite de la commande pour modifier son comportement. Les arguments sont séparés par des esapces. Un argument peut-être obligatoire ou optionnel. 
+Un argument est une chaîne de caractère ajouté à la suite de la commande pour modifier son comportement. Les arguments sont séparés par des espaces. Un argument peut-être obligatoire ou optionnel. 
 
 Il s'écrit sous la forme `cm <nom de la commande> <nom de l'argument>`. Par exemple, `cm add:project mes-cours`. Attention, **les arguments sont ordonnés**, ils doivent être écrits dans l'ordre attendu par la commande. 
 
@@ -249,12 +251,12 @@ Il s'écrit sous la forme `cm <nom de la commande> <nom de l'argument>`. Par exe
 
 ### Options d'une commande
 
-Une option **est par définition optionnelle**. Elle a un nom et peut être placée n'importe où à la suite du nom de la commande (contrairement aux arguments). Elle sont préfixées par deux dashes `--`. Par exemple l'option `help` s'écrit `cm add:project --help`. 
+Une option **est par définition optionnelle**. Elle a un nom et peut être placée n'importe où à la suite du nom de la commande (contrairement aux arguments). Elles sont préfixées par deux dashes `--`. Par exemple l'option `help` s'écrit `cm add:project --help`. 
 
 Les options ont également un *alias*, un nom plus court. Un alias est préfixé par un dash `-`. Par exemple, `cm add:project --help` est équivalent à `cm add:project -h`; `-h` est l'alias de `--help`. Si l'option prend une valeur, on la passera comme suit: `--option=foo`, ou en version abrégée `-ofoo` (en supposant ici que l'*alias* de `option` est `o`).
 
 
-<!-- ## Sous le capôt: génération des documents au format HTML ou PDF avec marp et pandoc
+<!-- ## Sous le capot: génération des documents au format HTML ou PDF avec marp et pandoc
 
 ### Générer un fichier HTML+CSS à partir d'un fichier Markdown (avec `marp`)
 
@@ -291,7 +293,7 @@ pandoc {file.md} -t html5 -o {file.pdf} --css style.css --pdf-engine-opt=--enabl
 
 La documentation du code est générée par [phpDocumentor](https://docs.phpdoc.org/3.0/) et se trouve dans le dossier `docs`. Elle est [consultable dans le navigateur depuis ce fichier](./docs/index.html).
 
-Regénérer la documentation du projet à partir des sources
+Régénérer la documentation du projet à partir des sources
 
 ~~~
 #installer docker pour pouvoir générér la documentation de cette manière
