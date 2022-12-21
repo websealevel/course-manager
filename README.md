@@ -2,8 +2,9 @@
 
 Une application CLI [basée sur le composant Console de Symfony](https://symfony.com/doc/current/components/console.html), à destination des formateur·trices et enseignant·es, pour gérer les fichiers de cours et supports pédagogiques. 
 
-Tous les contenus du cours (cours, sujets de TD,TP, corrections, fiches, etc.) sont écrits en [Markdown](https://fr.wikipedia.org/wiki/Markdown) *en un endroit*, puis publiés vers différents autant de formats que nécessaires: HTML (présentations interactives, pages web, etc.), PDF (impression, exercices, sujet d'examens, etc.), LaTeX, etc.
+Tous les contenus du cours (cours, sujets de TD,TP, corrections, fiches, etc.) sont écrits en [Markdown](https://fr.wikipedia.org/wiki/Markdown) *en un endroit*, puis publiés vers autant de formats que désirés: HTML (présentations interactives, pages web, etc.), PDF (impression, exercices, sujet d'examens, etc.), LaTeX, etc.
 
+>Write once, reuse and publish everywhere !
 
 - [Course-manager](#course-manager)
   - [Dépendances tierces](#dépendances-tierces)
