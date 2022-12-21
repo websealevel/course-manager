@@ -30,15 +30,16 @@ class FileManager
      * @param string $absPathIniFile Le chemin absolu vers le fichier de configuration du projet 
      * @return string[]|false
      */
-    public static function parseIniFile(string $absPathIniFile): array|false
+    public static function parseIniFile(string $absPathIniFile, bool $processSections = false): array|false
     {
         $size = filesize($absPathIniFile);
 
-        $result = parse_ini_file($absPathIniFile);
+        $result = parse_ini_file($absPathIniFile, $processSections);
 
         //Un fichier vide n'est pas un fichier INI invalide.
         if (false === $result && 0 !== $size)
             throw new \Exception("Impossible de parser le fichier de configuration INI. Veuillez vérifier sa syntaxe.");
+
         return $result;
     }
 
@@ -70,22 +71,50 @@ class FileManager
      * @return bool
      * @throws Exception Si impossible d'ouvrir le fichier en écriture, impossible d'écrire dans le fichier.
      */
-    public static function createFile(string $abspath, string|array $content = ''): bool
+    public static function createFile(string $absPath, string|array $content = ''): bool
     {
         $file = fopen(
-            $abspath,
+            $absPath,
             'w'
         );
 
         if (!$file) {
-            throw new \Exception(sprintf("Impossible d'ouvrir le fichier %s", $abspath));
+            throw new \Exception(sprintf("Impossible d'ouvrir le fichier %s", $absPath));
         }
 
         if (false === fwrite($file, $content)) {
-            throw new \Exception(sprintf("Impossible d'écrire dans le fichier %s", $abspath));
+            throw new \Exception(sprintf("Impossible d'écrire dans le fichier %s", $absPath));
         }
 
         return fclose($file);
+    }
+
+
+    /**
+     * Lit le contenu d'un fichier dans une chaîne de caractères
+     * @param string $absPath Le chemin absolu du fichier à lire
+     * @return string Le contenu du fichier
+     * @throws Exception Si le fichier n'existe pas, impossible de le lire
+     */
+    public static function readFileContent(string $absPath): string
+    {
+
+        if (!static::fileExists($absPath))
+            throw new \Exception(sprintf("Le fichier %s n'existe pas.", $absPath));
+
+        $handle = fopen($absPath, "r");
+
+        if (false === $handle)
+            throw new \Exception(sprintf("Impossible d'ouvrir le fichier %s.", $absPath));
+
+        $contents = fread($handle, filesize($absPath));
+
+        if (false === $contents)
+            throw new \Exception(sprintf("Impossible de lire le contenu du fichier %s.", $absPath));
+
+        fclose($handle);
+
+        return $contents;
     }
 
 
