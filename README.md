@@ -9,7 +9,7 @@ Tous les contenus du cours (cours, sujets de TD,TP, corrections, fiches, etc.) s
 - [Course-manager](#course-manager)
   - [Dépendances tierces](#dépendances-tierces)
   - [Installation avec Composer](#installation-avec-composer)
-  - [Mettre à jour `course-manager`](#mettre-à-jour-course-manager)
+  - [Mettre à jour](#mettre-à-jour)
   - [Philosophie](#philosophie)
   - [Guide de démarrage](#guide-de-démarrage)
     - [Créer un nouveau projet](#créer-un-nouveau-projet)
@@ -62,9 +62,15 @@ export PATH="/path/to/course-manager:$PATH"
 
 Tester votre installation en tapant la commande `cm`.
 
-## Mettre à jour `course-manager`
+## Mettre à jour
 
-Pour mettre à jour course-manager, rendez-vous dans le dossier contenant le dépôt cloné. Assurez-vous d'être sur la branche `main` puis `git pull` pour récupérer le code-source à jour, et `composer update` pour mettre à jour les dépendances.
+Pour mettre à jour le programme, rendez-vous dans le dossier contenant le dépôt cloné. Assurez-vous d'être sur la branche `main` puis `git pull` pour récupérer le code-source à jour, et `composer update` pour mettre à jour les dépendances.
+
+~~~bash
+#Dans le repertoire du projet cloné sur github
+git pull
+composer update
+~~~
 
 ## Philosophie
 
