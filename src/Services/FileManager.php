@@ -173,23 +173,9 @@ class FileManager
      */
     public static function createRootDirectory(string $rootDir): string
     {
-
-        //Récuperer le répertoire courant
-        $absPathRootDir = sprintf("%s/%s", getcwd(), $rootDir);
-
-        try {
-
-            static::createDirectory($rootDir);
-        } catch (\Exception $e) {
-            // //Si le dossier existe déjà, on continue.
-            // if (FileManager::CODE_DIR_ALREADY_EXISTS === $e->getCode())
-            //     return $absPathRootDir;
-
-            //Sinon on fait passer l'exception
-            throw new \Exception($e->getMessage());
-        }
-
-        return $absPathRootDir;
+        static::createDirectory($rootDir);
+        //Récuperer le full path vers le projet
+        return  sprintf("%s/%s", getcwd(), $rootDir);
     }
 
     /**
@@ -273,6 +259,8 @@ class FileManager
      */
     public static function treeStructureUnderPath(string $path): array
     {
+
+
         $recursiveIterator = new \RecursiveIteratorIterator(
             new \RecursiveDirectoryIterator($path),
             \RecursiveIteratorIterator::LEAVES_ONLY
@@ -281,25 +269,16 @@ class FileManager
         //Build the full tree
         $tree = static::buildFullTreeFromPaths($recursiveIterator);
 
+        var_dump($tree);
+
         return $tree;
     }
 
-    public static function mapTreeStructureToHTML(string $path): array
-    {
-        $filesTree = FileManager::treeStructureUnderPath($path);
-
-        var_dump($filesTree);
-
-        //Transformer le filesTree en listes d'hyperliens HTML ayant la même structure.
-
-        return array();
-    }
-
     /**
-     * Return the complete tree structure representation of the iterator
+     * Return the complete tree structure representation of the recursive directory iterator
      * @param \RecursiveIteratorIterator $iterator The recursive iterator directory on the path
      */
-    public static function buildFullTreeFromPaths(\RecursiveIteratorIterator $iterator): array
+    private static function buildFullTreeFromPaths(\RecursiveIteratorIterator $iterator): array
     {
         //Filter dot files
         $iteratorFiltered = new \CallbackFilterIterator($iterator, function ($current, $key, $iterator) {
