@@ -62,10 +62,12 @@ class DefaultContent
      * Retourne le contenu du index.html d'un cours à sa création
      * @return string
      */
-    public static function indexHtmlContent(string $title): string
+    public static function indexHtmlContent(string $title, string $absPath = ''): string
     {
 
         $titleCapitalFirst = ucfirst($title);
+
+        $tree = FileManager::treeStructureUnderPath($absPath);
 
         $content = <<<HTML
 

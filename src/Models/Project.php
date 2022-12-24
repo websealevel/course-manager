@@ -38,7 +38,7 @@ class Project extends AbstractNode
     public function getDefaultFiles(): array
     {
         return array(
-            new File('index.html', DefaultContent::indexHtmlContent('Liste des cours')),
+            new File('index.html', DefaultContent::indexHtmlContent('Liste des cours', $this->absPath)),
             new File('config.ini', Config::configIniContent())
         );
     }
