@@ -37,6 +37,7 @@ class CreateProjectCommand extends Command
             $output->writeln([
                 $e->getMessage(),
             ]);
+            return COMMAND::FAILURE;
         }
 
         try {
@@ -44,7 +45,7 @@ class CreateProjectCommand extends Command
         } catch (\Exception $e) {
 
             //Rollback: supprimer le dossier $rootDir
-            FileManager::removeDir($rootDir);
+            FileManager::removeDir($absPathOfRootDir);
 
             $output->writeln([
                 $e->getMessage()
@@ -62,8 +63,8 @@ class CreateProjectCommand extends Command
                 $e->getMessage(),
             ]);
             //Rollback: suppresion du $rootDir et du projet dans le fichier de configuration global
-            FileManager::removeDir($rootDir);
-            Config::removeFromConfigFile($rootDir);
+            FileManager::removeDir($absPathOfRootDir);
+            Config::removeFromConfigFile($absPathOfRootDir);
             return COMMAND::FAILURE;
         }
 

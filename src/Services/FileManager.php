@@ -137,6 +137,7 @@ class FileManager
      */
     public static function removeDir(string $abspath): bool
     {
+
         //Check que le PATH est sur le home (on ne veut pas toucher à des fichiers systeme)
         if (!str_starts_with($abspath, '/home/') || str_contains($abspath, '.'))
             throw new \Exception("Impossible de supprimer un fichier qui n'appartient pas à l'utilisateur courant.");
@@ -180,9 +181,9 @@ class FileManager
 
             static::createDirectory($rootDir);
         } catch (\Exception $e) {
-            //Si le dossier existe déjà, on continue.
-            if (FileManager::CODE_DIR_ALREADY_EXISTS === $e->getCode())
-                return $absPathRootDir;
+            // //Si le dossier existe déjà, on continue.
+            // if (FileManager::CODE_DIR_ALREADY_EXISTS === $e->getCode())
+            //     return $absPathRootDir;
 
             //Sinon on fait passer l'exception
             throw new \Exception($e->getMessage());
@@ -272,22 +273,63 @@ class FileManager
      */
     public static function treeStructureUnderPath(string $path): array
     {
-        if (!is_dir($path))
-            return array($path => array());
+        $recursiveIterator = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($path),
+            \RecursiveIteratorIterator::LEAVES_ONLY
+        );
 
-        //Le but est de reconstruire l'arbre des fichiers sur le path et de 
-        //le mapper à un arbre d'hyperliens en HTML
+        //Build the full tree
+        $tree = static::buildFullTreeFromPaths($recursiveIterator);
 
-
-        return array();
+        return $tree;
     }
 
     public static function mapTreeStructureToHTML(string $path): array
     {
         $filesTree = FileManager::treeStructureUnderPath($path);
 
+        var_dump($filesTree);
+
         //Transformer le filesTree en listes d'hyperliens HTML ayant la même structure.
 
         return array();
+    }
+
+    /**
+     * Return the complete tree structure representation of the iterator
+     * @param \RecursiveIteratorIterator $iterator The recursive iterator directory on the path
+     */
+    public static function buildFullTreeFromPaths(\RecursiveIteratorIterator $iterator): array
+    {
+        //Filter dot files
+        $iteratorFiltered = new \CallbackFilterIterator($iterator, function ($current, $key, $iterator) {
+            return !$iterator->isDot();
+        });
+
+        $trees = array();
+        foreach ($iteratorFiltered as $file) {
+            $trees[] = static::buildTreeFromPath($file->getPathname());
+        }
+        return array_merge_recursive(...$trees);
+    }
+
+    /**
+     * Return the tree for the given path
+     * @param string $path 
+     * @param array $tree 
+     * @return string|array
+     */
+    public static function buildTreeFromPath(string $path, array $tree = array()): string|array
+    {
+        $pos = strpos($path, '/');
+
+        if (false === $pos)
+            return $path;
+
+        $key = substr($path, 0, $pos);
+
+        $tree[$key] = static::buildTreeFromPath(substr($path, $pos + 1), $tree[$key] = array());
+
+        return $tree;
     }
 }
