@@ -11,6 +11,7 @@ Tous les contenus du cours (cours, sujets de TD,TP, corrections, fiches, etc.) s
   - [Installation avec Composer](#installation-avec-composer)
   - [Mettre à jour](#mettre-à-jour)
   - [Philosophie](#philosophie)
+  - [Modèle](#modèle)
   - [Guide de démarrage](#guide-de-démarrage)
     - [Créer un nouveau projet](#créer-un-nouveau-projet)
     - [Ajouter un nouveau cours](#ajouter-un-nouveau-cours)
@@ -87,7 +88,7 @@ Un projet de gestion de cours se compose des éléments suivants:
 Vous écrivez vos contenus de cours en Markdown. Le programme vous convertit tous vos supports aux formats HTML et PDF dans le dossier `public`, prêts à être imprimés ou distribués à vos étudiant·es.
 
 ~~~
-#Exemple de l'architecture d'un projet de gestion de cours
+#Un exemple de l'architecture d'un projet de gestion de cours
 #Sources des cours
 sources/
   - mon-ecole/
@@ -114,6 +115,19 @@ public/
       - module01-td-01.pdf
       - etc.
 ~~~
+
+Le programme vous oblige uniquement à 
+
+- définir un projet courant (un dossier de travail)
+- créer un dossier par cours
+
+Vous organisez ensuite comme vous le désirez vos supports de cours à l'intérieur de ces dossiers. Des règles de publication sont définies automatiquement ou sont configurables.
+
+## Modèle
+
+Un *projet* est un *système de gestion de cours*, c'est votre répertoire de travail. Vous pouvez avoir plusieurs projets sur la même machine. 
+
+Un *cours* est défini par des *métadonnées*, peut être assigné à un *vendor*, et se compose de *modules*. Chaque *module* contient vos supports de cours. Les métadonnées servent à lister, filtrer et interroger vos cours.
 
 ## Guide de démarrage
 
@@ -144,16 +158,17 @@ cm add:course course-manager mon-ecole --level=L1 --keywords=cli,gestion
 
 > Le `vendor` est un paramètre *optionnel*. Si vous ne renseignez pas de `vendor`, le cours sera enregistré dans le vendor global. Par exemple, `cm add:course course-manager` créera le cours `course-manager` directement dans le dossier `sources`, et celui-ci ne sera rattaché à aucun `vendor` en particulier.
 
-Par défaut, le programme vous crée un dossier `mon-ecole/course-manager` contenant les fichiers suivants:
+Par défaut, le programme vous crée un dossier `mon-ecole/course-manager` contenant les fichiers/dossiers suivants:
 
  - `bibliographie`: pour stocker les documents bibliographiques du cours (ebook, fichiers PDF, images, etc.)
  - `module00-presentation`: module de présentation du cours
-   - `cours`: contient le fichier de présentation `slides.md`. Placer ici les supports de cours.
+   - `cours`: contient le fichier de cours `cours.md`. Placer ici les supports de cours.
    - `exercices`: placer ici les fiches d'exercices (énoncés, corrections)
  - `README.md`: description brève du cours (durée, contenu, ressources, niveau des apprenants (`--level`), remarques). Contient le plan, les objectifs, le planning, etc.
- - `tp`: pour stocker les sujets de TP, TP fil rouge, etc.
  - `index.html`: permet de naviguer dans le cours au format HTML.
  - `.metadata`: un fichier caché contenant des métadonnées sur le cours. Généré automatiquement. Permet de filtrer les cours via le programme.
+
+> Vous pouvez modifier le contenu par défaut d'un cours selon vos besoins.
 
 ### Ajouter un nouveau module à un cours
 
@@ -190,7 +205,7 @@ cm add:project <nom du système de gestion de cours>
 ### Ajouter un nouveau cours au système courant `add:course`
 
 ~~~bash
-cm add:course <vendor> <niveau> <nom du cours>
+cm add:course <vendor> <nom du cours>
 ~~~ -->
 
 <!-- ~~~bash
@@ -235,6 +250,8 @@ Publier un cours revient à publier l'intégralité de ses modules.
 #### Contenus de type *document*: format HTML et PDF
 
 ### Inspecter les cours du système courant (à venir...) -->
+
+<!-- ### Exporter toutes les références biblio dans un fichier par cours -->
 
 
 
