@@ -47,14 +47,21 @@ class Course extends AbstractNode
         return sprintf("%s/%s", $this->absPathProjectDirectory, $this->path());
     }
 
+    /**
+     * Retourne les répertoires contenus par défaut dans un cours
+     * @return array
+     */
     public function getDefaultDirectories(): array
     {
         return array(
             new Directory('bibliographie'),
-            new Directory('tp'),
         );
     }
 
+    /**
+     * Retourne les fichiers contenus par défaut dans un cours
+     * @return array
+     */
     public function getDefaultFiles(): array
     {
 

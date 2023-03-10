@@ -8,11 +8,12 @@ use Symfony\Component\Console\Application;
 use Wsl\CourseManager\Commands\ChangeCurrentProjectCommand;
 use Wsl\CourseManager\Commands\CreateProjectCommand;
 use Wsl\CourseManager\Commands\ListAllProjectsCommand;
+use Wsl\CourseManager\Commands\ListAllCoursesCommand;
 use Wsl\CourseManager\Commands\RemoveProjectCommand;
 use Wsl\CourseManager\Commands\ShowCurrentProjetCommand;
 use Wsl\CourseManager\Commands\UninstallCommand;
 use Wsl\CourseManager\Commands\CreateCourseCommand;
-
+use Wsl\CourseManager\Commands\PublishCourseCommand;
 use Wsl\CourseManager\Config;
 
 
@@ -34,8 +35,9 @@ $app->add(new UninstallCommand('uninstall'));
 /**
  * Gestion des cours d'un projet
  */
-
 $app->add(new CreateCourseCommand('add:course'));
+$app->add(new ListAllCoursesCommand('show:courses'));
+$app->add(new PublishCourseCommand('publish:course'));
 
 
 $app->run();

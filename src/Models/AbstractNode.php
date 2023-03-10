@@ -33,7 +33,7 @@ abstract class AbstractNode implements INode
             if ($dir->hasFiles()) {
                 //Creation des fichiers dans le sous-noeud
                 foreach ($dir->files as $file) {
-                    $absPath =  sprintf("%s/%s/%s", $this->getAbsPathOfParentDirectory(), $dir->name, $file->name);
+                    $absPathFile =  sprintf("%s/%s",  $absPath, $file->name);
                     FileManager::createFile($absPath, $file->content);
                 }
             }

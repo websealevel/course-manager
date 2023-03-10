@@ -30,8 +30,11 @@ class Project extends AbstractNode
     public function getDefaultDirectories(): array
     {
         return array(
+            //Où seront les sources des modules
             new Directory('sources'),
+            //Où seront les templates par défaut du projet
             new Directory('templates'),
+            //Où seront publiés les cours
             new Directory('public')
         );
     }

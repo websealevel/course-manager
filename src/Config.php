@@ -83,7 +83,7 @@ class Config
 
 
     /**
-     * Le contenu du fichier INI de configuration local du projet par défaut
+     * Le contenu par défaut du fichier de configuration local du projet 
      * @return string
      */
     public static function configIniContent(): string
