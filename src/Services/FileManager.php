@@ -260,7 +260,6 @@ class FileManager
     public static function treeStructureUnderPath(string $path): array
     {
 
-
         $recursiveIterator = new \RecursiveIteratorIterator(
             new \RecursiveDirectoryIterator($path),
             \RecursiveIteratorIterator::LEAVES_ONLY
