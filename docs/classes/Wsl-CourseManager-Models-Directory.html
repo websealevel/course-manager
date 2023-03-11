@@ -72,10 +72,6 @@
     <a href="packages/Application.html" class="">Application</a>
 </h4>
 
-                                    <h4 class="phpdocumentor-sidebar__root-namespace">
-    <a href="packages/wsl.html" class="">wsl</a>
-</h4>
-
                         </section>
             
     <section class="phpdocumentor-sidebar__category">
@@ -148,14 +144,14 @@
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;            </span>
 </dt>
-<dd></dd>
+<dd>Liste des dossiers qui doivent être présents</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/Wsl-CourseManager-Models-Directory.html#property_files">$files</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;            </span>
 </dt>
-<dd></dd>
+<dd>Liste des fichiers qui doivent être présents</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/Wsl-CourseManager-Models-Directory.html#property_name">$name</a>
@@ -170,6 +166,14 @@
                                 &nbsp;: mixed    </span>
 </dt>
 <dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Wsl-CourseManager-Models-Directory.html#method_hasDirs">hasDirs()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Retourne vrai si le repertoire contient
+des repertoires, faux sinon.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Wsl-CourseManager-Models-Directory.html#method_hasFiles">hasFiles()</a>
@@ -207,7 +211,7 @@ des fichiers, faux sinon.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Models/Directory.php"><a href="files/src-models-directory.html"><abbr title="src/Models/Directory.php">Directory.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">14</span>
+    <span class="phpdocumentor-element-found-in__line">22</span>
 
     </aside>
 
@@ -241,21 +245,20 @@ des fichiers, faux sinon.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Models/Directory.php"><a href="files/src-models-directory.html"><abbr title="src/Models/Directory.php">Directory.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">12</span>
+    <span class="phpdocumentor-element-found-in__line">16</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Liste des dossiers qui doivent être présents</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
     <span class="phpdocumentor-signature__name">$directories</span>
      = <span class="phpdocumentor-signature__default-value">array()</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -275,21 +278,20 @@ des fichiers, faux sinon.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Models/Directory.php"><a href="files/src-models-directory.html"><abbr title="src/Models/Directory.php">Directory.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">21</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Liste des fichiers qui doivent être présents</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
     <span class="phpdocumentor-signature__name">$files</span>
      = <span class="phpdocumentor-signature__default-value">array()</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -408,6 +410,40 @@ des fichiers, faux sinon.</dd>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_hasDirs">
+        hasDirs()
+        <a href="classes/Wsl-CourseManager-Models-Directory.html#method_hasDirs" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Models/Directory.php"><a href="files/src-models-directory.html"><abbr title="src/Models/Directory.php">Directory.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">39</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Retourne vrai si le repertoire contient
+des repertoires, faux sinon.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">hasDirs</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_hasFiles">
         hasFiles()
         <a href="classes/Wsl-CourseManager-Models-Directory.html#method_hasFiles" class="headerlink"><i class="fas fa-link"></i></a>
@@ -415,7 +451,7 @@ des fichiers, faux sinon.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Models/Directory.php"><a href="files/src-models-directory.html"><abbr title="src/Models/Directory.php">Directory.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">30</span>
 
     </aside>
 

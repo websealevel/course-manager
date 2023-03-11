@@ -161,10 +161,10 @@ Search.appendIndex(
             "summary": "Classe\u0020en\u0020charge\u0020de\u0020g\u00E9rer\u0020la\u0020configuration\u0020d\u0027un\u0020projet",
             "url": "classes/Wsl-CourseManager-Config.html"
         },                {
-            "fqsen": "\\Wsl\\CourseManager\\Config\u003A\u003Acreate\u0028\u0029",
-            "name": "create",
-            "summary": "Retourne\u0020les\u0020variables\u0020d\u0027environnement\u0020avec\u0020validation\u0020pr\u00E9alable",
-            "url": "classes/Wsl-CourseManager-Config.html#method_create"
+            "fqsen": "\\Wsl\\CourseManager\\Config\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Wsl-CourseManager-Config.html#method___construct"
         },                {
             "fqsen": "\\Wsl\\CourseManager\\Config\u003A\u003AreadLocalConfigFile\u0028\u0029",
             "name": "readLocalConfigFile",
@@ -173,7 +173,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Wsl\\CourseManager\\Config\u003A\u003AconfigIniContent\u0028\u0029",
             "name": "configIniContent",
-            "summary": "Le\u0020contenu\u0020du\u0020fichier\u0020INI\u0020de\u0020configuration\u0020local\u0020du\u0020projet\u0020par\u0020d\u00E9faut",
+            "summary": "Le\u0020contenu\u0020par\u0020d\u00E9faut\u0020du\u0020fichier\u0020de\u0020configuration\u0020local\u0020du\u0020projet",
             "url": "classes/Wsl-CourseManager-Config.html#method_configIniContent"
         },                {
             "fqsen": "\\Wsl\\CourseManager\\Config\u003A\u003AcreateGlobalConfigFile\u0028\u0029",
@@ -213,7 +213,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Wsl\\CourseManager\\Config\u003A\u003AisThereALocalConfigurationFileInTheCurrentDirectory\u0028\u0029",
             "name": "isThereALocalConfigurationFileInTheCurrentDirectory",
-            "summary": "Retourne\u0020vrai\u0020si\u0020le\u0020dossier\u0020courant\u0020est\u0020un\u0020repertoire\u0020de\u0020gestion\u0020de\u0020cours\nmanipuable\u0020par\u0020le\u0020programme,\u0020faux\u0020sinon",
+            "summary": "Retourne\u0020vrai\u0020si\u0020le\u0020dossier\u0020courant\u0020est\u0020un\u0020repertoire\u0020de\u0020gestion\u0020de\u0020cours,\u0020faux\u0020sinon",
             "url": "classes/Wsl-CourseManager-Config.html#method_isThereALocalConfigurationFileInTheCurrentDirectory"
         },                {
             "fqsen": "\\Wsl\\CourseManager\\Config\u003A\u003AgetCurrentProjectDefinedInGlobalConfiguration\u0028\u0029",
@@ -261,20 +261,35 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Wsl-CourseManager-Config.html#constant_DEFAULT_ROOT_DIR"
         },                {
-            "fqsen": "\\Wsl\\CourseManager\\Config\u003A\u003AMANDATORY_CONFIG_KEYS",
-            "name": "MANDATORY_CONFIG_KEYS",
+            "fqsen": "\\Wsl\\CourseManager\\Config\u003A\u003AMANDATORY_LOCAL_CONFIG_KEYS",
+            "name": "MANDATORY_LOCAL_CONFIG_KEYS",
             "summary": "Les\u0020cl\u00E9s\u0020\u0028cl\u00E9s\/valeurs\u0029\u0020obligatoires\u0020dans\u0020le\u0020fichier\u0020de\u0020configuration\nlocal\u0020\u00E0\u0020un\u0020projet.",
-            "url": "classes/Wsl-CourseManager-Config.html#constant_MANDATORY_CONFIG_KEYS"
+            "url": "classes/Wsl-CourseManager-Config.html#constant_MANDATORY_LOCAL_CONFIG_KEYS"
+        },                {
+            "fqsen": "\\Wsl\\CourseManager\\Config\u003A\u003A\u0024variables",
+            "name": "variables",
+            "summary": "",
+            "url": "classes/Wsl-CourseManager-Config.html#property_variables"
         },                {
             "fqsen": "\\Wsl\\CourseManager\\Models\\AbstractNode",
             "name": "AbstractNode",
             "summary": "Classe\u0020abstraite\u0020repr\u00E9sentant\u0020un\u0020noeud\u0020\u0028projet,\u0020cours,\u0020module\u0029\nUtilise\u0020le\u0020DP\u0020Template\u0020Method\u0020pour\u0020creer\u0020les\u0020repertoires\u0020et\u0020les\u0020fichiers.",
             "url": "classes/Wsl-CourseManager-Models-AbstractNode.html"
         },                {
+            "fqsen": "\\Wsl\\CourseManager\\Models\\AbstractNode\u003A\u003Acreate\u0028\u0029",
+            "name": "create",
+            "summary": "Action\u003A\u0020Execution\u0020du\u0020build\u0020\u0028cr\u00E9ation\u0020des\u0020fichiers\u0020et\u0020des\u0020dossiers\u0029\u0020et\u0020des\u0020hooks",
+            "url": "classes/Wsl-CourseManager-Models-AbstractNode.html#method_create"
+        },                {
             "fqsen": "\\Wsl\\CourseManager\\Models\\AbstractNode\u003A\u003Abuild\u0028\u0029",
             "name": "build",
             "summary": "Action\u003A\u0020cr\u00E9e\u0020les\u0020dossiers\u0020et\u0020les\u0020fichiers\u0020par\u0020d\u00E9faut\u0020du\u0020Noeud.",
             "url": "classes/Wsl-CourseManager-Models-AbstractNode.html#method_build"
+        },                {
+            "fqsen": "\\Wsl\\CourseManager\\Models\\AbstractNode\u003A\u003AcreateDirectoryAndItsContent\u0028\u0029",
+            "name": "createDirectoryAndItsContent",
+            "summary": "Action\u003A\u0020cree\u0020le\u0020repertoire\u0020et\u0020son\u0020contenu\u0020de\u0020mani\u00E8re\u0020r\u00E9cursive\u0020\u0028repertoire\u0020et\u0020fichiers\u0029",
+            "url": "classes/Wsl-CourseManager-Models-AbstractNode.html#method_createDirectoryAndItsContent"
         },                {
             "fqsen": "\\Wsl\\CourseManager\\Models\\AbstractNode\u003A\u003AgetDefaultDirectory\u0028\u0029",
             "name": "getDefaultDirectory",
@@ -290,11 +305,6 @@ Search.appendIndex(
             "name": "hookAfterBuilding",
             "summary": "Hook\u0020mis\u0020\u00E0\u0020disposition\u0020pour\u0020executer\u0020du\u0020code\u0020apr\u00E8s\u0020le\u0020build",
             "url": "classes/Wsl-CourseManager-Models-AbstractNode.html#method_hookAfterBuilding"
-        },                {
-            "fqsen": "\\Wsl\\CourseManager\\Models\\AbstractNode\u003A\u003Acreate\u0028\u0029",
-            "name": "create",
-            "summary": "Action\u003A\u0020Execution\u0020du\u0020build\u0020\u0028cr\u00E9ation\u0020des\u0020fichiers\u0020et\u0020des\u0020dossiers\u0029\u0020et\u0020des\u0020hooks",
-            "url": "classes/Wsl-CourseManager-Models-AbstractNode.html#method_create"
         },                {
             "fqsen": "\\Wsl\\CourseManager\\Models\\Course",
             "name": "Course",
@@ -318,18 +328,13 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Wsl\\CourseManager\\Models\\Course\u003A\u003AgetDefaultDirectories\u0028\u0029",
             "name": "getDefaultDirectories",
-            "summary": "",
+            "summary": "Retourne\u0020les\u0020r\u00E9pertoires\u0020contenus\u0020par\u0020d\u00E9faut\u0020dans\u0020un\u0020cours",
             "url": "classes/Wsl-CourseManager-Models-Course.html#method_getDefaultDirectories"
         },                {
             "fqsen": "\\Wsl\\CourseManager\\Models\\Course\u003A\u003AgetDefaultFiles\u0028\u0029",
             "name": "getDefaultFiles",
-            "summary": "",
+            "summary": "Retourne\u0020les\u0020fichiers\u0020contenus\u0020par\u0020d\u00E9faut\u0020dans\u0020un\u0020cours",
             "url": "classes/Wsl-CourseManager-Models-Course.html#method_getDefaultFiles"
-        },                {
-            "fqsen": "\\Wsl\\CourseManager\\Models\\Course\u003A\u003AfullName\u0028\u0029",
-            "name": "fullName",
-            "summary": "Retourne\u0020le\u0020nom\u0020complet\u0020\u0028path\u0020relatif\u0020au\u0020projet\u0020courant\u0029\u0020du\u0020cours",
-            "url": "classes/Wsl-CourseManager-Models-Course.html#method_fullName"
         },                {
             "fqsen": "\\Wsl\\CourseManager\\Models\\Course\u003A\u003Apath\u0028\u0029",
             "name": "path",
@@ -343,7 +348,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Wsl\\CourseManager\\Models\\Course\u003A\u003A\u0024modules",
             "name": "modules",
-            "summary": "",
+            "summary": "Liste\u0020des\u0020modules\u0020contenus\u0020dans\u0020le\u0020cours",
             "url": "classes/Wsl-CourseManager-Models-Course.html#property_modules"
         },                {
             "fqsen": "\\Wsl\\CourseManager\\Models\\Course\u003A\u003A\u0024name",
@@ -386,6 +391,11 @@ Search.appendIndex(
             "summary": "Retourne\u0020vrai\u0020si\u0020le\u0020repertoire\u0020est\u0020suppos\u00E9\u0020contenir\ndes\u0020fichiers,\u0020faux\u0020sinon.",
             "url": "classes/Wsl-CourseManager-Models-Directory.html#method_hasFiles"
         },                {
+            "fqsen": "\\Wsl\\CourseManager\\Models\\Directory\u003A\u003AhasDirs\u0028\u0029",
+            "name": "hasDirs",
+            "summary": "Retourne\u0020vrai\u0020si\u0020le\u0020repertoire\u0020contient\ndes\u0020repertoires,\u0020faux\u0020sinon.",
+            "url": "classes/Wsl-CourseManager-Models-Directory.html#method_hasDirs"
+        },                {
             "fqsen": "\\Wsl\\CourseManager\\Models\\Directory\u003A\u003A\u0024name",
             "name": "name",
             "summary": "",
@@ -393,12 +403,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Wsl\\CourseManager\\Models\\Directory\u003A\u003A\u0024directories",
             "name": "directories",
-            "summary": "",
+            "summary": "Liste\u0020des\u0020dossiers\u0020qui\u0020doivent\u0020\u00EAtre\u0020pr\u00E9sents",
             "url": "classes/Wsl-CourseManager-Models-Directory.html#property_directories"
         },                {
             "fqsen": "\\Wsl\\CourseManager\\Models\\Directory\u003A\u003A\u0024files",
             "name": "files",
-            "summary": "",
+            "summary": "Liste\u0020des\u0020fichiers\u0020qui\u0020doivent\u0020\u00EAtre\u0020pr\u00E9sents",
             "url": "classes/Wsl-CourseManager-Models-Directory.html#property_files"
         },                {
             "fqsen": "\\Wsl\\CourseManager\\Models\\Directory\u003A\u003A\u0024description",
@@ -463,7 +473,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Wsl\\CourseManager\\Models\\Module\u003A\u003AgetDefaultDirectories\u0028\u0029",
             "name": "getDefaultDirectories",
-            "summary": "",
+            "summary": "Retourne\u0020les\u0020repertoires\u0020par\u0020d\u00E9faut\u0020d\u0027un\u0020module",
             "url": "classes/Wsl-CourseManager-Models-Module.html#method_getDefaultDirectories"
         },                {
             "fqsen": "\\Wsl\\CourseManager\\Models\\Module\u003A\u003AgetDefaultFiles\u0028\u0029",
@@ -520,6 +530,11 @@ Search.appendIndex(
             "name": "getDefaultFiles",
             "summary": "",
             "url": "classes/Wsl-CourseManager-Models-Project.html#method_getDefaultFiles"
+        },                {
+            "fqsen": "\\Wsl\\CourseManager\\Models\\Project\u003A\u003AhookAfterBuilding\u0028\u0029",
+            "name": "hookAfterBuilding",
+            "summary": "Hook\u0020mis\u0020\u00E0\u0020disposition\u0020pour\u0020executer\u0020du\u0020code\u0020apr\u00E8s\u0020le\u0020build",
+            "url": "classes/Wsl-CourseManager-Models-Project.html#method_hookAfterBuilding"
         },                {
             "fqsen": "\\Wsl\\CourseManager\\Models\\Project\u003A\u003A\u0024absPath",
             "name": "absPath",
@@ -581,6 +596,11 @@ Search.appendIndex(
             "summary": "Action\u003A\u0020Cr\u00E9e\u0020le\u0020fichier\u0020\u0024abspath\u0020et\u0020\u00E9crit\u0020le\u0020contenu\u0020dedans.\u0020Retourne\u0020vrai\u0020en\u0020cas\u0020de\u0020r\u00E9ussite\u0020d\u0027\u00E9criture,\u0020faux\u0020sinon.",
             "url": "classes/Wsl-CourseManager-Services-FileManager.html#method_createFile"
         },                {
+            "fqsen": "\\Wsl\\CourseManager\\Services\\FileManager\u003A\u003AreadFileContent\u0028\u0029",
+            "name": "readFileContent",
+            "summary": "Lit\u0020le\u0020contenu\u0020d\u0027un\u0020fichier\u0020dans\u0020une\u0020cha\u00EEne\u0020de\u0020caract\u00E8res",
+            "url": "classes/Wsl-CourseManager-Services-FileManager.html#method_readFileContent"
+        },                {
             "fqsen": "\\Wsl\\CourseManager\\Services\\FileManager\u003A\u003AremoveFile\u0028\u0029",
             "name": "removeFile",
             "summary": "Action\u003A\u0020supprime\u0020le\u0020fichier\u0020sur\u0020le\u0020path\u0020\u0024abspath.\u0020Retourne\u0020vrai\u0020si\u0020la\u0020suppression\na\u0020eu\u0020lieu,\u0020faux\u0020sinon.",
@@ -616,6 +636,21 @@ Search.appendIndex(
             "summary": "Action\u003A\u0020cr\u00E9e\u0020un\u0020ensemble\u0020de\u0020fichiers\u0020dans\u0020le\u0020dossier\u0020du\u0020projet.",
             "url": "classes/Wsl-CourseManager-Services-FileManager.html#method_createFiles"
         },                {
+            "fqsen": "\\Wsl\\CourseManager\\Services\\FileManager\u003A\u003AtreeStructureUnderPath\u0028\u0029",
+            "name": "treeStructureUnderPath",
+            "summary": "Retourne\u0020la\u0020structure\u0020de\u0020fichiers\u0020pr\u00E9sent\u0020sur\u0020le\u0020path",
+            "url": "classes/Wsl-CourseManager-Services-FileManager.html#method_treeStructureUnderPath"
+        },                {
+            "fqsen": "\\Wsl\\CourseManager\\Services\\FileManager\u003A\u003AbuildFullTreeFromPaths\u0028\u0029",
+            "name": "buildFullTreeFromPaths",
+            "summary": "Return\u0020the\u0020complete\u0020tree\u0020structure\u0020representation\u0020of\u0020the\u0020recursive\u0020directory\u0020iterator",
+            "url": "classes/Wsl-CourseManager-Services-FileManager.html#method_buildFullTreeFromPaths"
+        },                {
+            "fqsen": "\\Wsl\\CourseManager\\Services\\FileManager\u003A\u003AbuildTreeFromPath\u0028\u0029",
+            "name": "buildTreeFromPath",
+            "summary": "Return\u0020the\u0020tree\u0020for\u0020the\u0020given\u0020path",
+            "url": "classes/Wsl-CourseManager-Services-FileManager.html#method_buildTreeFromPath"
+        },                {
             "fqsen": "\\Wsl\\CourseManager\\Services\\FileManager\u003A\u003ACODE_DIR_ALREADY_EXISTS",
             "name": "CODE_DIR_ALREADY_EXISTS",
             "summary": "",
@@ -630,6 +665,46 @@ Search.appendIndex(
             "name": "flatten",
             "summary": "Retourne\u0020les\u0020options\u0020d\u0027une\u0020commande\u0020dans\u0020une\u0020chaine\u0020de\u0020caract\u00E8res",
             "url": "classes/Wsl-CourseManager-Services-ParserOptions.html#method_flatten"
+        },                {
+            "fqsen": "\\Wsl\\CourseManager\\Commands\\ListAllCoursesCommand",
+            "name": "ListAllCoursesCommand",
+            "summary": "Commande\u0020pour\u0020lister\u0020tous\u0020les\u0020cours\u0020du\u0020projet\u0020courant",
+            "url": "classes/Wsl-CourseManager-Commands-ListAllCoursesCommand.html"
+        },                {
+            "fqsen": "\\Wsl\\CourseManager\\Commands\\ListAllCoursesCommand\u003A\u003Aexecute\u0028\u0029",
+            "name": "execute",
+            "summary": "",
+            "url": "classes/Wsl-CourseManager-Commands-ListAllCoursesCommand.html#method_execute"
+        },                {
+            "fqsen": "\\Wsl\\CourseManager\\Commands\\ListAllCoursesCommand\u003A\u003Aconfigure\u0028\u0029",
+            "name": "configure",
+            "summary": "",
+            "url": "classes/Wsl-CourseManager-Commands-ListAllCoursesCommand.html#method_configure"
+        },                {
+            "fqsen": "\\Wsl\\CourseManager\\Commands\\ListAllCoursesCommand\u003A\u003A\u0024defaultDescription",
+            "name": "defaultDescription",
+            "summary": "",
+            "url": "classes/Wsl-CourseManager-Commands-ListAllCoursesCommand.html#property_defaultDescription"
+        },                {
+            "fqsen": "\\Wsl\\CourseManager\\Commands\\PublishCourseCommand",
+            "name": "PublishCourseCommand",
+            "summary": "",
+            "url": "classes/Wsl-CourseManager-Commands-PublishCourseCommand.html"
+        },                {
+            "fqsen": "\\Wsl\\CourseManager\\Commands\\PublishCourseCommand\u003A\u003Aexecute\u0028\u0029",
+            "name": "execute",
+            "summary": "",
+            "url": "classes/Wsl-CourseManager-Commands-PublishCourseCommand.html#method_execute"
+        },                {
+            "fqsen": "\\Wsl\\CourseManager\\Commands\\PublishCourseCommand\u003A\u003Aconfigure\u0028\u0029",
+            "name": "configure",
+            "summary": "",
+            "url": "classes/Wsl-CourseManager-Commands-PublishCourseCommand.html#method_configure"
+        },                {
+            "fqsen": "\\Wsl\\CourseManager\\Commands\\PublishCourseCommand\u003A\u003A\u0024defaultDescription",
+            "name": "defaultDescription",
+            "summary": "",
+            "url": "classes/Wsl-CourseManager-Commands-PublishCourseCommand.html#property_defaultDescription"
         },                {
             "fqsen": "\\",
             "name": "\\",

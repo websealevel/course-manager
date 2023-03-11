@@ -72,10 +72,6 @@
     <a href="packages/Application.html" class="">Application</a>
 </h4>
 
-                                    <h4 class="phpdocumentor-sidebar__root-namespace">
-    <a href="packages/wsl.html" class="">wsl</a>
-</h4>
-
                         </section>
             
     <section class="phpdocumentor-sidebar__category">
@@ -156,9 +152,16 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Wsl-CourseManager-Models-AbstractNode.html#method_create">create()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: void    </span>
 </dt>
 <dd>Action: Execution du build (création des fichiers et des dossiers) et des hooks</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Wsl-CourseManager-Models-AbstractNode.html#method_createDirectoryAndItsContent">createDirectoryAndItsContent()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Action: cree le repertoire et son contenu de manière récursive (repertoire et fichiers)</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Wsl-CourseManager-Models-Project.html#method_getAbsPathOfParentDirectory">getAbsPathOfParentDirectory()</a>
@@ -170,7 +173,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Wsl-CourseManager-Models-Project.html#method_getDefaultDirectories">getDefaultDirectories()</a>
     <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+                                &nbsp;: array&lt;string|int, <a href="classes/Wsl-CourseManager-Models-Directory.html"><abbr title="\Wsl\CourseManager\Models\Directory">Directory</abbr></a>&gt;    </span>
 </dt>
 <dd></dd>
 
@@ -188,17 +191,17 @@
 </dt>
 <dd></dd>
 
-            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a href="classes/Wsl-CourseManager-Models-AbstractNode.html#method_hookAfterBuilding">hookAfterBuilding()</a>
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Wsl-CourseManager-Models-Project.html#method_hookAfterBuilding">hookAfterBuilding()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: void    </span>
 </dt>
 <dd>Hook mis à disposition pour executer du code après le build</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a href="classes/Wsl-CourseManager-Models-AbstractNode.html#method_hookBeforeBuilding">hookBeforeBuilding()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: void    </span>
 </dt>
 <dd>Hook mis à disposition pour executer du code avant le build</dd>
 
@@ -319,7 +322,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Models/AbstractNode.php"><a href="files/src-models-abstractnode.html"><abbr title="src/Models/AbstractNode.php">AbstractNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">85</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
@@ -327,17 +330,18 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">create</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$label</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;directory&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">create</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$description</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;node&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$label</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">&#039;directory&#039;</span>            </dt>
+                <span class="phpdocumentor-signature__argument__name">$description</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;node&#039;</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
+                    <section class="phpdocumentor-description"><p>. Opt. Un description du noeud qui va être crée.</p>
+</section>
 
             </dd>
             </dl>
@@ -352,14 +356,68 @@
                     <span class="phpdocumentor-tag__name">throws</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><abbr title="\Wsl\CourseManager\Models\Exception">Exception</abbr></span>
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
                                                             
                                              
                                     </dd>
                         </dl>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_createDirectoryAndItsContent">
+        createDirectoryAndItsContent()
+        <a href="classes/Wsl-CourseManager-Models-AbstractNode.html#method_createDirectoryAndItsContent" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Models/AbstractNode.php"><a href="files/src-models-abstractnode.html"><abbr title="src/Models/AbstractNode.php">AbstractNode.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">56</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Action: cree le repertoire et son contenu de manière récursive (repertoire et fichiers)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">createDirectoryAndItsContent</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$path</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Wsl-CourseManager-Models-Directory.html"><abbr title="\Wsl\CourseManager\Models\Directory">Directory</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$dir</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$path</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Le chemin absolu du repertoire à créer</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$dir</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Wsl-CourseManager-Models-Directory.html"><abbr title="\Wsl\CourseManager\Models\Directory">Directory</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Le repertoire et son contenu à créer</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
             &mdash;
         
     
@@ -410,22 +468,21 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Models/Project.php"><a href="files/src-models-project.html"><abbr title="src/Models/Project.php">Project.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">26</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getDefaultDirectories</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">getDefaultDirectories</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Wsl-CourseManager-Models-Directory.html"><abbr title="\Wsl\CourseManager\Models\Directory">Directory</abbr></a>&gt;</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Wsl-CourseManager-Models-Directory.html"><abbr title="\Wsl\CourseManager\Models\Directory">Directory</abbr></a>&gt;</span>
             &mdash;
         
     
@@ -443,7 +500,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Models/AbstractNode.php"><a href="files/src-models-abstractnode.html"><abbr title="src/Models/AbstractNode.php">AbstractNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">55</span>
+    <span class="phpdocumentor-element-found-in__line">86</span>
 
     </aside>
 
@@ -476,7 +533,7 @@
                     <span class="phpdocumentor-tag__name">throws</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><abbr title="\Wsl\CourseManager\Models\Exception">Exception</abbr></span>
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
                                                             
                                                  <section class="phpdocumentor-description"><p>Si le repertoire par défaut n'existe pas</p>
 </section>
@@ -503,7 +560,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Models/Project.php"><a href="files/src-models-project.html"><abbr title="src/Models/Project.php">Project.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">35</span>
+    <span class="phpdocumentor-element-found-in__line">41</span>
 
     </aside>
 
@@ -526,32 +583,32 @@
                     <article
         class="phpdocumentor-element
             -method
-            -protected
+            -public
                                                         "
 >
     <h4 class="phpdocumentor-element__name" id="method_hookAfterBuilding">
         hookAfterBuilding()
-        <a href="classes/Wsl-CourseManager-Models-AbstractNode.html#method_hookAfterBuilding" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Wsl-CourseManager-Models-Project.html#method_hookAfterBuilding" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Models/AbstractNode.php"><a href="files/src-models-abstractnode.html"><abbr title="src/Models/AbstractNode.php">AbstractNode.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Models/Project.php"><a href="files/src-models-project.html"><abbr title="src/Models/Project.php">Project.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">77</span>
+    <span class="phpdocumentor-element-found-in__line">49</span>
 
     </aside>
 
         <p class="phpdocumentor-summary">Hook mis à disposition pour executer du code après le build</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-                    <span class="phpdocumentor-signature__name">hookAfterBuilding</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">hookAfterBuilding</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
+    <span class="phpdocumentor-signature__response_type">void</span>
             &mdash;
         
     
@@ -569,7 +626,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Models/AbstractNode.php"><a href="files/src-models-abstractnode.html"><abbr title="src/Models/AbstractNode.php">AbstractNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">70</span>
+    <span class="phpdocumentor-element-found-in__line">102</span>
 
     </aside>
 
@@ -577,14 +634,14 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-                    <span class="phpdocumentor-signature__name">hookBeforeBuilding</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">hookBeforeBuilding</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
+    <span class="phpdocumentor-signature__response_type">void</span>
             &mdash;
         
     
@@ -602,7 +659,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Models/AbstractNode.php"><a href="files/src-models-abstractnode.html"><abbr title="src/Models/AbstractNode.php">AbstractNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">23</span>
+    <span class="phpdocumentor-element-found-in__line">32</span>
 
     </aside>
 
@@ -610,17 +667,17 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">build</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$label</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">build</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$description</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$label</span>
+                <span class="phpdocumentor-signature__argument__name">$description</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Un label qui décrit ce que l'on build</p>
+                    <section class="phpdocumentor-description"><p>Une description du noeud</p>
 </section>
 
             </dd>
@@ -636,7 +693,7 @@
                     <span class="phpdocumentor-tag__name">throws</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><abbr title="\Wsl\CourseManager\Models\Exception">Exception</abbr></span>
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
                                                             
                                              
                                     </dd>

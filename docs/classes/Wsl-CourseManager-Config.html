@@ -72,10 +72,6 @@
     <a href="packages/Application.html" class="">Application</a>
 </h4>
 
-                                    <h4 class="phpdocumentor-sidebar__root-namespace">
-    <a href="packages/wsl.html" class="">wsl</a>
-</h4>
-
                         </section>
             
     <section class="phpdocumentor-sidebar__category">
@@ -115,7 +111,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Config.php"><a href="files/src-config.html"><abbr title="src/Config.php">Config.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">12</span>
+    <span class="phpdocumentor-element-found-in__line">14</span>
 
     </aside>
 
@@ -138,7 +134,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a href="classes/Wsl-CourseManager-Config.html#constant_COURSE_MANAGER_VERSION">COURSE_MANAGER_VERSION</a>
     <span>
-        &nbsp;= 1.0                            </span>
+        &nbsp;= &quot;1.0&quot;                            </span>
 </dt>
 <dd></dd>
 
@@ -165,14 +161,28 @@ et un pointeur MAIN sur le projet courant.</dd>
 <dd>Le nom du fichier de configuration local à un projet</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a href="classes/Wsl-CourseManager-Config.html#constant_MANDATORY_CONFIG_KEYS">MANDATORY_CONFIG_KEYS</a>
+    <a href="classes/Wsl-CourseManager-Config.html#constant_MANDATORY_LOCAL_CONFIG_KEYS">MANDATORY_LOCAL_CONFIG_KEYS</a>
     <span>
-        &nbsp;= array(&#039;path_courses&#039;)                            </span>
+        &nbsp;= array(&#039;project&#039; =&gt; array(&#039;type&#039;, &#039;version&#039;, &#039;editor&#039;))                            </span>
 </dt>
 <dd>Les clés (clés/valeurs) obligatoires dans le fichier de configuration
 local à un projet.</dd>
 
-                        <dt class="phpdocumentor-table-of-contents__entry -method -public">
+                    <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/Wsl-CourseManager-Config.html#property_variables">$variables</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;            </span>
+</dt>
+<dd></dd>
+
+                <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Wsl-CourseManager-Config.html#method___construct">__construct()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Wsl-CourseManager-Config.html#method_absPathOfGlobalConfigFile">absPathOfGlobalConfigFile()</a>
     <span>
                                 &nbsp;: string    </span>
@@ -191,14 +201,7 @@ local à un projet.</dd>
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd>Le contenu du fichier INI de configuration local du projet par défaut</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Wsl-CourseManager-Config.html#method_create">create()</a>
-    <span>
-                                &nbsp;: <a href="classes/Wsl-CourseManager-Config.html"><abbr title="\Wsl\CourseManager\Config">Config</abbr></a>    </span>
-</dt>
-<dd>Retourne les variables d&#039;environnement avec validation préalable</dd>
+<dd>Le contenu par défaut du fichier de configuration local du projet</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Wsl-CourseManager-Config.html#method_createGlobalConfigFile">createGlobalConfigFile()</a>
@@ -226,7 +229,7 @@ et qui existent sur le disque.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Wsl-CourseManager-Config.html#method_getGlobalConfigurationValues">getGlobalConfigurationValues()</a>
     <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+                                &nbsp;: array&lt;string|int, string&gt;    </span>
 </dt>
 <dd>Retourne la liste des clefs/valeurs enregistrés dans le fichier de configuration
 global au format INI</dd>
@@ -251,8 +254,7 @@ des clefs MAIN et PROJECTS), faux sinon</dd>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
-<dd>Retourne vrai si le dossier courant est un repertoire de gestion de cours
-manipuable par le programme, faux sinon</dd>
+<dd>Retourne vrai si le dossier courant est un repertoire de gestion de cours, faux sinon</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Wsl-CourseManager-Config.html#method_loadCurrentProject">loadCurrentProject()</a>
@@ -271,7 +273,7 @@ manipuable par le programme, faux sinon</dd>
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Wsl-CourseManager-Config.html#method_readLocalConfigFile">readLocalConfigFile()</a>
     <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+                                &nbsp;: array&lt;string|int, string&gt;    </span>
 </dt>
 <dd>Retourne un tableau contenant les variables de configuration local d&#039;un projet.</dd>
 
@@ -310,7 +312,7 @@ s&#039;il existe. Si le projet a retiré est le projet MAIN, le projet précéde
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Config.php"><a href="files/src-config.html"><abbr title="src/Config.php">Config.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">15</span>
+    <span class="phpdocumentor-element-found-in__line">17</span>
 
     </aside>
 
@@ -319,7 +321,7 @@ s&#039;il existe. Si le projet a retiré est le projet MAIN, le projet précéde
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">COURSE_MANAGER_VERSION</span>
-    = <span class="phpdocumentor-signature__default-value">1.0</span>
+    = <span class="phpdocumentor-signature__default-value">&quot;1.0&quot;</span>
 </code>
 
 
@@ -339,7 +341,7 @@ s&#039;il existe. Si le projet a retiré est le projet MAIN, le projet précéde
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Config.php"><a href="files/src-config.html"><abbr title="src/Config.php">Config.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">32</span>
 
     </aside>
 
@@ -368,7 +370,7 @@ s&#039;il existe. Si le projet a retiré est le projet MAIN, le projet précéde
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Config.php"><a href="files/src-config.html"><abbr title="src/Config.php">Config.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">24</span>
 
     </aside>
 
@@ -397,7 +399,7 @@ et un pointeur MAIN sur le projet courant.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Config.php"><a href="files/src-config.html"><abbr title="src/Config.php">Config.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">30</span>
 
     </aside>
 
@@ -417,15 +419,15 @@ et un pointeur MAIN sur le projet courant.</p>
 
 </article>
                     <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_MANDATORY_CONFIG_KEYS">
-        MANDATORY_CONFIG_KEYS
-        <a href="classes/Wsl-CourseManager-Config.html#constant_MANDATORY_CONFIG_KEYS" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="constant_MANDATORY_LOCAL_CONFIG_KEYS">
+        MANDATORY_LOCAL_CONFIG_KEYS
+        <a href="classes/Wsl-CourseManager-Config.html#constant_MANDATORY_LOCAL_CONFIG_KEYS" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Config.php"><a href="files/src-config.html"><abbr title="src/Config.php">Config.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">37</span>
+    <span class="phpdocumentor-element-found-in__line">46</span>
 
     </aside>
 
@@ -435,8 +437,8 @@ local à un projet.</p>
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">array&lt;string|int, string&gt;</span>
-    <span class="phpdocumentor-signature__name">MANDATORY_CONFIG_KEYS</span>
-    = <span class="phpdocumentor-signature__default-value">array(&#039;path_courses&#039;)</span>
+    <span class="phpdocumentor-signature__name">MANDATORY_LOCAL_CONFIG_KEYS</span>
+    = <span class="phpdocumentor-signature__default-value">array(&#039;project&#039; =&gt; array(&#039;type&#039;, &#039;version&#039;, &#039;editor&#039;))</span>
 </code>
 
 
@@ -448,12 +450,94 @@ local à un projet.</p>
             </section>
 
         
+    <section class="phpdocumentor-properties">
+        <h3 class="phpdocumentor-elements__header" id="properties">
+            Properties
+            <a href="classes/Wsl-CourseManager-Config.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+        </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                -read-only        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_variables">
+        $variables
+        <a href="classes/Wsl-CourseManager-Config.html#property_variables" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Config.php"><a href="files/src-config.html"><abbr title="src/Config.php">Config.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">37</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">$variables</span>
+    </code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+            </section>
 
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
             <a href="classes/Wsl-CourseManager-Config.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/Wsl-CourseManager-Config.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Config.php"><a href="files/src-config.html"><abbr title="src/Config.php">Config.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">37</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$variables</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$variables</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, string&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
+            &mdash;
+        
+    
+</article>
                     <article
         class="phpdocumentor-element
             -method
@@ -467,7 +551,7 @@ local à un projet.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Config.php"><a href="files/src-config.html"><abbr title="src/Config.php">Config.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">139</span>
+    <span class="phpdocumentor-element-found-in__line">149</span>
 
     </aside>
 
@@ -500,7 +584,7 @@ local à un projet.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Config.php"><a href="files/src-config.html"><abbr title="src/Config.php">Config.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">364</span>
+    <span class="phpdocumentor-element-found-in__line">381</span>
 
     </aside>
 
@@ -533,11 +617,11 @@ local à un projet.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Config.php"><a href="files/src-config.html"><abbr title="src/Config.php">Config.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">94</span>
+    <span class="phpdocumentor-element-found-in__line">89</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Le contenu du fichier INI de configuration local du projet par défaut</p>
+        <p class="phpdocumentor-summary">Le contenu par défaut du fichier de configuration local du projet</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -559,57 +643,6 @@ local à un projet.</p>
             -public
                                     -static                    "
 >
-    <h4 class="phpdocumentor-element__name" id="method_create">
-        create()
-        <a href="classes/Wsl-CourseManager-Config.html#method_create" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Config.php"><a href="files/src-config.html"><abbr title="src/Config.php">Config.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">44</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Retourne les variables d&#039;environnement avec validation préalable</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">create</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Wsl-CourseManager-Config.html"><abbr title="\Wsl\CourseManager\Config">Config</abbr></a></span></code>
-
-    
-    
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">throws</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><abbr title="\Wsl\CourseManager\Exception">Exception</abbr></span>
-                                                            
-                                                 <section class="phpdocumentor-description"><ul>
-<li>Si PHP n'est pas executé en mode (SAPI) 'cli'</li>
-</ul>
-</section>
-
-                                    </dd>
-                        </dl>
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Wsl-CourseManager-Config.html"><abbr title="\Wsl\CourseManager\Config">Config</abbr></a></span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                    -static                    "
->
     <h4 class="phpdocumentor-element__name" id="method_createGlobalConfigFile">
         createGlobalConfigFile()
         <a href="classes/Wsl-CourseManager-Config.html#method_createGlobalConfigFile" class="headerlink"><i class="fas fa-link"></i></a>
@@ -617,7 +650,7 @@ local à un projet.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Config.php"><a href="files/src-config.html"><abbr title="src/Config.php">Config.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">104</span>
+    <span class="phpdocumentor-element-found-in__line">109</span>
 
     </aside>
 
@@ -640,7 +673,7 @@ s&#039;il n&#039;existe pas déjà. Retourne vrai si le fichier a été crée, f
                     <span class="phpdocumentor-tag__name">throws</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><abbr title="\Wsl\CourseManager\Exception">Exception</abbr></span>
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
                                                             
                                                  <section class="phpdocumentor-description"><ul>
 <li>Si impossible de créer le fichier de configuration alors qu'il n'existe pas.</li>
@@ -669,7 +702,7 @@ s&#039;il n&#039;existe pas déjà. Retourne vrai si le fichier a été crée, f
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Config.php"><a href="files/src-config.html"><abbr title="src/Config.php">Config.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">339</span>
+    <span class="phpdocumentor-element-found-in__line">356</span>
 
     </aside>
 
@@ -705,7 +738,7 @@ et qui existent sur le disque.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Config.php"><a href="files/src-config.html"><abbr title="src/Config.php">Config.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">294</span>
+    <span class="phpdocumentor-element-found-in__line">310</span>
 
     </aside>
 
@@ -738,7 +771,7 @@ et qui existent sur le disque.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Config.php"><a href="files/src-config.html"><abbr title="src/Config.php">Config.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">307</span>
+    <span class="phpdocumentor-element-found-in__line">324</span>
 
     </aside>
 
@@ -747,7 +780,7 @@ global au format INI</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getGlobalConfigurationValues</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getGlobalConfigurationValues</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span></code>
 
     
     
@@ -761,7 +794,7 @@ global au format INI</p>
                     <span class="phpdocumentor-tag__name">throws</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><abbr title="\Wsl\CourseManager\Exception">Exception</abbr></span>
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
                                                             
                                                  <section class="phpdocumentor-description"><ul>
 <li>Si le fichier de configuration n'existe pas, n'a pas une syntaxe correcte.</li>
@@ -772,7 +805,7 @@ global au format INI</p>
                         </dl>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span>
             &mdash;
         
     
@@ -790,7 +823,7 @@ global au format INI</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Config.php"><a href="files/src-config.html"><abbr title="src/Config.php">Config.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">130</span>
+    <span class="phpdocumentor-element-found-in__line">140</span>
 
     </aside>
 
@@ -823,7 +856,7 @@ global au format INI</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Config.php"><a href="files/src-config.html"><abbr title="src/Config.php">Config.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">250</span>
+    <span class="phpdocumentor-element-found-in__line">260</span>
 
     </aside>
 
@@ -857,12 +890,11 @@ des clefs MAIN et PROJECTS), faux sinon</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Config.php"><a href="files/src-config.html"><abbr title="src/Config.php">Config.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">278</span>
+    <span class="phpdocumentor-element-found-in__line">287</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Retourne vrai si le dossier courant est un repertoire de gestion de cours
-manipuable par le programme, faux sinon</p>
+        <p class="phpdocumentor-summary">Retourne vrai si le dossier courant est un repertoire de gestion de cours, faux sinon</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -891,7 +923,7 @@ manipuable par le programme, faux sinon</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Config.php"><a href="files/src-config.html"><abbr title="src/Config.php">Config.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">379</span>
+    <span class="phpdocumentor-element-found-in__line">396</span>
 
     </aside>
 
@@ -924,7 +956,7 @@ manipuable par le programme, faux sinon</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Config.php"><a href="files/src-config.html"><abbr title="src/Config.php">Config.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">235</span>
+    <span class="phpdocumentor-element-found-in__line">245</span>
 
     </aside>
 
@@ -994,7 +1026,7 @@ manipuable par le programme, faux sinon</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Config.php"><a href="files/src-config.html"><abbr title="src/Config.php">Config.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">63</span>
+    <span class="phpdocumentor-element-found-in__line">58</span>
 
     </aside>
 
@@ -1002,7 +1034,7 @@ manipuable par le programme, faux sinon</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">readLocalConfigFile</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">readLocalConfigFile</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span></code>
 
     
     
@@ -1016,7 +1048,7 @@ manipuable par le programme, faux sinon</p>
                     <span class="phpdocumentor-tag__name">throws</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><abbr title="\Wsl\CourseManager\Exception">Exception</abbr></span>
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
                                                             
                                                  <section class="phpdocumentor-description"><ul>
 <li>Si le fichier de configuration local n'existe pas.</li>
@@ -1028,7 +1060,7 @@ manipuable par le programme, faux sinon</p>
                     <span class="phpdocumentor-tag__name">throws</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><abbr title="\Wsl\CourseManager\Exception">Exception</abbr></span>
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
                                                             
                                                  <section class="phpdocumentor-description"><ul>
 <li>Si le fichier de configuration local ne contient pas les clefs/valeurs obligatoires.</li>
@@ -1039,7 +1071,7 @@ manipuable par le programme, faux sinon</p>
                         </dl>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span>
             &mdash;
         
     
@@ -1057,7 +1089,7 @@ manipuable par le programme, faux sinon</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Config.php"><a href="files/src-config.html"><abbr title="src/Config.php">Config.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">150</span>
+    <span class="phpdocumentor-element-found-in__line">160</span>
 
     </aside>
 
@@ -1102,7 +1134,7 @@ manipuable par le programme, faux sinon</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Config.php"><a href="files/src-config.html"><abbr title="src/Config.php">Config.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">192</span>
+    <span class="phpdocumentor-element-found-in__line">202</span>
 
     </aside>
 
