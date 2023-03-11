@@ -2,7 +2,6 @@
 
 namespace Wsl\CourseManager\Models;
 
-
 use Wsl\CourseManager\Models\Module;
 use Wsl\CourseManager\Services\DefaultContent;
 
@@ -13,7 +12,6 @@ use Wsl\CourseManager\Services\DefaultContent;
  */
 class Course extends AbstractNode
 {
-
     /**
      * Liste des modules contenus dans le cours
      * @var Module[]
@@ -79,25 +77,14 @@ class Course extends AbstractNode
     }
 
     /**
-     * Retourne le nom complet (path relatif au projet courant) du cours
-     * @return string
-     */
-    public function fullName(): string
-    {
-        if (empty($this->vendor))
-            return sprintf("%s", strtolower($this->name));
-
-        return sprintf("%s/%s", strtolower($this->vendor), strtolower($this->name));
-    }
-
-    /**
      * Retourne le chemin relatif du cours par rapport au projet courant
      * @return string
      */
     public function path(): string
     {
-        if (empty($this->vendor))
+        if (empty($this->vendor)) {
             return sprintf("%s", strtolower($this->name));
+        }
 
         return sprintf("%s/%s", strtolower($this->vendor), strtolower($this->name));
     }
