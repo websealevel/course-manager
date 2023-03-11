@@ -39,6 +39,7 @@ class CreateCourseCommand extends Command
             $sourcesDir->name
         );
 
+        //Définition du cours
         $course = new Course(
             $courseName,
             $absPathOfParentDirectory,
@@ -47,6 +48,7 @@ class CreateCourseCommand extends Command
             ParserOptions::flatten($keywords, ',')
         );
 
+        //Création du cours (dossiers et fichiers, configuration)
         try {
             $course->create();
         } catch (\Exception $e) {
