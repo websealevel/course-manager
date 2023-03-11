@@ -267,8 +267,6 @@ class FileManager
         //Build the full tree
         $tree = static::buildFullTreeFromPaths($recursiveIterator);
 
-        var_dump($tree);
-
         return $tree;
     }
 
