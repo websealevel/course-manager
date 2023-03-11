@@ -299,16 +299,14 @@ pandoc {file.md} -t html5 -o {file.pdf} --css style.css --pdf-engine-opt=--enabl
 
 ## Backlog (idées de commandes à ajouter)
 
-- `add:module`, ajouter un module a un cours existant
-- publication et formats
 - dans le `config.ini` ajouter un éditeur par défaut pour ouvrir le dossier d'un cours ou d'un module (par exemple vscode, emacs, vim, etc.). Ensuite utiliser `open:course <nom_du_cours>` et il ouvrira le dossier du cours avec l'éditeur défini.
 - filtrer les cours par niveau, sujets
 - ajouter une option à `add:course --prompt` pour proposer de guider l'utilisateur dans la création de cours:
   - vendor
   - liste de modules à ajouter des le debut
-- ajouter une commande qui installer un projet demo avec un cours demo sur course-manager
-- ajouter une commande pour publier sur un repo distant le contenu de sources et le contenu de public (possiblement séparés)
-- ajouter des abstractions Abstract Factory pour laisser l'utilisateur implementer ses projets, modules et cours (dossiers et fichiers par défaut, structure personnalisée)
+  - metadonnées
+- ajouter une commande qui installe un projet demo avec un cours demo sur course-manager (tutoriel)
+- ajouter une commande pour publier sur un repo distant le contenu des sources et le contenu de public (possiblement sur deux repos distants)
 
 ## phpDocumentor
 
