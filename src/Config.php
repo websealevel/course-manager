@@ -305,7 +305,7 @@ class Config
 
     /**
      * Retourne le projet courant défini dans la configuration globale (sous la clef MAIN)
-     * @return string
+     * @return string Le path absolu du projet
      */
     public static function getCurrentProjectDefinedInGlobalConfiguration(): string
     {
