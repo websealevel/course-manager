@@ -16,7 +16,7 @@ Une application CLI [basée sur le composant Console de Symfony](https://symfony
     - [Ajouter un nouveau module à un cours](#ajouter-un-nouveau-module-à-un-cours)
     - [Publier un cours](#publier-un-cours)
   - [Liste des commandes disponibles](#liste-des-commandes-disponibles)
-  - [Manuel général des outils CLI: arguments, options et syntaxe utilisée dans la documentation](#manuel-général-des-outils-cli-arguments-options-et-syntaxe-utilisée-dans-la-documentation)
+  - [Savoir utiliser la ligne de commande: arguments, options et syntaxe utilisées dans la documentation](#savoir-utiliser-la-ligne-de-commande-arguments-options-et-syntaxe-utilisées-dans-la-documentation)
     - [Argument d'une commande](#argument-dune-commande)
     - [Options d'une commande](#options-dune-commande)
   - [Backlog (idées de commandes à ajouter)](#backlog-idées-de-commandes-à-ajouter)
@@ -252,9 +252,7 @@ Publier un cours revient à publier l'intégralité de ses modules.
 <!-- ### Exporter toutes les références biblio dans un fichier par cours -->
 
 
-
-
-## Manuel général des outils CLI: arguments, options et syntaxe utilisée dans la documentation
+## Savoir utiliser la ligne de commande: arguments, options et syntaxe utilisées dans la documentation
 
 >Ce programme en ligne de commande suit les conventions généralement adoptées sur l'utilisation des commandes, arguments et options. 
 

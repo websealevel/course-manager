@@ -12,6 +12,7 @@ class DefaultContent
     public static function marpFirstSlide(string $moduleName, string $courseLevel)
     {
 
+        //A charger depuis un template
         $slideContent = <<<MARPMARKDOWN
         ---
         marp: false
@@ -43,11 +44,12 @@ class DefaultContent
     public static function readmeContent(string $title): string
     {
 
+        //A charger depuis un template
         $titleCapitalFirst = ucfirst($title);
 
         $content = <<<MARKDOWN
 
-        # ${titleCapitalFirst}
+        # {$titleCapitalFirst}
 
         ## Notes
 
@@ -78,7 +80,7 @@ class DefaultContent
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         </head>
         <body>
-            <h1>${titleCapitalFirst}</h1>
+            <h1>{$titleCapitalFirst}</h1>
         </body>
         </html>
 
