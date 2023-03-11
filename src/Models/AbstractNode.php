@@ -108,5 +108,6 @@ abstract class AbstractNode implements INode
      */
     protected function hookAfterBuilding(): void
     {
+        //Mettre à jour le listing des cours
     }
 }
