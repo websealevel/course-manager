@@ -19,7 +19,6 @@ Une application CLI [basée sur le composant Console de Symfony](https://symfony
   - [Savoir utiliser la ligne de commande: arguments, options et syntaxe utilisées dans la documentation](#savoir-utiliser-la-ligne-de-commande-arguments-options-et-syntaxe-utilisées-dans-la-documentation)
     - [Argument d'une commande](#argument-dune-commande)
     - [Options d'une commande](#options-dune-commande)
-  - [Backlog (idées de commandes à ajouter)](#backlog-idées-de-commandes-à-ajouter)
   - [phpDocumentor](#phpdocumentor)
   - [phpStan](#phpstan)
   - [Ressources](#ressources)
@@ -295,16 +294,6 @@ marp --pdf --allow-local-files {file.md}
 pandoc {file.md} -t html5 -o {file.pdf} --css style.css --pdf-engine-opt=--enable-local-file-access -->
 <!-- ~~~ -->
 
-## Backlog (idées de commandes à ajouter)
-
-- dans le `config.ini` ajouter un éditeur par défaut pour ouvrir le dossier d'un cours ou d'un module (par exemple vscode, emacs, vim, etc.). Ensuite utiliser `open:course <nom_du_cours>` et il ouvrira le dossier du cours avec l'éditeur défini.
-- filtrer les cours par niveau, sujets
-- ajouter une option à `add:course --prompt` pour proposer de guider l'utilisateur dans la création de cours:
-  - vendor
-  - liste de modules à ajouter des le debut
-  - metadonnées
-- ajouter une commande qui installe un projet demo avec un cours demo sur course-manager (tutoriel)
-- ajouter une commande pour publier sur un repo distant le contenu des sources et le contenu de public (possiblement sur deux repos distants)
 
 ## phpDocumentor
 
