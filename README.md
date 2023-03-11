@@ -85,7 +85,7 @@ Un projet de gestion de cours se compose des éléments suivants:
 
 Vous écrivez vos contenus de cours en Markdown. Le programme vous convertit tous vos supports aux formats HTML et PDF dans le dossier `public`, prêts à être imprimés ou distribués à vos étudiant·es.
 
-~~~
+<!-- ~~~
 #Un exemple de l'architecture d'un projet de gestion de cours
 #Sources des cours
 sources/
@@ -112,7 +112,7 @@ public/
       - module01-mon-module-slides.pdf
       - module01-td-01.pdf
       - etc.
-~~~
+~~~ -->
 
 Le programme vous oblige uniquement à 
 
