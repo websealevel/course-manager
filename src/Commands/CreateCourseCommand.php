@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Wsl\CourseManager\Commands;
 
 use Symfony\Component\Console\Command\Command;
@@ -8,14 +7,12 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
-
 use Wsl\CourseManager\Config;
 use Wsl\CourseManager\Models\Course;
 use Wsl\CourseManager\Services\ParserOptions;
 
 class CreateCourseCommand extends Command
 {
-
     protected static $defaultDescription = 'Create a new course in the current project.';
     protected static $defaultName = 'add:course';
 
@@ -53,7 +50,7 @@ class CreateCourseCommand extends Command
         try {
             $course->create();
         } catch (\Exception $e) {
-            $output->writeln("Une erreur est survenue lors de la création du cours" . $courseName);
+            $output->writeln("Une erreur est survenue lors de la création du cours " . $courseName);
             $output->writeln(
                 $e->getMessage()
             );
