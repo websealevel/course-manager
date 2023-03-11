@@ -35,14 +35,15 @@ Pour pouvoir utiliser le programme, assurez-vous d'installer les programmes suiv
 
 ## Installation avec Composer
 
-- installer [Composer](https://getcomposer.org/download/).
-- télécharger le [code source](https://github.com/websealevel/course-manager).
+Installer [Composer](https://getcomposer.org/download/).
+
+Télécharger le [code source](https://github.com/websealevel/course-manager).
 
 ~~~bash
 composer install
 ~~~
 
-- rendre le script `cm` exécutable
+Rendre le script `cm` exécutable
 
 ~~~bash
 chmod +x cm
@@ -65,6 +66,7 @@ Pour mettre à jour le programme, rendez-vous dans le dossier contenant le dép�
 
 ~~~bash
 #Dans le repertoire du projet cloné sur github
+git checkout main
 git pull && composer update
 ~~~
 
