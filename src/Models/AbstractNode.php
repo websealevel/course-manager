@@ -1,11 +1,9 @@
 <?php
 
-
 namespace Wsl\CourseManager\Models;
 
 use Wsl\CourseManager\Models\INode;
 use Wsl\CourseManager\Services\FileManager;
-
 
 /**
  * Classe abstraite représentant un noeud (projet, cours, module)
@@ -13,36 +11,69 @@ use Wsl\CourseManager\Services\FileManager;
  */
 abstract class AbstractNode implements INode
 {
+     /**
+     * Action: Execution du build (création des fichiers et des dossiers) et des hooks
+     * @param string $label Un label décrivant le noeud qui va être crée.
+     * @throws \Exception
+     */
+    public function create(string $label = 'directory'): void
+    {
+        $this->hookBeforeBuilding();
+        $this->build($label);
+        $this->hookAfterBuilding();
+    }
 
     /**
      * Action: crée les dossiers et les fichiers par défaut du Noeud.
-     * @param string $label Un label qui décrit ce que l'on build
+     * @param string $label Un label décrivant le noeud
      * @return void
      * @throws \Exception
      */
     private function build($label): void
     {
 
-        //Création des dossiers par défaut
-        foreach ($this->getDefaultDirectories() as $dir) {
+        $path =  $this->getAbsPathOfParentDirectory();
 
-            $absPath = sprintf("%s/%s", $this->getAbsPathOfParentDirectory(), $dir->name);
-            FileManager::createDirectory($absPath, $label);
-
-            //A refactor proprement. Possibilité de recursion ici avec le Model Directory.
-            if ($dir->hasFiles()) {
-                //Creation des fichiers dans le sous-noeud
-                foreach ($dir->files as $file) {
-                    $absPathFile =  sprintf("%s/%s",  $absPath, $file->name);
-                    FileManager::createFile($absPath, $file->content);
-                }
-            }
-        }
+        //Creation du dossier du noeud
+        FileManager::createDirectory($path, 'course');
 
         //Création des fichiers par défaut a la racine du Noeud
         foreach ($this->getDefaultFiles() as $file) {
-            $absPath =  sprintf("%s/%s", $this->getAbsPathOfParentDirectory(), $file->name);
-            FileManager::createFile($absPath, $file->content);
+            FileManager::createFile(sprintf("%s/%s", $path, $file->name), $file->content);
+        }
+
+        //Création des sous-dossiers du noeud (recursif)
+        foreach ($this->getDefaultDirectories() as $dir) {
+            $this->createDirectoryAndItsContent(sprintf("%s/%s", $path, $dir->name), $dir);
+        }
+    }
+
+    /**
+     * Action: cree le repertoire et son contenu de manière récursive (repertoire et fichiers)
+     * @param string $path Le chemin absolu du repertoire à créer
+     * @param Directory $dir Le repertoire et son contenu à créer
+     */
+    public function createDirectoryAndItsContent(string $path, Directory $dir)
+    {
+
+        FileManager::createDirectory($path);
+
+        if ($dir->hasFiles()) {
+            foreach ($dir->files as $file) {
+                FileManager::createFile(
+                    sprintf("%s/%s", $path, $file->name),
+                    $file->content
+                );
+            }
+        }
+
+        if ($dir->hasDirs()) {
+            foreach ($dir->directories as $subDir) {
+                $this->createDirectoryAndItsContent(
+                    sprintf("%s/%s", $path, $subDir->name),
+                    $subDir
+                );
+            }
         }
     }
 
@@ -57,8 +88,9 @@ abstract class AbstractNode implements INode
         $defaultDirectories = $this->getDefaultDirectories();
 
         foreach ($defaultDirectories as $dir) {
-            if ($dir->name === $name)
+            if ($dir->name === $name) {
                 return $dir;
+            }
         }
 
         throw new \Exception("Le repertoire %s n'existe pas");
@@ -76,17 +108,5 @@ abstract class AbstractNode implements INode
      */
     protected function hookAfterBuilding(): void
     {
-    }
-
-    /**
-     * Action: Execution du build (création des fichiers et des dossiers) et des hooks
-     * @param string $label Un label décrivant le noeud qui va être crée.
-     * @throws \Exception
-     */
-    public function create(string $label = 'directory'): void
-    {
-        $this->hookBeforeBuilding();
-        $this->build($label);
-        $this->hookAfterBuilding();
     }
 }
