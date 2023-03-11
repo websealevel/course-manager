@@ -13,23 +13,23 @@ abstract class AbstractNode implements INode
 {
      /**
      * Action: Execution du build (création des fichiers et des dossiers) et des hooks
-     * @param string $label Un label décrivant le noeud qui va être crée.
+     * @param string $description . Opt. Un description du noeud qui va être crée.
      * @throws \Exception
      */
-    public function create(string $label = 'directory'): void
+    public function create(string $description = 'node'): void
     {
         $this->hookBeforeBuilding();
-        $this->build($label);
+        $this->build($description);
         $this->hookAfterBuilding();
     }
 
     /**
      * Action: crée les dossiers et les fichiers par défaut du Noeud.
-     * @param string $label Un label décrivant le noeud
+     * @param string $description Une description du noeud
      * @return void
      * @throws \Exception
      */
-    private function build($label): void
+    private function build($description): void
     {
 
         $path =  $this->getAbsPathOfParentDirectory();
@@ -53,7 +53,7 @@ abstract class AbstractNode implements INode
      * @param string $path Le chemin absolu du repertoire à créer
      * @param Directory $dir Le repertoire et son contenu à créer
      */
-    public function createDirectoryAndItsContent(string $path, Directory $dir)
+    public function createDirectoryAndItsContent(string $path, Directory $dir): void
     {
 
         FileManager::createDirectory($path);
