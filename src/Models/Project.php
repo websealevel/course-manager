@@ -4,7 +4,6 @@
 namespace Wsl\CourseManager\Models;
 
 use Wsl\CourseManager\Models\AbstractNode;
-use Wsl\CourseManager\Services\DefaultContent;
 use Wsl\CourseManager\Config;
 use Wsl\CourseManager\Services\FileManager;
 
