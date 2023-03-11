@@ -16,7 +16,7 @@ abstract class AbstractNode implements INode
      * @param string $description . Opt. Un description du noeud qui va être crée.
      * @throws \Exception
      */
-    public function create(string $description = 'node'): void
+    final public function create(string $description = 'node'): void
     {
         $this->hookBeforeBuilding();
         $this->build($description);
