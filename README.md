@@ -268,7 +268,7 @@ Un argument est une chaîne de caractère ajouté à la suite de la commande pou
 
 Il s'écrit sous la forme `cm <nom de la commande> <nom de l'argument>`. Par exemple, `cm add:project mes-cours`. Attention, **les arguments sont ordonnés**, ils doivent être écrits dans l'ordre attendu par la commande. 
 
->Un argument optionnel s'écrit *entre crochets* `cm <nom de la commande> [<nom de l'argument optionnel>]`.
+>Un argument optionnel est représenté *entre crochets* `cm <nom de la commande> [<nom de l'argument optionnel>]`.
 
 ### Options d'une commande
 
