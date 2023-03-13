@@ -16,7 +16,7 @@ class Course extends AbstractNode
      * Liste des modules contenus dans le cours
      * @var Module[]
      */
-    readonly public array $modules;
+    private array $modules;
 
     public function __construct(
         readonly public string $name,
@@ -25,15 +25,14 @@ class Course extends AbstractNode
         readonly public string $level,
         readonly public string $keyWords,
     ) {
-
-        //Initialisation des modules par défaut
-        $this->modules = array(
-            new Module($this, 0, 'presentation')
-        );
     }
 
     protected function hookAfterBuilding(): void
     {
+        //Initialisation des modules par défaut
+        $this->modules = array(
+            new Module($this, 0, 'presentation')
+        );
         //Création des modules par défaut.
         foreach ($this->modules as $module) {
             $module->create();
