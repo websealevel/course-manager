@@ -17,15 +17,15 @@ class ListAllCoursesCommand extends Command
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        // $project = Config::getCurrentProjectDefinedInGlobalConfiguration();
+        $project = Config::getCurrentProjectDefinedInGlobalConfiguration();
 
-        // //Recuperer tous les cours (dossiers) et scanner méta données
+        //Recuperer tous les cours (dossiers) et scanner méta données
 
-        // $path_sources = sprintf("%s/%s", $project, 'sources');
+        $path_sources = sprintf("%s/%s", $project, 'sources');
 
         // var_dump($path_sources);
 
-        // $courses = Loader::coursesUnderProject($project);
+        $courses = Loader::coursesUnderProject($project);
 
         // //Afficher les cours
 
