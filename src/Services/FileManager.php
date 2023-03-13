@@ -11,7 +11,6 @@ use Exception;
 
 class FileManager
 {
-
     private const CODE_DIR_ALREADY_EXISTS = 203;
 
     /**
@@ -26,7 +25,7 @@ class FileManager
 
     /**
      * Retourne le contenu parsé d'un fichier de configuration au format INI
-     * @param string $absPathIniFile Le chemin absolu vers le fichier de configuration du projet 
+     * @param string $absPathIniFile Le chemin absolu vers le fichier de configuration du projet
      * @return string[]|false
      */
     public static function parseIniFile(string $absPathIniFile, bool $processSections = false): array|false
@@ -36,8 +35,9 @@ class FileManager
         $result = parse_ini_file($absPathIniFile, $processSections);
 
         //Un fichier vide n'est pas un fichier INI invalide.
-        if (false === $result && 0 !== $size)
+        if (false === $result && 0 !== $size) {
             throw new \Exception("Impossible de parser le fichier de configuration INI. Veuillez vérifier sa syntaxe.");
+        }
 
         return $result;
     }
@@ -98,18 +98,21 @@ class FileManager
     public static function readFileContent(string $absPath): string
     {
 
-        if (!static::fileExists($absPath))
+        if (!static::fileExists($absPath)) {
             throw new \Exception(sprintf("Le fichier %s n'existe pas.", $absPath));
+        }
 
         $handle = fopen($absPath, "r");
 
-        if (false === $handle)
+        if (false === $handle) {
             throw new \Exception(sprintf("Impossible d'ouvrir le fichier %s.", $absPath));
+        }
 
         $contents = fread($handle, filesize($absPath));
 
-        if (false === $contents)
+        if (false === $contents) {
             throw new \Exception(sprintf("Impossible de lire le contenu du fichier %s.", $absPath));
+        }
 
         fclose($handle);
 
@@ -138,8 +141,9 @@ class FileManager
     {
 
         //Check que le PATH est sur le home (on ne veut pas toucher à des fichiers systeme)
-        if (!str_starts_with($abspath, '/home/') || str_contains($abspath, '.'))
+        if (!str_starts_with($abspath, '/home/') || str_contains($abspath, '.')) {
             throw new \Exception("Impossible de supprimer un fichier qui n'appartient pas à l'utilisateur courant.");
+        }
 
         return FileManager::recursiveRmDir($abspath);
     }
@@ -153,13 +157,16 @@ class FileManager
         $files = glob($absPath . '/{,.metadata}*', GLOB_BRACE);
 
         foreach ($files as $file) {
-            if (is_dir($file))
+            if (is_dir($file)) {
                 FileManager::recursiveRmDir($file);
-            else
+            } else {
                 unlink($file);
+            }
         }
 
-        if (is_dir($absPath)) rmdir($absPath);
+        if (is_dir($absPath)) {
+            rmdir($absPath);
+        }
 
         return true;
     }
@@ -250,6 +257,16 @@ class FileManager
         return true;
     }
 
+    /**
+     * Retourne la liste des dossiers sur le path
+     */
+    public static function listDirsUnderPath(string $path)
+    {
+
+        $directories= glob($path . '/*', GLOB_ONLYDIR);
+        return $directories;
+    }
+
 
     /**
      * Retourne la structure de fichiers présent sur le path
@@ -290,16 +307,17 @@ class FileManager
 
     /**
      * Return the tree for the given path
-     * @param string $path 
-     * @param array $tree 
+     * @param string $path
+     * @param array $tree
      * @return string|array
      */
-    public static function buildTreeFromPath(string $path, array $tree = array()): string|array
+    private static function buildTreeFromPath(string $path, array $tree = array()): string|array
     {
         $pos = strpos($path, '/');
 
-        if (false === $pos)
+        if (false === $pos) {
             return $path;
+        }
 
         $key = substr($path, 0, $pos);
 
