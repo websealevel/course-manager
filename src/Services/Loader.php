@@ -44,6 +44,7 @@ class Loader
 
     /**
      * Retourne vrai si un vendor est détécté pour le cours, faux sinon
+     * @param $pathCourse Le chemin absolu du cours
      * @return bool
      */
     public static function courseHasVendor(string $pathCourse): bool
