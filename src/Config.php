@@ -1,20 +1,17 @@
 <?php
 
-
 namespace Wsl\CourseManager;
 
 use Wsl\CourseManager\Services\FileManager;
 use Wsl\CourseManager\Models\Project;
-
 use Exception;
 
 /**
- * Classe en charge de gérer la configuration d'un projet
+ * Classe en charge de la configuration et de la gestion des projets sur la machine utilisateur
  */
 class Config
 {
-
-    public const COURSE_MANAGER_VERSION = "1.0";
+    public const COURSE_MANAGER_VERSION = "0.1";
 
     /**
      * Nom du fichier de configuration global du programme. Maintient la liste des tous les projets de gestion de cours,
@@ -83,7 +80,7 @@ class Config
 
 
     /**
-     * Le contenu par défaut du fichier de configuration local du projet 
+     * Le contenu par défaut du fichier de configuration local du projet
      * @return string
      */
     public static function configIniContent(): string
@@ -121,13 +118,14 @@ class Config
             $absPathGlobalConfig
         );
 
-        if (!$success)
+        if (!$success) {
             throw new \Exception(
                 sprintf(
                     "Impossible de créer le fichier de configuration global %s.",
                     $absPathGlobalConfig
                 )
             );
+        }
 
         return true;
     }
@@ -167,13 +165,11 @@ class Config
         $values = array();
 
         if (!static::globalConfigFileIsInitialized()) {
-
             $values = array(
                 sprintf("MAIN=%s", $absPathToRootDir),
                 sprintf("PROJECTS=%s", $absPathToRootDir),
             );
         } else {
-
             $parsed = FileManager::parseIniFile(static::absPathOfGlobalConfigFile());
 
             //Projet non encore enregistré
@@ -188,8 +184,9 @@ class Config
             );
         }
 
-        if (false !== $values)
+        if (false !== $values) {
             FileManager::createFile(static::absPathOfGlobalConfigFile(), implode("\n", $values));
+        }
 
         return;
     }
@@ -204,8 +201,9 @@ class Config
         //Lire le fichier de config
         $values = FileManager::parseIniFile(static::absPathOfGlobalConfigFile());
 
-        if (!is_array($values))
+        if (!is_array($values)) {
             return false;
+        }
 
         //Tous les projets enregistrés
         $projects = explode(',', $values['PROJECTS']);
@@ -218,7 +216,6 @@ class Config
         $main = $values['MAIN'];
 
         if ($values['MAIN'] === $absPathToRootDir) {
-
             //Changer le curseur au projet précédent
             if (empty($otherProjects)) {
                 //Si pas d'autres projets, on supprime le fichier de configuration globale
@@ -230,7 +227,7 @@ class Config
             $main = reset($otherProjects);
         }
 
-        return static::overWriteGlobalConfigFile($main,  implode(",", $otherProjects));
+        return static::overWriteGlobalConfigFile($main, implode(",", $otherProjects));
     }
 
 
@@ -239,7 +236,7 @@ class Config
      * Retourne vrai si l'écriture à réussi, faux sinon
      * @param string $main Le nouveau projet courant
      * @param string $projects Les nouveaux projets enregistrés
-     * @return bool 
+     * @return bool
      * @see FileManager::createFile
      */
     public static function overWriteGlobalConfigFile(string $main, string $projects): bool
@@ -260,13 +257,15 @@ class Config
     public static function globalConfigFileIsInitialized(): bool
     {
 
-        if (!FileManager::fileExists(static::absPathOfGlobalConfigFile()))
+        if (!FileManager::fileExists(static::absPathOfGlobalConfigFile())) {
             return false;
+        }
 
         $values = FileManager::parseIniFile(static::absPathOfGlobalConfigFile());
 
-        if (false === $values)
+        if (false === $values) {
             return false;
+        }
 
         return
             in_array(
@@ -290,14 +289,16 @@ class Config
 
         $localConfigurationFileExists = FileManager::fileExists($absPathToLocalConfigurationFile);
 
-        if (false === $localConfigurationFileExists)
+        if (false === $localConfigurationFileExists) {
             return false;
+        }
 
         //Rajouter une clef dans le fichier pour le distinguer d'autres fichiers config.ini qui pourraient s'y trouver.
         $content = FileManager::parseIniFile($absPathToLocalConfigurationFile, processSections: true);
 
-        if (false === $content)
+        if (false === $content) {
             return false;
+        }
 
         return isset($content['project']['type']) && 'course-manager' === $content['project']['type'];
     }
@@ -329,12 +330,14 @@ class Config
 
         $values = FileManager::parseIniFile(static::absPathOfGlobalConfigFile());
 
-        if (false === $values)
+        if (false === $values) {
             throw new \Exception("Impossible de lire le fichier de configuration global. Veuillez vérifier sa syntaxe.");
+        }
 
 
-        if (isset($values['MAIN']) && empty($values['MAIN']))
+        if (isset($values['MAIN']) && empty($values['MAIN'])) {
             throw new \Exception("Aucun projet courant défini dans le fichier de configuration global. Veuillez en définir un.");
+        }
 
 
         if (isset($values['PROJECTS']) && empty($values['PROJECTS'])) {
@@ -381,9 +384,10 @@ class Config
     public static function absPathToCurrentProject(): string
     {
 
-        if (Config::isThereALocalConfigurationFileInTheCurrentDirectory())
+        if (Config::isThereALocalConfigurationFileInTheCurrentDirectory()) {
             //On est dans un projet course-manager, donc le currentPath est le pathCourant
             return getcwd();
+        }
 
         //Renvoyer le dossier courant défini dans la configuration globale.
         return Config::getCurrentProjectDefinedInGlobalConfiguration();
